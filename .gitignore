@@ -1,0 +1,10 @@
+/node_modules
+/.idea
+/.awcache
+/.vscode
+/.nyc_output
+*.log
+~*
+/dist/
+/dist_*
+/.rts2_cache_*
