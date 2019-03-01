@@ -21,11 +21,18 @@ const schema = {
         env: 'PORT',
         arg: 'port',
     },
-    connectionString: {
-        doc: 'Database connection config',
-        default: 'mssql://username:password@localhost/database',
-        env: 'CONNECTION_STRING',
-    }
+    mongoUri: {
+        doc: 'MongoDB connection dsn string',
+        default: 'mongodb://localhost:27017',
+        env: 'MONGO_URI',
+        arg: 'mongo_uri',
+    },
+    mongoDb: {
+        doc: 'MongoDB name',
+        default: 'webhive',
+        env: 'MONGO_DB',
+        arg: 'mongo_db',
+    },
 };
 
 export const config = convict(schema).validate();

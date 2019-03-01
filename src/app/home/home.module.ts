@@ -1,6 +1,5 @@
 import { AppContext } from '../../main';
 import { inject } from 'njct';
-import { HomeService } from './home.service';
 import { IRouterContext } from 'koa-tree-router';
 import { config } from '../../config';
 

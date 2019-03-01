@@ -54,7 +54,7 @@ export function entryDate(item: FeedParser.Item) {
     let result: Date;
     const testDate = item.date || item.pubdate || item.pubDate;
     if (testDate) {
-        result = Date.parse(testDate);
+        result = new Date(testDate);
     }
     if (!result) {
         result = new Date();
