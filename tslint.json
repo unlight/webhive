@@ -42,6 +42,8 @@
     "no-parameter-reassignment": false,
     "strict-boolean-expressions": false,
     "no-unsafe-any": false,
+    "no-backbone-get-set-outside-model": false,
+    "newline-per-chained-call": false,
     ".": false
   }
 }
