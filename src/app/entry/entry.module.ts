@@ -1,18 +1,17 @@
 import { AppContext } from '../../main';
 import { inject } from 'njct';
-import { IRouterContext } from 'koa-tree-router';
-import { config } from '../../config';
+import { entryDtoValidate } from './entry-dto.validate';
+import { CreateEntryDTO } from './entry.dto';
+import { EntryService } from './entry.service';
+import * as Koa from 'koa';
 
 export function initialize({ router, app }: AppContext) {
-    router.on('POST', '/entry', validateEntryDto, createEntry);
+    router.on('POST', '/entry', entryDtoValidate, createEntry);
 }
 
-export async function createEntry(context: IRouterContext, next: Function) {
-    // todo: make it protected
-    // context.request.body
-    // context.body = {
-    //     app: 'webhive',
-    //     environment: config.get('environment'),
-    //     program: config.get('program'),
-    // };
+export async function createEntry(context: Koa.Context, next: Function) {
+    const createEntryDto: CreateEntryDTO = context.state.createEntryDto;
+    const entryService = inject(EntryService);
+    await entryService.create(createEntryDto);
+    context.status = 201;
 }

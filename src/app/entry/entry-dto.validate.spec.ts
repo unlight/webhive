@@ -1,17 +1,31 @@
+import { entryDtoSchema } from './entry-dto.validate';
+import { CreateEntryDTO } from './entry.dto';
+import { ValidationError } from 'joi';
 import * as expect from 'expect';
-import { CreateEntryDtoValidator } from './entry-dto.validate';
+import * as Joi from 'joi';
 
 describe('validate entry', () => {
 
-    it.only('create entry', () => {
-        const createEntryDtoValidator = new CreateEntryDtoValidator();
-        const entry: any = {};
-        const result = createEntryDtoValidator.validate(entry);
-        expect(result.isInvalid()).toBe(true);
-        const failures = result.getFailures();
-        console.log("failures", failures);
-        const messages = result.getFailureMessages();
-        console.log("messages", messages);
+    let error: ValidationError;
+    let value: any;
+    const validateOptions = { abortEarly: false, allowUnknown: true, stripUnknown: true };
+
+    it('create entry valid', () => {
+        const entry: CreateEntryDTO = {
+            title: 'Retrain',
+            link: 'http://muishond.com/unpolicied/ticktacker?a=saliva&b=courge#headlight',
+            date: '2019-03-02T22:08:37+08:00',
+        };
+        ({ value, error } = entryDtoSchema.validate(entry, validateOptions));
+        expect(error).toBeFalsy();
+    });
+
+    it('create entry invalid empty', () => {
+        const entry = { title: '', link: '//annoying.com/akhoond/hypocone?a=loony&b=pladarosis#shunammite' } as CreateEntryDTO;
+        ({ value, error } = entryDtoSchema.validate(entry, validateOptions));
+        expect(error).toBeTruthy();
+        expect(error.message).toBeTruthy();
+        expect(error.message).toContain('date');
     });
 
 });
