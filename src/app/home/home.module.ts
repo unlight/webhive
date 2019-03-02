@@ -3,7 +3,7 @@ import { inject } from 'njct';
 import { IRouterContext } from 'koa-tree-router';
 import { config } from '../../config';
 
-export function homeModule({ router, app }: AppContext) {
+export function initialize({ router, app }: AppContext) {
     router.on('GET', '/', home);
 }
 

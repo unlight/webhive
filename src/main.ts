@@ -6,15 +6,13 @@ import { config } from './config';
 const app = new Koa();
 const router = new Router();
 
-const appContext = {
-    app,
-    router,
-};
+const appContext = { app, router };
 
 export type AppContext = typeof appContext;
 
 async function main() {
-    await import('./app/home/home.module').then(module => module.homeModule({ app, router }));
+    await import('./app/home/home.module').then(module => module.initialize(appContext));
+    await import('./app/entry/entry.module').then(module => module.initialize(appContext));
     app.use(koaBodyparser({ strict: false }));
     app.use(router.routes());
     app.listen(config.get('port'), () => {

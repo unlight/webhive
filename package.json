@@ -35,6 +35,7 @@
   "dependencies": {
     "convict": "4.4.1",
     "feedparser": "^2.2.9",
+    "fluent-ts-validator": "^3.0.2",
     "got": "^9.6.0",
     "koa": "2.7.0",
     "koa-bodyparser": "4.2.1",
