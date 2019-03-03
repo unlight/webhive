@@ -1,11 +1,14 @@
 import 'reflect-metadata';
+import { config } from './config';
 import * as Koa from 'koa';
 import * as Router from 'koa-tree-router';
 import * as koaBodyparser from 'koa-bodyparser';
-import { config } from './config';
 import { ServerResponse } from 'http';
 import * as koaJsonError from 'koa-json-error';
 
+if (config.get('environment') === 'development' || config.get('environment') === 'test') {
+    require('loud-rejection/register');
+}
 const app = new Koa();
 const router = new Router();
 let appInstance: typeof app;
@@ -22,7 +25,7 @@ export type CustomServerResponse = ServerResponse & {
 };
 
 async function main() {
-    app.use(koaJsonError());
+    // app.use(koaJsonError());
     await import('./app/home/home.module').then(module => module.initialize(appContext));
     await import('./app/entry/entry.module').then(module => module.initialize(appContext));
     app.use(koaBodyparser({ strict: false }));
