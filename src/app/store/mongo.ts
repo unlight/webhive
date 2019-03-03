@@ -16,3 +16,7 @@ export async function connection<TResult = any>(execute: (options: ExecuteConnec
 }
 
 export type ConnectionFunc = typeof connection;
+
+export function toObjectId(id: string): ObjectId {
+    return (<any>ObjectId)(id);
+}

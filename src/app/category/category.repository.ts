@@ -1,5 +1,5 @@
 import { inject } from 'njct';
-import { ObjectId } from '../store/mongo';
+import { toObjectId } from '../store/mongo';
 import * as mongo from '../store/mongo';
 import { CategoryModel } from './category.model';
 
@@ -14,8 +14,7 @@ export class CategoryRepository {
             let category = await db.collection('category').findOne<CategoryModel>({ name });
             if (!category) {
                 category = { name, _id: undefined };
-                const { insertedId } = await db.collection('category').insertOne(category);
-                category._id = ObjectId(insertedId);
+                ({ insertedId: category._id } = await db.collection('category').insertOne(category));
             }
             return category;
         });

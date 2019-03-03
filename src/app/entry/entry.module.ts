@@ -1,6 +1,6 @@
 import { AppContext } from '../../main';
 import { inject } from 'njct';
-import { entryDtoValidate } from './entry-dto.validate';
+import { entryDtoValidate } from './entry-dto-validate';
 import { CreateEntryDTO } from './entry.dto';
 import { EntryService } from './entry.service';
 import * as Koa from 'koa';
