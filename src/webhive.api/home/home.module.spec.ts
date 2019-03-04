@@ -1,12 +1,12 @@
 import * as expect from 'expect';
-import { getApp, ThenArg, CustomServerResponse } from '../../main';
+import { getApp, ThenArg, CustomServerResponse } from '../main';
 import { ServerResponse } from 'http';
 import * as Koa from 'koa';
 const sham = require('koa-sham');
 
 describe('home api', () => {
 
-    let app: ThenArg<ReturnType<typeof main>>;
+    let app: ThenArg<ReturnType<typeof getApp>>;
 
     before(async () => {
         app = await getApp();

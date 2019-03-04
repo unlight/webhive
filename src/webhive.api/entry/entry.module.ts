@@ -1,4 +1,4 @@
-import { AppContext } from '../../main';
+import { AppContext } from '../main';
 import { inject } from 'njct';
 import { CreateEntryDTO } from './entry.dto';
 import { EntryService } from './entry.service';

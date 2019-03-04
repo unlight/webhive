@@ -8,6 +8,6 @@ export class CategoryService {
     ) { }
 
     async findOrCreate(name: string) {
-        return await this.categoryRepository.findOrCreate(name);
+        return this.categoryRepository.findOrCreate(name);
     }
 }

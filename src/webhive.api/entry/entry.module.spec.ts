@@ -1,5 +1,5 @@
 import * as expect from 'expect';
-import { getApp, CustomServerResponse, ThenArg } from '../../main';
+import { getApp, CustomServerResponse, ThenArg } from '../main';
 import { ServerResponse } from 'http';
 import { CreateEntryDTO } from './entry.dto';
 import * as Koa from 'koa';

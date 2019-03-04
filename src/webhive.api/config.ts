@@ -24,14 +24,14 @@ const schema = {
     mongoUri: {
         doc: 'MongoDB connection dsn string',
         default: 'mongodb://localhost:27017',
-        env: 'MONGO_URI',
-        arg: 'mongo_uri',
+        env: 'MONGODB_URI',
+        arg: 'mongodb_uri',
     },
     mongoDb: {
         doc: 'MongoDB name',
         default: 'webhive',
-        env: 'MONGO_DB',
-        arg: 'mongo_db',
+        env: 'MONGODB_NAME',
+        arg: 'mongodb_name',
     },
 };
 
