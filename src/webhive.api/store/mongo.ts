@@ -1,4 +1,4 @@
-import { config } from '../../config';
+import { config } from '../config';
 import { MongoClient, Db, ObjectId } from 'mongodb';
 
 export { ObjectId };
@@ -20,3 +20,15 @@ export type ConnectionFunc = typeof connection;
 export function toObjectId(id: string): ObjectId {
     return (<any>ObjectId)(id);
 }
+
+const mongoClient = new MongoClient(config.get('mongoUri'), { useNewUrlParser: true });
+const mongoDb = config.get('mongoDb');
+
+export async function mongoDatabase() {
+    if (!mongoClient.isConnected()) {
+        await mongoClient.connect();
+    }
+    return mongoClient.db(mongoDb);
+}
+
+export type Database = ReturnType<typeof mongoDatabase>;

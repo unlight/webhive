@@ -1,7 +1,7 @@
-import { AppContext } from '../../main';
+import { AppContext } from '../main';
 import { inject } from 'njct';
 import { IRouterContext } from 'koa-tree-router';
-import { config } from '../../config';
+import { config } from '../config';
 
 export function harvestModule({ router, app }: AppContext) {
     router.on('GET', '/harvest', harvest);

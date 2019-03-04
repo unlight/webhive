@@ -1,17 +1,16 @@
 import { inject } from 'njct';
-import * as mongo from '../store/mongo';
 import { EntryModel } from './entry.model';
+import { mongoDatabase } from '../store/mongo';
 
 export class EntryRepository {
 
     constructor(
-        private readonly connection = inject('connection', () => mongo.connection),
+        private readonly database = inject('database', mongoDatabase),
     ) { }
 
     async insert(entry: EntryModel) {
-        const result = await this.connection(({ db }) => {
-            return db.collection('entry2').insertOne(entry);
-        });
+        const collection = (await this.database).collection('entry2');
+        const result = await collection.insertOne(entry);
         return result;
     }
 }

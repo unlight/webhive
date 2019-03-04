@@ -4,6 +4,9 @@ import * as Koa from 'koa';
 import * as Router from 'koa-tree-router';
 import * as koaBodyparser from 'koa-bodyparser';
 import { ServerResponse } from 'http';
+import { MongoClient } from 'mongodb';
+import { inject, injector } from 'njct';
+import { mongoDatabase } from './store/mongo';
 import * as koaJsonError from 'koa-json-error';
 
 if (config.get('environment') === 'development' || config.get('environment') === 'test') {
@@ -24,10 +27,13 @@ export type CustomServerResponse = ServerResponse & {
     ctx: Koa.ParameterizedContext<any, CustomContext>;
 };
 
+injector.provide('database', mongoDatabase);
+
 async function main() {
-    // app.use(koaJsonError());
-    await import('./app/home/home.module').then(module => module.initialize(appContext));
-    await import('./app/entry/entry.module').then(module => module.initialize(appContext));
+    app.use(koaJsonError());
+    await inject('database', mongoDatabase);
+    await import('./home/home.module').then(module => module.initialize(appContext));
+    await import('./entry/entry.module').then(module => module.initialize(appContext));
     app.use(koaBodyparser({ strict: false }));
     app.use(router.routes());
     return app;
