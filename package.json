@@ -29,8 +29,9 @@
     "lint:w": "run-p tsclint:w eslint:w",
     "prepublishOnly": "sed -i -e 's/devDependencies/_devDependencies/g' package.json",
     "copySource": "cp -rv src dist && find dist/src -name '*.spec.ts' | xargs rm -f",
-    "build": "sh Taskfile build",
-    "commit": "git-cz"
+    "build": "echo build",
+    "commit": "git-cz",
+    "heroku-postbuild": "echo Skip build on Heroku"
   },
   "dependencies": {
     "await-to-js": "2.1.1",
@@ -87,5 +88,6 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
-  }
+  },
+  "heroku-run-build-script": true
 }
