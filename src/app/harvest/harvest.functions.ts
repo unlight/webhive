@@ -5,7 +5,7 @@ import * as FeedParser from 'feedparser';
 
 export type HarvestResourceArguments = {
     url?: string;
-    stream?: Readable;
+    stream?: NodeJS.ReadableStream;
 }
 
 export async function harvestResource({ url, stream }: HarvestResourceArguments): Promise<FeedParser.Item[]> {
