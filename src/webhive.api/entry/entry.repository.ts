@@ -1,11 +1,11 @@
 import { inject } from 'njct';
 import { EntryModel } from './entry.model';
-import { mongoDatabase } from '../store/mongo';
+import { mongoDatabaseInstance } from '../store/mongo';
 
 export class EntryRepository {
 
     constructor(
-        private readonly database = inject('database', mongoDatabase),
+        private readonly database = inject('database', mongoDatabaseInstance),
     ) { }
 
     async insert(entry: EntryModel) {

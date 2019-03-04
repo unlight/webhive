@@ -1,5 +1,6 @@
 import { config } from '../config';
 import { MongoClient, Db, ObjectId } from 'mongodb';
+import { inject } from 'njct';
 
 export { ObjectId };
 
@@ -21,14 +22,21 @@ export function toObjectId(id: string): ObjectId {
     return (<any>ObjectId)(id);
 }
 
-const mongoClient = new MongoClient(config.get('mongoUri'), { useNewUrlParser: true });
-const mongoDb = config.get('mongoDb');
+let mongoClient: MongoClient;
 
-export async function mongoDatabase() {
-    if (!mongoClient.isConnected()) {
-        await mongoClient.connect();
+export function mongoClientInstance() {
+    if (mongoClient === undefined) {
+        mongoClient = new MongoClient(config.get('mongoUri'), { useNewUrlParser: true });
     }
-    return mongoClient.db(mongoDb);
+    return mongoClient;
 }
 
-export type Database = ReturnType<typeof mongoDatabase>;
+export async function mongoDatabaseInstance() {
+    const client = inject('client', mongoClientInstance);
+    if (!client.isConnected()) {
+        await client.connect();
+    }
+    return client.db(config.get('mongoDb'));
+}
+
+export type Database = ReturnType<typeof mongoDatabaseInstance>;

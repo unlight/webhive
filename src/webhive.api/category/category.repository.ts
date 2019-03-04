@@ -1,11 +1,11 @@
 import { inject } from 'njct';
-import { mongoDatabase } from '../store/mongo';
+import { mongoDatabaseInstance } from '../store/mongo';
 import { CategoryModel } from './category.model';
 
 export class CategoryRepository {
 
     constructor(
-        private readonly database = inject('database', mongoDatabase),
+        private readonly database = inject('database', mongoDatabaseInstance),
     ) { }
 
     async findOrCreate(name: string) {
