@@ -7,7 +7,7 @@
   "typings": "index.d.ts",
   "author": "2019",
   "engines": {
-    "node": ">=6",
+    "node": ">=8.3",
     "npm": ">=3"
   },
   "scripts": {
