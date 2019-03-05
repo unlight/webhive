@@ -17,7 +17,7 @@
     "test:r": "node node_modules/mocha/bin/_mocha --node_env=test -r ts-node/register/transpile-only -r reflect-metadata --timeout 8s src/**/*.spec.ts",
     "test:w": "node node_modules/mocha/bin/_mocha --node_env=test -r ts-node/register/transpile-only -r reflect-metadata --timeout 8s --watch-extensions ts --watch src/**/*.spec.ts",
     "test:cov": "nyc mocha src/**/*.spec.ts",
-    "test:d": "node --inspect-brk -r ts-node/register/transpile-only node_modules/mocha/bin/_mocha --no-timeouts --watch-extensions ts --watch src/**/*.spec.ts",
+    "test:d": "node --inspect-brk -r ts-node/register/transpile-only -r reflect-metadata node_modules/mocha/bin/_mocha --no-timeouts --watch-extensions ts --watch src/**/*.spec.ts",
     "tscheck": "echo tscheck... && tsc --noEmit",
     "tscheck:w": "npm run tscheck -- --watch",
     "tsclint": "tsc --noEmit --strict --forceConsistentCasingInFileNames --noImplicitReturns --noImplicitThis --noUnusedLocals --noUnusedParameters",
@@ -83,7 +83,8 @@
     "tslint-clean-code": "^0.2.9",
     "tslint-microsoft-contrib": "^6.0.0",
     "tslint-sonarts": "^1.9.0",
-    "typescript": "~3.3.3333"
+    "typescript": "~3.3.3333",
+    "universal-mock": "^1.1.0"
   },
   "config": {
     "commitizen": {

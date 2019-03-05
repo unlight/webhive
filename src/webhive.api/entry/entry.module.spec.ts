@@ -3,29 +3,34 @@ import * as expect from 'expect';
 import { getApp, CustomServerResponse, ThenArg } from '../main';
 import { ServerResponse } from 'http';
 import { CreateEntryDTO } from './entry.dto';
-import { injector } from 'njct';
+import { injector, inject } from 'njct';
 import * as Koa from 'koa';
-import { MockoDb } from 'mockodb';
 import { MongoClient } from 'mongodb';
+import { EntryRepository } from './entry.repository';
 const sham = require('koa-sham');
+const universalMock = require('universal-mock');
 
-describe.skip('entry api', () => {
+describe('entry api', () => {
 
     let app: ThenArg<ReturnType<typeof getApp>>;
     let mockoDb: MockoDb;
+    let mocks = {
+        EntryRepository: universalMock(),
+        database: Promise.resolve(universalMock()),
+    };
 
     before(async () => {
-        mockoDb = await MockoDb.boot();
-        const handle = await mockoDb.open();
-        const client = await MongoClient.connect(handle.url.href);
-        const database = client.db('webhive_test');
-        await injector.provide('database', () => database);
+        debugger;
+        injector.provide('database', () => mocks.database);
+        mocks.EntryRepository.insert = expect.createSpy();
+        injector.provide(EntryRepository, () => mocks.EntryRepository);
         app = await getApp();
+        console.log('ok');
     });
 
-    after(async () => {
-        await mockoDb.shutdown();
-    });
+    // after(async () => {
+    //     await mockoDb.shutdown();
+    // });
 
     it.skip('POST /entry fail', async () => {
         const response: CustomServerResponse = await sham(app, '/entry', {
