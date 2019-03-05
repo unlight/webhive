@@ -44,10 +44,10 @@ export async function getApp() {
     return appInstance;
 }
 
-if (module.parent == null) {
+if (!module.parent) {
     main().then(app => {
         app.listen(config.get('port'), () => {
-            console.log(`Server running on port ${config.get('port')}`);
+            console.log(`Server running on port ${config.get('port')}`); // eslint-disable-line no-console
         });
     });
 }

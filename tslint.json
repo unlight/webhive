@@ -44,6 +44,8 @@
     "no-unsafe-any": false,
     "no-backbone-get-set-outside-model": false,
     "newline-per-chained-call": false,
+    "no-parameter-properties": false,
+    "import-name": false,
     ".": false
   }
 }

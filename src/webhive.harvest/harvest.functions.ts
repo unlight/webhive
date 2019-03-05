@@ -20,7 +20,7 @@ export async function harvestResource({ url, stream }: HarvestResourceArguments)
     stream.pipe(feeds);
     feeds.on('readable', function() {
         let item: FeedParser.Item;
-        while (item = feeds.read()) {
+        while ((item = feeds.read())) {
             result.push(item);
         }
     });
@@ -58,7 +58,7 @@ export function entryLink(link: string) {
 }
 
 export function entryDate(item: FeedParser.Item) {
-    let result: Date | undefined = undefined;
+    let result: Date | undefined;
     const testDate = item.date || item.pubdate || item['pubDate'];
     if (testDate) {
         result = new Date(testDate);

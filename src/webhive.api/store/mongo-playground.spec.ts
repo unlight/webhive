@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/tslint/config */
 import { MongoClient } from 'mongodb';
 import { config } from '../config';
 import { EntryService } from '../entry/entry.service';
