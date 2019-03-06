@@ -1,7 +1,10 @@
 import { Stream, Readable } from 'stream';
+import { Ant } from './harvest.ants';
 import * as url from 'url';
 import * as got from 'got';
 import * as FeedParser from 'feedparser';
+
+const ucfirst = require('ucfirst');
 
 export type HarvestResourceArguments = {
     url?: string;
@@ -32,13 +35,26 @@ export async function harvestResource({ url, stream }: HarvestResourceArguments)
     });
 }
 
-export async function createEntry(item: FeedParser.Item) {
+export async function createEntry(item: FeedParser.Item, ant: Ant) {
+    let category = ant.defaultCategory;
+    if (item.categories && item.categories.length > 0) {
+        category = item.categories[0];
+    }
     return {
         title: item.title,
         link: entryLink(item.link),
         date: entryDate(item),
-        category: undefined as unknown as string,
+        category: entryCategory(category),
     };
+}
+
+export function entryCategory(name: string) {
+    if (name) {
+        if (name[0] !== name[0].toUpperCase()) {
+            name = ucfirst(name);
+        }
+    }
+    return name;
 }
 
 export function entryLink(link: string) {
@@ -47,24 +63,23 @@ export function entryLink(link: string) {
     }
     let result = link;
     if (link.startsWith('https://javascriptkicks.com/r')) {
-        const urlobject = new url.URL(link);
-        const testurl = urlobject.searchParams.get('url');
+        let components = new url.URL(link);
+        let testurl = components.searchParams.get('url');
         if (!testurl) {
             throw new Error('url is empty');
         }
-        result = testurl;
+        if (/\/r\/(\d+)\?url=\/articles\/\1/.test(link)) {
+            testurl = `https://javascriptkicks.com${testurl}`;
+        }
+        components = new url.URL(testurl);
+        components.searchParams.delete('gi');
+        components.searchParams.delete('source');
+        result = components.toString();
     }
     return result;
 }
 
 export function entryDate(item: FeedParser.Item) {
-    let result: Date | undefined;
-    const testDate = item.date || item.pubdate || item['pubDate'];
-    if (testDate) {
-        result = new Date(testDate);
-    }
-    if (!result) {
-        result = new Date();
-    }
+    const result = new Date();
     return result;
 }

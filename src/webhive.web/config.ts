@@ -17,9 +17,9 @@ const schema = {
     },
     port: {
         format: 'port',
-        default: 3000,
-        env: 'API_PORT',
-        arg: 'api_port',
+        default: 8000,
+        env: 'PORT',
+        arg: 'port',
     },
     mongoUri: {
         doc: 'MongoDB connection dsn string',
@@ -32,6 +32,11 @@ const schema = {
         default: 'webhive',
         env: 'MONGODB_NAME',
         arg: 'mongodb_name',
+    },
+    apiUrl: {
+        doc: 'API url',
+        default: 'http://localhost:3000',
+        env: 'API_URL',
     },
 };
 

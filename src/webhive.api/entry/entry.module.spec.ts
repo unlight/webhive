@@ -7,6 +7,7 @@ import { injector, inject } from 'njct';
 import * as Koa from 'koa';
 import { MongoClient } from 'mongodb';
 import { EntryRepository } from './entry.repository';
+import { MockoDb } from 'mockodb';
 const sham = require('koa-sham');
 const universalMock = require('universal-mock');
 
@@ -20,13 +21,17 @@ describe('entry api', () => {
     };
 
     before(async () => {
-        debugger;
-        injector.provide('database', () => mocks.database);
-        mocks.EntryRepository.insert = expect.createSpy();
-        injector.provide(EntryRepository, () => mocks.EntryRepository);
         app = await getApp();
-        console.log('ok');
     });
+
+    // before(async () => {
+    //     debugger;
+    //     injector.provide('database', () => mocks.database);
+    //     mocks.EntryRepository.insert = expect.createSpy();
+    //     injector.provide(EntryRepository, () => mocks.EntryRepository);
+    //     app = await getApp();
+    //     console.log('ok');
+    // });
 
     // after(async () => {
     //     await mockoDb.shutdown();
@@ -56,6 +61,18 @@ describe('entry api', () => {
         });
         expect(response.statusCode).toEqual(201);
         expect(response.ctx.body).toContain({ message: 'Entry created' });
+    });
+
+    it.skip('GET /entry', async () => {
+        const response: CustomServerResponse = await sham(app, '/entry', {
+            method: 'GET',
+            promise: true,
+            resolveWithFullResponse: true,
+        });
+        expect(response.statusCode).toEqual(200);
+        expect(response.ctx.body).toBeTruthy();
+        expect(response.ctx.body).toBeAn(Array);
+        expect(response.ctx.body.length).toBeGreaterThan(0);
     });
 
 });
