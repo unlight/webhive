@@ -7,6 +7,7 @@ import { CategoryRepository } from '../category/category.repository';
 export type EntryBrowseRequest = {
     skip: number;
     limit: number;
+    q: string;
     // orderby: string;
     // direction: 'asc' | 'desc';
 }
@@ -38,17 +39,18 @@ export class EntryService {
     }
 
     async browse(entryBrowseRequest: Partial<EntryBrowseRequest> = {}) {
-        let {
-            skip = 0,
-            limit = 100,
-        } = entryBrowseRequest;
+        let { skip = 0, limit = 100, q } = entryBrowseRequest;
         if (limit > 100 || limit <= 0) {
             limit = 100;
         }
         if (skip <= 0) {
             skip = 0;
         }
+        let filter: any = undefined;
+        if (q) {
+            filter = { title: new RegExp(q, 'i') };
+        }
         const sort = { date: -1 };
-        return this.entryRepository.get({ skip, limit, sort });
+        return this.entryRepository.get({ skip, limit, sort, filter });
     }
 }

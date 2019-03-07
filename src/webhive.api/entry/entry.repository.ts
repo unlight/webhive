@@ -6,6 +6,7 @@ const entryGetOptionsDefaults = {
     sort: undefined as unknown as (object | object[]),
     skip: 0,
     limit: 100,
+    filter: undefined as any,
 };
 
 type EntryGetOptions = typeof entryGetOptionsDefaults;
@@ -29,9 +30,9 @@ export class EntryRepository {
     }
 
     async get(options: Partial<EntryGetOptions>) {
-        const { skip, limit, sort } = { ...entryGetOptionsDefaults, ...options };
+        const { skip, limit, sort, filter } = { ...entryGetOptionsDefaults, ...options };
         const collection = (await this.database).collection('entry2');
-        const result = await collection.find()
+        const result = await collection.find(filter)
             .skip(skip)
             .limit(limit)
             .sort(sort)

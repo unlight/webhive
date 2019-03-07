@@ -10,6 +10,8 @@
     "emitDecoratorMetadata": true,
     "outDir": "dist",
     "pretty": true,
+    "jsx": "react",
+    "jsxFactory": "h",
     "removeComments": false,
     "sourceMap": true,
     "declaration": true,

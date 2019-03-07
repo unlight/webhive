@@ -2,6 +2,9 @@ import { config } from './config';
 import { ServerResponse } from 'http';
 import * as Koa from 'koa';
 import * as Router from 'koa-tree-router';
+import * as favicon from 'koa-favicon';
+import * as serve from 'koa-static';
+
 
 if (config.get('environment') === 'development' || config.get('environment') === 'test') {
     require('loud-rejection/register');
@@ -22,7 +25,9 @@ export type CustomServerResponse = ServerResponse & {
 };
 
 async function main() {
-    await import('./home/home.module').then(module => module.initialize(appContext));
+    await import('./entry/entry.module').then(module => module.initialize(appContext));
+    app.use(favicon(`${__dirname}/public_html/favicon.ico`));
+    app.use(serve(`${__dirname}/public_html`));
     app.use(router.routes());
     return app;
 }
