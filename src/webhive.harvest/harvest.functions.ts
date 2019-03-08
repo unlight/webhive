@@ -1,5 +1,6 @@
 import { Stream, Readable } from 'stream';
 import { Ant } from './harvest.ants';
+import { entryLink } from './entry-link';
 import * as url from 'url';
 import * as got from 'got';
 import * as FeedParser from 'feedparser';
@@ -48,28 +49,6 @@ export function createEntry(item: FeedParser.Item, ant: Ant) {
 
 export function entryCategory(name: string) {
     return name;
-}
-
-export function entryLink(link: string) {
-    if (!link) {
-        throw new TypeError('Expected link argument not empty');
-    }
-    let result = link;
-    if (link.startsWith('https://javascriptkicks.com/r')) {
-        let components = new url.URL(link);
-        let testurl = components.searchParams.get('url');
-        if (!testurl) {
-            throw new Error('url is empty');
-        }
-        if (/\/r\/(\d+)\?url=\/articles\/\1/.test(link)) {
-            testurl = `https://javascriptkicks.com${testurl}`;
-        }
-        components = new url.URL(testurl);
-        components.searchParams.delete('gi');
-        components.searchParams.delete('source');
-        result = components.toString();
-    }
-    return result;
 }
 
 export function entryDate(item: FeedParser.Item) {
