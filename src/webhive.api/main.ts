@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+import '@abraham/reflection';
 import { config } from './config';
 import * as Koa from 'koa';
 import * as Router from 'koa-tree-router';
