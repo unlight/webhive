@@ -2,7 +2,7 @@
 import * as expect from 'expect';
 import { harvestResource, createEntry, entryDate } from './harvest.functions';
 import { createReadStream } from 'fs';
-import { Ant } from './harvest.ants';
+import { Ant } from './ants';
 import * as intoStream from 'into-stream';
 
 describe('harvest functions', () => {
