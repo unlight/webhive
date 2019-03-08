@@ -3,7 +3,7 @@ import { IsString, IsUrl, IsDate, IsOptional, IsISO8601, MinLength } from 'class
 export class CreateEntryDTO {
 
     @IsString()
-    @MinLength(3)
+    @MinLength(2)
     title!: string;
 
     @IsUrl()

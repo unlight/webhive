@@ -4,8 +4,6 @@ import * as url from 'url';
 import * as got from 'got';
 import * as FeedParser from 'feedparser';
 
-const ucfirst = require('ucfirst');
-
 export type HarvestResourceArguments = {
     url?: string;
     stream?: NodeJS.ReadableStream;
@@ -35,7 +33,7 @@ export async function harvestResource({ url, stream }: HarvestResourceArguments)
     });
 }
 
-export async function createEntry(item: FeedParser.Item, ant: Ant) {
+export function createEntry(item: FeedParser.Item, ant: Ant) {
     let category = ant.defaultCategory;
     if (item.categories && item.categories.length > 0) {
         category = item.categories[0];
@@ -49,11 +47,6 @@ export async function createEntry(item: FeedParser.Item, ant: Ant) {
 }
 
 export function entryCategory(name: string) {
-    if (name) {
-        if (name[0] !== name[0].toUpperCase()) {
-            name = ucfirst(name);
-        }
-    }
     return name;
 }
 

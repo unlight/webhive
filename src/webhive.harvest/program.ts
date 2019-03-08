@@ -8,7 +8,7 @@ async function program() {
     for await (const ant of ants) {
         let feedItems = await harvestResource({ url: ant.target });
         for await (const feedItem of feedItems) {
-            const entry = await createEntry(feedItem, ant);
+            const entry = createEntry(feedItem, ant);
             console.log('Saving', entry.link);
             try {
                 await got.post(`${config.get('apiUrl')}/entry`, { json: true, body: entry });

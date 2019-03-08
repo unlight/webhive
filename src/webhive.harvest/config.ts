@@ -24,6 +24,7 @@ const schema = {
         doc: 'API url',
         default: 'http://localhost:3000',
         env: 'API_URL',
+        arg: 'api_url',
     },
 };
 
