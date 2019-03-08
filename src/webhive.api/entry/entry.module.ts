@@ -8,7 +8,7 @@ import { validate } from 'class-validator';
 import * as Koa from 'koa';
 
 export function initialize({ router }: AppContext) {
-    router.on('POST', '/entry', transformEntry, createEntry);
+    router.on('POST', '/entry', checkPermission, transformEntry, createEntry);
     router.on('GET', '/entry', browseEntry);
 }
 
@@ -16,6 +16,10 @@ export async function browseEntry(context: Koa.Context, next: Function) {
     const entryService = inject(EntryService);
     const q = context.request.query['q'];
     context.body = await entryService.browse({ limit: 100, skip: 0, q });
+}
+
+export async function checkPermission(context: Koa.Context, next: Function) {
+    return next();
 }
 
 export async function createEntry(context: Koa.Context, next: Function) {

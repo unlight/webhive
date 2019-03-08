@@ -12,7 +12,7 @@ export class CategoryRepository {
     ) { }
 
     async findOrCreate(name: string) {
-        const collection = (await this.database).collection('category');
+        const collection = this.database.collection('category');
         let result = await collection.findOne<CategoryModel>({ name });
         if (!result) {
             result = { name, _id: undefined };

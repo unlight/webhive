@@ -2,31 +2,35 @@
 import * as expect from 'expect';
 import { getApp, ThenArg, CustomServerResponse } from '../main';
 import { ServerResponse } from 'http';
-import { MockoDb } from 'mockodb';
-import { MongoClient } from 'mongodb';
+import { MongoClient, Db } from 'mongodb';
 import { injector } from 'njct';
+import { mockMongoDatabase, mockMongoDatabaseClose } from '../testing/mock-mongo-database';
 import * as Koa from 'koa';
+import MongoMemoryServer from 'mongodb-memory-server';
 const sham = require('koa-sham');
 
-describe.skip('home api', () => {
+describe('home api', () => {
 
     let app: ThenArg<ReturnType<typeof getApp>>;
-    let mockoDb: MockoDb;
+    let mongoServer: MongoMemoryServer;
+    let client: MongoClient;
+    let database: Db;
 
     before(async () => {
-        mockoDb = await MockoDb.boot();
-        const handle = await mockoDb.open();
-        const client = await MongoClient.connect(handle.url.href);
-        const database = client.db('webhive_test');
-        await injector.provide('database', () => database);
-        app = await getApp();
+        ({ mongoServer, client, database } = await mockMongoDatabase());
+        injector.provide('client', () => client);
+        injector.provide('database', () => database);
     });
 
     after(async () => {
-        await mockoDb.shutdown();
+        await mockMongoDatabaseClose({ client, mongoServer });
     });
 
-    it.skip('GET /', async () => {
+    before(async () => {
+        app = await getApp();
+    });
+
+    it('GET /', async () => {
         const response: CustomServerResponse = await sham(app, '/', { promise: true, resolveWithFullResponse: true });
         expect(response.statusCode).toEqual(200);
         expect(response.ctx.body).toContain({ app: 'webhive' });

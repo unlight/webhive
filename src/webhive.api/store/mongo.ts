@@ -4,20 +4,6 @@ import { inject } from 'njct';
 
 export { ObjectId };
 
-export type ExecuteConnectionOptions = {
-    db: Db;
-}
-
-export async function connection<TResult = any>(execute: (options: ExecuteConnectionOptions) => Promise<TResult>) {
-    const client = await new MongoClient(config.get('mongoUri')).connect();
-    const db = client.db(config.get('mongoDb'));
-    const result = await execute({ db });
-    client.close();
-    return result;
-}
-
-export type ConnectionFunc = typeof connection;
-
 export function toObjectId(id: string): ObjectId {
     return (<any>ObjectId)(id);
 }
@@ -31,10 +17,10 @@ export function mongoClientInstance() {
     return mongoClient;
 }
 
-export async function mongoDatabaseInstance() {
+export function mongoDatabaseInstance() {
     const client = inject('client', mongoClientInstance);
     if (!client.isConnected()) {
-        await client.connect();
+        throw new Error('Client is not connected');
     }
     return client.db(config.get('mongoDb'));
 }

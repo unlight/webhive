@@ -21,20 +21,20 @@ export class EntryRepository {
     ) { }
 
     async insert(entry: EntryModel) {
-        const collection = (await this.database).collection('entry2');
+        const collection = this.database.collection('entry2');
         const result = await collection.insertOne(entry);
         return result;
     }
 
     async getByLink(link: string) {
-        const collection = (await this.database).collection('entry2');
+        const collection = this.database.collection('entry2');
         const result = await collection.findOne({ link });
         return result;
     }
 
     async get(options: Partial<EntryGetOptions>) {
         const { skip, limit, sort, filter } = { ...entryGetOptionsDefaults, ...options };
-        const collection = (await this.database).collection('entry2');
+        const collection = this.database.collection('entry2');
         const result = await collection.find(filter)
             .skip(skip)
             .limit(limit)
