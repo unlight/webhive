@@ -12,6 +12,9 @@ export type EntryBrowseRequest = {
     // direction: 'asc' | 'desc';
 }
 
+/**
+ * Entry service.
+ */
 export class EntryService {
 
     constructor(

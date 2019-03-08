@@ -20,7 +20,7 @@ async function main() {
     const client = await new MongoClient(process.env.MONGODB_URI1!, { useNewUrlParser: true }).connect();
     const collection = client.db('heroku_g67g5p9d').collection('entry');
     const cursor = collection.find();
-    while (true) {
+    while (true) { // eslint-disable-line no-constant-condition
         const item = await cursor.next();
         if (!item) break;
         const category = entities.decode(item.category_name);

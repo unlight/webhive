@@ -2,6 +2,9 @@ import { inject } from 'njct';
 import { mongoDatabaseInstance } from '../store/mongo';
 import { CategoryModel } from './category.model';
 
+/**
+ * Category repository.
+ */
 export class CategoryRepository {
 
     constructor(

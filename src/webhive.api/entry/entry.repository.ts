@@ -11,6 +11,9 @@ const entryGetOptionsDefaults = {
 
 type EntryGetOptions = typeof entryGetOptionsDefaults;
 
+/**
+ * Entry repository.
+ */
 export class EntryRepository {
 
     constructor(

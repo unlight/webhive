@@ -1,6 +1,9 @@
 import { CategoryRepository } from './category.repository';
 import { inject } from 'njct';
 
+/**
+ * Service to work with categories.
+ */
 export class CategoryService {
 
     constructor(
