@@ -29,6 +29,7 @@ module.exports = {
         'unicorn/import-index': 0,
         'unicorn/catch-error-name': 0,
         'import/newline-after-import': 0,
+        'no-console': 1,
         'import/no-duplicates': 1,
         'import/max-dependencies': [1, { 'max': 10 }],
         'quotes': [1, 'single', { 'allowTemplateLiterals': true }],

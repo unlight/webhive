@@ -46,6 +46,8 @@
     "newline-per-chained-call": false,
     "no-parameter-properties": false,
     "import-name": false,
+    "no-void-expression": false,
+    "no-submodule-imports": false,
     ".": false
   }
 }

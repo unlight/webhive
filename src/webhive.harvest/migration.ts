@@ -10,7 +10,7 @@ const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
 
 const apiUrl = config.get('apiUrl');
-console.log("apiUrl", apiUrl);
+console.log('apiUrl', apiUrl);
 
 const testInvalidEntries: any[] = [];
 
@@ -46,15 +46,15 @@ async function main() {
         const entryEntity = plainToClass(CreateEntryDTO, entry);
         const errors = await validate(entryEntity);
         if (errors.length > 0) {
-            console.log("entryEntity", entryEntity);
-            console.log("errors", JSON.stringify(errors, null, 2));
+            console.log('entryEntity', entryEntity);
+            console.log('errors', JSON.stringify(errors, null, 2));
             testInvalidEntries.push({ entryEntity, errors } as any);
         }
         try {
             await got.post(`${apiUrl}/entry`, { json: true, body: entry });
             console.log('entry', entry.title);
         } catch (err) {
-            console.log("err", err.body, err.statusCode);
+            console.log('err', err.body, err.statusCode);
             const canContinue = err && err.body && err.body.code === 'EntryExists';
             if (!canContinue) {
                 throw err;
@@ -63,7 +63,7 @@ async function main() {
 
     }
     await client.close();
-    console.log("testInvalidEntries", JSON.stringify(testInvalidEntries, null, 2));
+    console.log('testInvalidEntries', JSON.stringify(testInvalidEntries, null, 2));
 }
 
 main();
@@ -78,23 +78,23 @@ function stringEndsWith(haystack: string, needle) {
 
 function cleanUpHtml(value) {
     value = value.trim();
-    if (stringBeginsWith(value, "<!--[CDATA[")) {
+    if (stringBeginsWith(value, '<!--[CDATA[')) {
         value = value.substr(11);
-    } else if (stringBeginsWith(value, "[CDATA[")) {
+    } else if (stringBeginsWith(value, '[CDATA[')) {
         value = value.substr(7);
     } else if (stringBeginsWith(value, '<![CDATA[')) {
         value = value.substr(9);
     }
-    if (stringEndsWith(value, "]]-->")) {
+    if (stringEndsWith(value, ']]-->')) {
         value = value.slice(0, -5);
-    } else if (stringEndsWith(value, "]]")) {
+    } else if (stringEndsWith(value, ']]')) {
         value = value.slice(0, -2);
     } else if (stringEndsWith(value, ']]>')) {
         value = value.slice(0, -3);
     }
 
     value = value.replace(/&amp;(#\d+;)/gi, function() {
-        var entity = "&" + arguments[1];
+        var entity = '&' + arguments[1];
         return entity;
     });
 
