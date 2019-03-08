@@ -2,7 +2,7 @@ import * as got from 'got';
 import { config } from './config';
 import { MongoClient } from 'mongodb';
 import { createEntry } from './harvest.functions';
-import { Ant } from './harvest.ants';
+import { Ant } from './ants';
 import { plainToClass } from 'class-transformer';
 import { CreateEntryDTO } from '../webhive.api/entry/entry.dto';
 import { validate, ValidatorOptions } from 'class-validator';

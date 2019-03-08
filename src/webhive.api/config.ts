@@ -8,13 +8,6 @@ const schema = {
         env: 'NODE_ENV',
         arg: 'node_env',
     },
-    program: {
-        doc: 'The program which runs code',
-        format: ['node', 'tsnode', 'webpack'],
-        default: 'node',
-        env: 'PROGRAM',
-        arg: 'program',
-    },
     port: {
         format: 'port',
         default: 3000,

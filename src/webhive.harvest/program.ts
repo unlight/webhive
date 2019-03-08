@@ -1,6 +1,6 @@
 import * as FeedParser from 'feedparser';
 import * as got from 'got';
-import { ants } from './harvest.ants';
+import { ants } from './ants';
 import { harvestResource, createEntry } from './harvest.functions';
 import { config } from './config';
 import * as minimist from 'minimist';

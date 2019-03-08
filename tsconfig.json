@@ -14,8 +14,8 @@
     "jsxFactory": "h",
     "removeComments": false,
     "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
+    "declaration": false,
+    "declarationMap": false,
     "lib": [
       "esnext"
     ]

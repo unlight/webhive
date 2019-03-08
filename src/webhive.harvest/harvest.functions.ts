@@ -1,5 +1,5 @@
 import { Stream, Readable } from 'stream';
-import { Ant } from './harvest.ants';
+import { Ant } from './ants';
 import { entryLink } from './entry-link';
 import * as url from 'url';
 import * as got from 'got';

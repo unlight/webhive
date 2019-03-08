@@ -1,4 +1,6 @@
 ## TODO
+* protect create entry endpoint
+* build
 * escape title and category when output
 * Unwrap category from category collection ($lookup)
 * close connection (looks like it is not nessesary)

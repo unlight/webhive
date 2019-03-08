@@ -11,6 +11,5 @@ export async function home(context: IRouterContext, next: Function) {
     context.body = {
         app: 'webhive',
         environment: config.get('environment'),
-        program: config.get('program'),
     };
 }
