@@ -26,7 +26,7 @@ export async function createEntry(context: Koa.Context, next: Function) {
         context.status = 409;
         context.body = {
             message: 'Entry with such link already exists',
-            code: 'AlreadyExists',
+            code: 'EntryExists',
             data: {
                 link: createEntryDTO.link,
             },

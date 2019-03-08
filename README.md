@@ -9,3 +9,5 @@
 * Replace reflect-metadata by @abraham/reflect
 * Rename components to webhive.api, webhive.frontend
 * once function
+* nested logging
+* more modern args module

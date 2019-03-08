@@ -26,6 +26,13 @@ const schema = {
         env: 'API_URL',
         arg: 'api_url',
     },
+    waitInterval: {
+        doc: 'Wait until next run',
+        format: 'duration',
+        default: 45 * 60 * 1000,
+        env: 'WAIT_INTERVAL',
+        arg: 'wait_interval',
+    }
 };
 
 export const config = convict(schema).validate();

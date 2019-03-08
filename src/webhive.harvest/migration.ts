@@ -55,7 +55,7 @@ async function main() {
             console.log('entry', entry.title);
         } catch (err) {
             console.log("err", err.body, err.statusCode);
-            const canContinue = err && err.body && err.body.code === 'AlreadyExists';
+            const canContinue = err && err.body && err.body.code === 'EntryExists';
             if (!canContinue) {
                 throw err;
             }

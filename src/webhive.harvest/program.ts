@@ -3,16 +3,14 @@ import * as got from 'got';
 import { ants } from './ants';
 import { harvestResource, createEntry } from './harvest.functions';
 import { config } from './config';
-import * as minimist from 'minimist';
-
-const argv: minimist.ParsedArgs = require('minimist')(process.argv.slice(2));
+const argv = require('yargs').argv
 
 async function program() {
-    let programAnts = ants;
+    let swarm = ants;
     if (argv.ant) {
-        programAnts = programAnts.filter(x => x.name === argv.ant);
+        swarm = swarm.filter(x => x.name === argv.ant);
     }
-    for await (const ant of programAnts) {
+    for await (const ant of swarm) {
         let feedItems = await harvestResource({ url: ant.target });
         for await (const feedItem of feedItems) {
             const entry = createEntry(feedItem, ant);
@@ -21,13 +19,19 @@ async function program() {
                 await got.post(`${config.get('apiUrl')}/entry`, { json: true, body: entry });
             } catch (e) {
                 const err = e as got.Response<{ message: string, code?: string }>;
-                const canContinue = err.body && err.body.code && err.body.code === 'AlreadyExists';
-                if (!canContinue) {
-                    throw err;
+                const code = err.body && err.body.code;
+                switch (code) {
+                    case 'EntryExists': {
+                        console.log(err.body.message);
+                    } break;
+                    default:
+                        throw err;
                 }
             }
         }
     }
+    console.log('Next run in', config.get('waitInterval'));
+    setTimeout(program, config.get('waitInterval'));
 }
 
 program();

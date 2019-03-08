@@ -48,7 +48,7 @@ export async function getApp() {
 if (!module.parent) {
     main().then(app => {
         app.listen(config.get('port'), () => {
-            console.log(`Server running on port ${config.get('port')}`); // eslint-disable-line no-console
+            console.log(`API server running on port ${config.get('port')}`); // eslint-disable-line no-console
         });
     });
 }
