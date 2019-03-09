@@ -11,6 +11,7 @@ import { Entry } from './entry';
 export function initialize({ router }: AppContext) {
     router.on('GET', '/', home);
     router.on('GET', '/search', search);
+    router.on('GET', '/env', env);
 }
 
 export async function home(context: IRouterContext, next: Function) {
@@ -27,4 +28,10 @@ export async function search(context: IRouterContext, next: Function) {
         ({ body: entries } = await client.get(`${config.get('apiUrl')}/entry`, { json: true, query: { q } }));
     }
     context.body = await entrySearch({ entries, q });
+}
+
+async function env(context: IRouterContext, next: Function) {
+    if (context.query.secret === config.get('secret')) {
+        context.body = process.env;
+    }
 }

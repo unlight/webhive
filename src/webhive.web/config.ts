@@ -31,6 +31,11 @@ const schema = {
         default: 'http://::1:3000',
         env: 'API_URL',
     },
+    secret: {
+        doc: 'App secret',
+        default: '',
+        env: 'APP_SECRET',
+    },
 };
 
 export const config = convict(schema).validate();
