@@ -7,7 +7,7 @@ import { ServerResponse } from 'http';
 import { MongoClient } from 'mongodb';
 import { inject, injector } from 'njct';
 import { mongoDatabaseInstance, mongoClientInstance } from './store/mongo';
-import * as koaJsonError from 'koa-json-error';
+const koaJsonError = require('koa-json-error');
 
 if (config.get('environment') === 'development' || config.get('environment') === 'test') {
     require('loud-rejection/register');
@@ -31,8 +31,8 @@ async function main() {
     app.use(koaJsonError());
     const client = await inject('client', mongoClientInstance);
     await client.connect();
-    await import('./home/home.module').then(module => module.initialize(appContext));
-    await import('./entry/entry.module').then(module => module.initialize(appContext));
+    await import('./home/home.module').then(m => m.initialize(appContext));
+    await import('./entry/entry.module').then(m => m.initialize(appContext));
     app.use(koaBodyparser({ strict: false }));
     app.use(router.routes());
     return app;

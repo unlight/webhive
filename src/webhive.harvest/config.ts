@@ -32,7 +32,12 @@ const schema = {
         default: 45 * 60 * 1000,
         env: 'WAIT_INTERVAL',
         arg: 'wait_interval',
-    }
+    },
+    apiToken: {
+        doc: 'API token to access data manipulation',
+        default: '0000',
+        env: 'API_TOKEN',
+    },
 };
 
 export const config = convict(schema).validate();

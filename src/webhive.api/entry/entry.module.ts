@@ -5,6 +5,7 @@ import { EntryService } from './entry.service';
 import { IRouterContext } from 'koa-tree-router';
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
+import { config } from '../config';
 import * as Koa from 'koa';
 
 export function initialize({ router }: AppContext) {
@@ -19,6 +20,10 @@ export async function browseEntry(context: Koa.Context, next: Function) {
 }
 
 export async function checkPermission(context: Koa.Context, next: Function) {
+    const apiToken = context.headers['api-token'];
+    if (apiToken !== config.get('apiToken')) {
+        context.throw(401);
+    }
     return next();
 }
 
@@ -53,8 +58,7 @@ export async function transformEntry(context: IRouterContext, next: Function) {
     const errors = await validate(createEntryDTO, { validationError: { target: false } });
     if (errors.length > 0) {
         // todo: throw error from errorlings
-        context.statusCode = 400;
-        throw errors;
+        context.throw(400, String(errors));
     }
     context.state.createEntryDTO = createEntryDTO;
     return next();

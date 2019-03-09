@@ -3,6 +3,7 @@ import * as got from 'got';
 import { ants } from './ants';
 import { harvestResource, createEntry } from './harvest.functions';
 import { config } from './config';
+import ms = require('ms');
 const argv = require('yargs').argv;
 
 async function program() {
@@ -11,10 +12,11 @@ async function program() {
         swarm = swarm.filter(x => x.name === argv.ant);
     }
     for (const ant of swarm) {
+        console.group('Starting', ant.name);
         const feedItems = await harvestResource({ url: ant.target });
         for (const feedItem of feedItems) {
+            console.group('Saving', feedItem.title);
             const entry = createEntry(feedItem, ant);
-            console.log('Saving', entry.link);
             try {
                 await got.post(`${config.get('apiUrl')}/entry`, { json: true, body: entry });
             } catch (e) {
@@ -28,10 +30,13 @@ async function program() {
                         throw err;
                 }
             }
+            console.groupEnd();
         }
+        console.groupEnd();
     }
-    console.log('Next run in', config.get('waitInterval'));
-    setTimeout(program, config.get('waitInterval'));
+    const waitInterval = config.get('waitInterval');
+    console.log('Next run in', ms(waitInterval));
+    setTimeout(program, waitInterval);
 }
 
 program();

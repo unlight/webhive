@@ -26,6 +26,11 @@ const schema = {
         env: 'MONGODB_NAME',
         arg: 'mongodb_name',
     },
+    apiToken: {
+        doc: 'API token to access data manipulation',
+        default: '0000',
+        env: 'API_TOKEN',
+    },
 };
 
 export const config = convict(schema).validate();

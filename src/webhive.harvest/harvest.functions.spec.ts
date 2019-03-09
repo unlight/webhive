@@ -42,7 +42,7 @@ describe('harvest functions', () => {
         // console.log("item", item);
         expect(item).toBeTruthy();
         expect(item.title).toBe('How do we');
-        const entry = createEntry(item, { defaultCategory: null } as Ant);
+        const entry = createEntry(item, { defaultCategory: null } as any);
         // console.log("entry", entry);
     });
 
