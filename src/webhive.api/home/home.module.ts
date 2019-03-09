@@ -8,6 +8,7 @@ export function initialize({ router }: AppContext) {
 }
 
 export async function home(context: IRouterContext, next: Function) {
+    console.log("context.ip", context.ip);
     context.body = {
         app: 'webhive',
         environment: config.get('environment'),
