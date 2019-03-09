@@ -1,12 +1,11 @@
-import '@abraham/reflection';
+import '@abraham/reflection'; // tslint:disable-line:no-import-side-effect
 import { config } from './config';
 import * as Koa from 'koa';
 import * as Router from 'koa-tree-router';
 import * as koaBodyparser from 'koa-bodyparser';
 import { ServerResponse } from 'http';
-import { MongoClient } from 'mongodb';
-import { inject, injector } from 'njct';
-import { mongoDatabaseInstance, mongoClientInstance } from './store/mongo';
+import { inject } from 'njct';
+import { mongoClientInstance } from './store/mongo';
 const koaJsonError = require('koa-json-error');
 
 if (config.get('environment') === 'development' || config.get('environment') === 'test') {
@@ -29,7 +28,7 @@ export type CustomServerResponse = ServerResponse & {
 
 async function main() {
     app.use(koaJsonError());
-    const client = await inject('client', mongoClientInstance);
+    const client = inject('client', mongoClientInstance);
     await client.connect();
     await import('./home/home.module').then(m => m.initialize(appContext));
     await import('./entry/entry.module').then(m => m.initialize(appContext));
@@ -50,5 +49,7 @@ if (!module.parent) {
         app.listen(config.get('port'), () => {
             console.log(`API server running on port ${config.get('port')}`); // eslint-disable-line no-console
         });
+    }, err => {
+        console.error(err); // eslint-disable-line no-console
     });
 }

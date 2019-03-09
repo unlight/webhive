@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/tslint/config */
 import { entryLink } from './entry-link';
 import * as expect from 'expect';
 

@@ -22,7 +22,7 @@ export async function harvestResource({ url, stream }: HarvestResourceArguments)
     stream.pipe(feeds);
     feeds.on('readable', function() {
         let item: FeedParser.Item;
-        while ((item = feeds.read())) {
+        while ((item = feeds.read())) { // tslint:disable-line:no-conditional-assignment
             result.push(item);
         }
     });
@@ -52,6 +52,5 @@ export function entryCategory(name: string) {
 }
 
 export function entryDate(item: FeedParser.Item) {
-    const result = new Date();
-    return result;
+    return new Date();
 }

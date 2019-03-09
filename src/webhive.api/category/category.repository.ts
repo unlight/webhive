@@ -3,7 +3,7 @@ import { mongoDatabaseInstance } from '../store/mongo';
 import { CategoryModel } from './category.model';
 
 /**
- * Category repository.
+ * Category repository, get data from store.
  */
 export class CategoryRepository {
 

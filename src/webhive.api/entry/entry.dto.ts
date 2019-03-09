@@ -1,7 +1,7 @@
 import { IsString, IsUrl, IsDate, IsOptional, IsISO8601, MinLength } from 'class-validator';
 
 /**
- * Create entry DTO.
+ * Represents create entry json object.
  */
 export class CreateEntryDTO {
 

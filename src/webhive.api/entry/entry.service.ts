@@ -8,12 +8,10 @@ export type EntryBrowseRequest = {
     skip: number;
     limit: number;
     q: string;
-    // orderby: string;
-    // direction: 'asc' | 'desc';
 }
 
 /**
- * Entry service.
+ * Entry service, any logic should be here.
  */
 export class EntryService {
 
@@ -34,7 +32,7 @@ export class EntryService {
             const category = await this.categoryRepository.findOrCreate(categoryName);
             entry.category_id = category._id;
         }
-        return await this.entryRepository.insert(entry);
+        return this.entryRepository.insert(entry);
     }
 
     async getByLink(link: string) {
@@ -49,11 +47,11 @@ export class EntryService {
         if (skip <= 0) {
             skip = 0;
         }
-        let filter: any = undefined;
+        let filter: any;
         if (q) {
             filter = { title: new RegExp(q, 'i') };
         }
         const sort = { date: -1 };
-        return this.entryRepository.get({ skip, limit, sort, filter });
+        return this.entryRepository.find({ skip, limit, sort, filter });
     }
 }

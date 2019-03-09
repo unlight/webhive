@@ -6,13 +6,13 @@ const entryGetOptionsDefaults = {
     sort: undefined as unknown as (object | object[]),
     skip: 0,
     limit: 100,
-    filter: undefined as any,
+    filter: undefined as unknown as { [k: string]: unknown },
 };
 
 type EntryGetOptions = typeof entryGetOptionsDefaults;
 
 /**
- * Entry repository.
+ * Entry repository, gets data from store.
  */
 export class EntryRepository {
 
@@ -22,17 +22,15 @@ export class EntryRepository {
 
     async insert(entry: EntryModel) {
         const collection = this.database.collection('entry2');
-        const result = await collection.insertOne(entry);
-        return result;
+        return collection.insertOne(entry);
     }
 
     async getByLink(link: string) {
         const collection = this.database.collection('entry2');
-        const result = await collection.findOne({ link });
-        return result;
+        return collection.findOne({ link });
     }
 
-    async get(options: Partial<EntryGetOptions>) {
+    async find(options: Partial<EntryGetOptions>) {
         const { skip, limit, sort, filter } = { ...entryGetOptionsDefaults, ...options };
         const collection = this.database.collection('entry2');
         const $lookup = {
@@ -43,12 +41,11 @@ export class EntryRepository {
         };
         const $match = filter || {};
         const $unwind = '$category';
-        const result = await collection
+        return collection
             .aggregate([{ $match }, { $lookup }, { $unwind }])
             .skip(skip)
             .limit(limit)
             .sort(sort)
             .toArray();
-        return result;
     }
 }

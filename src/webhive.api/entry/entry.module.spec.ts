@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/tslint/config */
+/* eslint-disable @typescript-eslint/tslint/config, import/max-dependencies */
 import * as expect from 'expect';
 import { getApp, CustomServerResponse, ThenArg } from '../main';
-import { ServerResponse } from 'http';
 import { CreateEntryDTO } from './entry.dto';
-import { injector, inject } from 'njct';
-import * as Koa from 'koa';
+import { injector } from 'njct';
 import { MongoClient, Db } from 'mongodb';
-import { EntryRepository } from './entry.repository';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { mockMongoDatabaseClose, mockMongoDatabase } from '../testing/mock-mongo-database';
 import { config } from '../config';

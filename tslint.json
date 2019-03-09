@@ -48,6 +48,9 @@
     "import-name": false,
     "no-void-expression": false,
     "no-submodule-imports": false,
+    "no-single-line-block-comment": false,
+    "prefer-type-cast": false,
+    "no-constant-condition": false,
     ".": false
   }
 }

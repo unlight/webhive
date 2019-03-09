@@ -45,8 +45,8 @@ describe('mongodb playground', () => {
     });
 
     it.skip('lookup category', async () => {
-        await inject('client', mongoClientInstance).connect();
-        const database = inject('database', mongoDatabaseInstance),
+        inject('client', mongoClientInstance).connect();
+        const database = inject('database', mongoDatabaseInstance);
         const collection = database.collection('entry2');
         const $lookup = {
             from: 'category',

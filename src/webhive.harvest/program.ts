@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* tslint:disable no-floating-promises */
 import * as FeedParser from 'feedparser';
 import * as got from 'got';
 import { ants } from './ants';
@@ -20,9 +22,9 @@ async function program() {
             try {
                 await got.post(`${config.get('apiUrl')}/entry`, { json: true, body: entry, headers: {'api-token': config.get('apiToken')} });
             } catch (e) {
-                const err = e as got.Response<{ message: string, code?: string }>;
+                const err = e as got.Response<{ message: string; code?: string }>;
                 const code = err.body && err.body.code;
-                switch (code) {
+                switch (code) { // tslint:disable-line:no-small-switch
                     case 'EntryExists': {
                         console.log(err.body.message);
                     } break;

@@ -5,7 +5,7 @@ import { inject } from 'njct';
 export { ObjectId };
 
 export function toObjectId(id: string): ObjectId {
-    return (<any>ObjectId)(id);
+    return (<any>ObjectId)(id); // tslint:disable-line:no-any
 }
 
 let mongoClient: MongoClient;

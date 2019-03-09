@@ -1,3 +1,5 @@
+/* eslint-disable no-console, @typescript-eslint/tslint/config */
+/* tslint:disable:no-floating-promises no-any */
 import * as got from 'got';
 import { config } from './config';
 import { MongoClient } from 'mongodb';
@@ -6,8 +8,8 @@ import { Ant } from './ants';
 import { plainToClass } from 'class-transformer';
 import { CreateEntryDTO } from '../webhive.api/entry/entry.dto';
 import { validate, ValidatorOptions } from 'class-validator';
-const Entities = require('html-entities').AllHtmlEntities;
-const entities = new Entities();
+import { AllHtmlEntities } from 'html-entities';
+const entities = new AllHtmlEntities();
 
 const apiUrl = config.get('apiUrl');
 console.log('apiUrl', apiUrl);
@@ -17,12 +19,14 @@ const testInvalidEntries: any[] = [];
 // to run prod migration run script with arg api_url
 
 async function main() {
-    const client = await new MongoClient(process.env.MONGODB_URI1!, { useNewUrlParser: true }).connect();
-    const collection = client.db('heroku_g67g5p9d').collection('entry');
+    const client = await new MongoClient(process.env.MONGODB_URI1 as string, { useNewUrlParser: true }).connect();
+    const collection = client.db(process.env.MONGODB_NAME1 as string).collection('entry');
     const cursor = collection.find();
     while (true) { // eslint-disable-line no-constant-condition
         const item = await cursor.next();
-        if (!item) break;
+        if (!item) {
+            break;
+        }
         const category = entities.decode(item.category_name);
         const dummyFeed = {
             categories: [category],
@@ -94,8 +98,7 @@ function cleanUpHtml(value) {
     }
 
     value = value.replace(/&amp;(#\d+;)/gi, function() {
-        var entity = '&' + arguments[1];
-        return entity;
+        return '&' + arguments[1];
     });
 
     value = value.replace(/&amp;quot;/g, '"');

@@ -15,10 +15,9 @@ export function initialize({ router }: AppContext) {
 
 export async function home(context: IRouterContext, next: Function) {
     const client = inject('client', () => got);
-    const { body, statusCode } = await client.get(`${config.get('apiUrl')}/entry`, { json: true });
+    const { body } = await client.get(`${config.get('apiUrl')}/entry`, { json: true });
     context.body = await entryIndex({ entries: body });
 }
-
 
 export async function search(context: IRouterContext, next: Function) {
     const q = context.query.q;
