@@ -4,6 +4,15 @@ import { CreateEntryDTO } from './entry.dto';
 import { EntryModel } from './entry.model';
 import { CategoryRepository } from '../category/category.repository';
 
+export type EntryBrowseRequest = {
+    skip: number;
+    limit: number;
+    q: string;
+}
+
+/**
+ * Entry service, any logic should be here.
+ */
 export class EntryService {
 
     constructor(
@@ -23,6 +32,26 @@ export class EntryService {
             const category = await this.categoryRepository.findOrCreate(categoryName);
             entry.category_id = category._id;
         }
-        return await this.entryRepository.insert(entry);
+        return this.entryRepository.insert(entry);
+    }
+
+    async getByLink(link: string) {
+        return this.entryRepository.getByLink(link);
+    }
+
+    async browse(entryBrowseRequest: Partial<EntryBrowseRequest> = {}) {
+        let { skip = 0, limit = 100, q } = entryBrowseRequest;
+        if (limit > 100 || limit <= 0) {
+            limit = 100;
+        }
+        if (skip <= 0) {
+            skip = 0;
+        }
+        let filter: any;
+        if (q) {
+            filter = { title: new RegExp(q, 'i') };
+        }
+        const sort = { date: -1 };
+        return this.entryRepository.find({ skip, limit, sort, filter });
     }
 }

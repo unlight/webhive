@@ -44,6 +44,13 @@
     "no-unsafe-any": false,
     "no-backbone-get-set-outside-model": false,
     "newline-per-chained-call": false,
+    "no-parameter-properties": false,
+    "import-name": false,
+    "no-void-expression": false,
+    "no-submodule-imports": false,
+    "no-single-line-block-comment": false,
+    "prefer-type-cast": false,
+    "no-constant-condition": false,
     ".": false
   }
 }

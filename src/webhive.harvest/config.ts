@@ -8,12 +8,6 @@ const schema = {
         env: 'NODE_ENV',
         arg: 'node_env',
     },
-    port: {
-        format: 'port',
-        default: 3000,
-        env: 'API_PORT',
-        arg: 'api_port',
-    },
     mongoUri: {
         doc: 'MongoDB connection dsn string',
         default: 'mongodb://localhost:27017',
@@ -25,6 +19,19 @@ const schema = {
         default: 'webhive',
         env: 'MONGODB_NAME',
         arg: 'mongodb_name',
+    },
+    apiUrl: {
+        doc: 'API url',
+        default: 'http://localhost:3000',
+        env: 'API_URL',
+        arg: 'api_url',
+    },
+    waitInterval: {
+        doc: 'Wait until next run',
+        format: 'duration',
+        default: 45 * 60 * 1000,
+        env: 'WAIT_INTERVAL',
+        arg: 'wait_interval',
     },
     apiToken: {
         doc: 'API token to access data manipulation',

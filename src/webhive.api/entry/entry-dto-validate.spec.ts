@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/tslint/config */
 import { CreateEntryDTO } from './entry.dto';
 import * as expect from 'expect';
 import { validate, ValidatorOptions } from 'class-validator';

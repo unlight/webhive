@@ -1,6 +1,6 @@
 ## TODO
-* Find mongo memory
-* Try koa middleware feature to open and close connection
-* Replace reflect-metadata by @abraham/reflect
-* Rename components to webhive.api, webhive.frontend
-
+* Once function (when injects)
+* Create indexes
+* Search, find in category name in category.name also
+* BEM names for css classes
+* createEntry: use ctx.throw to throw errrors (errorlings?)

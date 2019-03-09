@@ -1,19 +1,6 @@
 #!/bin/bash
 PATH="$PWD/node_modules/.bin":$PATH
 
-hello() {
-    echo Hello from taskfile
-    echo args: "$1" "$2" "$3"
-}
-
-remark_run() {
-    remark readme.md --use toc --use license "$@"
-}
-
-remark_output() {
-    remark_run --output
-}
-
 build() {
     rm -rf dist
     cp -rf src dist && /usr/bin/find dist -name '*.spec.ts' | xargs rm -f

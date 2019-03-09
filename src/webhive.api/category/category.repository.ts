@@ -1,23 +1,23 @@
 import { inject } from 'njct';
-import { toObjectId } from '../store/mongo';
-import * as mongo from '../store/mongo';
+import { mongoDatabaseInstance } from '../store/mongo';
 import { CategoryModel } from './category.model';
 
+/**
+ * Category repository, get data from store.
+ */
 export class CategoryRepository {
 
     constructor(
-        private readonly connection = inject('connection', () => mongo.connection),
+        private readonly database = inject('database', mongoDatabaseInstance),
     ) { }
 
     async findOrCreate(name: string) {
-        const result = await this.connection(async ({ db }) => {
-            let category = await db.collection('category').findOne<CategoryModel>({ name });
-            if (!category) {
-                category = { name, _id: undefined };
-                ({ insertedId: category._id } = await db.collection('category').insertOne(category));
-            }
-            return category;
-        });
+        const collection = this.database.collection('category');
+        let result = await collection.findOne<CategoryModel>({ name });
+        if (!result) {
+            result = { name, _id: undefined };
+            ({ insertedId: result._id } = await collection.insertOne(result));
+        }
         return result;
     }
 }

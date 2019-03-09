@@ -12,7 +12,7 @@
     ".tsx"
   ],
   "require": [
-    "reflect-metadata",
+    "@abraham/reflection",
     "ts-node/register/transpile-only"
   ],
   "reporter": [

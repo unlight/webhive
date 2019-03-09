@@ -1,4 +1,6 @@
 import { Stream, Readable } from 'stream';
+import { Ant } from './ants';
+import { entryLink } from './entry-link';
 import * as url from 'url';
 import * as got from 'got';
 import * as FeedParser from 'feedparser';
@@ -20,7 +22,7 @@ export async function harvestResource({ url, stream }: HarvestResourceArguments)
     stream.pipe(feeds);
     feeds.on('readable', function() {
         let item: FeedParser.Item;
-        while (item = feeds.read()) {
+        while ((item = feeds.read())) { // tslint:disable-line:no-conditional-assignment
             result.push(item);
         }
     });
@@ -32,39 +34,23 @@ export async function harvestResource({ url, stream }: HarvestResourceArguments)
     });
 }
 
-export async function createEntry(item: FeedParser.Item) {
+export function createEntry(item: FeedParser.Item, ant: Ant) {
+    let category = ant.defaultCategory;
+    if (item.categories && item.categories.length > 0) {
+        category = item.categories[0];
+    }
     return {
         title: item.title,
         link: entryLink(item.link),
         date: entryDate(item),
-        category: undefined as unknown as string,
+        category: entryCategory(category),
     };
 }
 
-export function entryLink(link: string) {
-    if (!link) {
-        throw new TypeError('Expected link argument not empty');
-    }
-    let result = link;
-    if (link.startsWith('https://javascriptkicks.com/r')) {
-        const urlobject = new url.URL(link);
-        const testurl = urlobject.searchParams.get('url');
-        if (!testurl) {
-            throw new Error('url is empty');
-        }
-        result = testurl;
-    }
-    return result;
+export function entryCategory(name: string) {
+    return name;
 }
 
 export function entryDate(item: FeedParser.Item) {
-    let result: Date | undefined = undefined;
-    const testDate = item.date || item.pubdate || item['pubDate'];
-    if (testDate) {
-        result = new Date(testDate);
-    }
-    if (!result) {
-        result = new Date();
-    }
-    return result;
+    return new Date();
 }

@@ -10,9 +10,9 @@ const schema = {
     },
     port: {
         format: 'port',
-        default: 3000,
-        env: 'API_PORT',
-        arg: 'api_port',
+        default: 8000,
+        env: 'PORT',
+        arg: 'port',
     },
     mongoUri: {
         doc: 'MongoDB connection dsn string',
@@ -26,10 +26,10 @@ const schema = {
         env: 'MONGODB_NAME',
         arg: 'mongodb_name',
     },
-    apiToken: {
-        doc: 'API token to access data manipulation',
-        default: '0000',
-        env: 'API_TOKEN',
+    apiUrl: {
+        doc: 'API url',
+        default: 'http://localhost:3000',
+        env: 'API_URL',
     },
 };
 

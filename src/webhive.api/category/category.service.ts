@@ -1,6 +1,9 @@
 import { CategoryRepository } from './category.repository';
 import { inject } from 'njct';
 
+/**
+ * Service to work with categories.
+ */
 export class CategoryService {
 
     constructor(
@@ -8,6 +11,6 @@ export class CategoryService {
     ) { }
 
     async findOrCreate(name: string) {
-        return await this.categoryRepository.findOrCreate(name);
+        return this.categoryRepository.findOrCreate(name);
     }
 }

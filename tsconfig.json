@@ -10,18 +10,18 @@
     "emitDecoratorMetadata": true,
     "outDir": "dist",
     "pretty": true,
+    "jsx": "react",
+    "jsxFactory": "h",
     "removeComments": false,
     "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
+    "declaration": false,
+    "declarationMap": false,
     "lib": [
       "esnext"
     ]
   },
   "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "src/**/*.spec.ts"
+    "src/**/*.ts",
+    "src/**/*.tsx"
   ]
 }

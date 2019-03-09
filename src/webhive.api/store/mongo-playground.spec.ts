@@ -1,6 +1,11 @@
+/* eslint-disable @typescript-eslint/tslint/config */
 import { MongoClient } from 'mongodb';
-import { config } from '../../config';
+import { config } from '../config';
 import { EntryService } from '../entry/entry.service';
+import { EntryRepository } from '../entry/entry.repository';
+import { inject } from 'njct';
+import { mongoDatabaseInstance, mongoClientInstance } from './mongo';
+import * as expect from 'expect';
 
 describe('mongodb playground', () => {
 
@@ -30,12 +35,30 @@ describe('mongodb playground', () => {
 
     it.skip('EntryService.create', async () => {
         const service = new EntryService();
-        const { ops } = await service.create({
+        const { ops: [entry] } = await service.create({
             category: 'A2',
             title: 'A2 title',
             link: 'http://airmanship.com/kansa/carapacho?a=stypticity&b=prediminution#pumpkinification',
             date: '2011-03-26T06:22:20-06:00',
         });
+        expect(entry).toBeTruthy();
+    });
+
+    it.skip('lookup category', async () => {
+        inject('client', mongoClientInstance).connect();
+        const database = inject('database', mongoDatabaseInstance);
+        const collection = database.collection('entry2');
+        const $lookup = {
+            from: 'category',
+            localField: 'category_id',
+            foreignField: '_id',
+            as: 'category',
+        };
+        const result = await collection.aggregate([{ $lookup }])
+            .limit(1)
+            .toArray();
+        expect(result).toBeAn(Array);
+        expect(result.length).toBeGreaterThan(0);
     });
 
 });

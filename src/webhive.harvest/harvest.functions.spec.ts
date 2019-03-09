@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/tslint/config */
 import * as expect from 'expect';
-import { harvestResource, createEntry, entryLink, entryDate } from './harvest.functions';
+import { harvestResource, createEntry, entryDate } from './harvest.functions';
 import { createReadStream } from 'fs';
+import { Ant } from './ants';
 import * as intoStream from 'into-stream';
 
 describe('harvest functions', () => {
@@ -40,13 +42,10 @@ describe('harvest functions', () => {
         // console.log("item", item);
         expect(item).toBeTruthy();
         expect(item.title).toBe('How do we');
-        const entry = createEntry(item);
+        const entry = createEntry(item, { defaultCategory: null } as any);
         // console.log("entry", entry);
     });
 
-    it('item link', () => {
-        expect(entryLink('https://javascriptkicks.com/r/157197?url=https://aurelia.io/blog/2019/03/01/how-do-we-react-part-2/')).toEqual('https://aurelia.io/blog/2019/03/01/how-do-we-react-part-2/');
-    });
 
     // it('entry date', () => {
     //     entryDate();
