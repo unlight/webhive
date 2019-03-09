@@ -33,7 +33,6 @@
     "copySource": "cp -rv src dist && find dist/src -name '*.spec.ts' | xargs rm -f",
     "build": "tsc",
     "commit": "git-cz",
-    "heroku-postbuild": "echo Skip build on Heroku",
     "rebuild_lock": "rm package-lock.json && npm prune && npm install",
     "typesync": "npx typesync"
   },
