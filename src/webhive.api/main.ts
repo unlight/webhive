@@ -49,7 +49,7 @@ if (!module.parent) {
     main().then(app => {
         app.listen(config.get('port'), () => {
             const out = execSync('hostname').toString();
-            console.log('hostname', out);
+            console.log('api.hostname', out);
             console.log(`API server running on port ${config.get('port')}`); // eslint-disable-line no-console
         });
     }, err => {
