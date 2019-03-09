@@ -18,7 +18,7 @@ async function program() {
             console.group('Saving', feedItem.title);
             const entry = createEntry(feedItem, ant);
             try {
-                await got.post(`${config.get('apiUrl')}/entry`, { json: true, body: entry });
+                await got.post(`${config.get('apiUrl')}/entry`, { json: true, body: entry, headers: {'api-token': config.get('apiToken')} });
             } catch (e) {
                 const err = e as got.Response<{ message: string, code?: string }>;
                 const code = err.body && err.body.code;

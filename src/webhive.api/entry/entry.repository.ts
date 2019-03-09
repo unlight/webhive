@@ -35,7 +35,16 @@ export class EntryRepository {
     async get(options: Partial<EntryGetOptions>) {
         const { skip, limit, sort, filter } = { ...entryGetOptionsDefaults, ...options };
         const collection = this.database.collection('entry2');
-        const result = await collection.find(filter)
+        const $lookup = {
+            from: 'category',
+            localField: 'category_id',
+            foreignField: '_id',
+            as: 'category',
+        };
+        const $match = filter || {};
+        const $unwind = '$category';
+        const result = await collection
+            .aggregate([{ $match }, { $lookup }, { $unwind }])
             .skip(skip)
             .limit(limit)
             .sort(sort)

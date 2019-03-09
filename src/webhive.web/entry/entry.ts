@@ -3,4 +3,8 @@ export interface Entry {
     title: string;
     link: string;
     date: string;
+    category: {
+        _id: string;
+        name: string;
+    }
 }

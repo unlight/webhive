@@ -6,7 +6,6 @@ import { Nav } from '../layout/nav';
 import * as h from 'vhtml';
 
 export async function entryIndex({ entries }: { entries: Entry[] }) {
-    const [firstEntryDate] = entries;
     return <html>
         <Head />
         <body>
