@@ -31,7 +31,7 @@
     "lint:w": "run-p tsclint:w eslint:w",
     "prepublishOnly": "sed -i -e 's/devDependencies/_devDependencies/g' package.json",
     "copySource": "cp -rv src dist && find dist/src -name '*.spec.ts' | xargs rm -f",
-    "build": "tsc",
+    "build": "sh Taskfile build",
     "commit": "git-cz",
     "rebuild_lock": "rm package-lock.json && npm prune && npm install",
     "typesync": "npx typesync"
