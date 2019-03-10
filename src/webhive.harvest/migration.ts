@@ -55,7 +55,7 @@ async function main() {
             testInvalidEntries.push({ entryEntity, errors } as any);
         }
         try {
-            await got.post(`${apiUrl}/entry`, { json: true, body: entry });
+            await got.post(`${apiUrl}/entry`, { json: true, body: entry, headers: { 'api-token': config.get('apiToken') } });
             console.log('entry', entry.title);
         } catch (err) {
             console.log('err', err.body, err.statusCode);
@@ -64,7 +64,7 @@ async function main() {
                 throw err;
             }
         }
-
+        // await new Promise(resolve => setTimeout(resolve, 100));
     }
     await client.close();
     console.log('testInvalidEntries', JSON.stringify(testInvalidEntries, null, 2));
