@@ -13,4 +13,6 @@ export const ants: Ant[] = [
     { name: 'codetalks', target: 'https://codetalks.tv/javascript/feed', defaultCategory: 'JavaScript' },
     { name: 'codetalks', target: 'https://codetalks.tv/nodejs/feed', defaultCategory: 'NodeJS' },
     { name: 'codetalks', target: 'https://codetalks.tv/frontend/feed', defaultCategory: 'Frontend' },
+    { name: 'chikuyonok', target: 'http://feeds.feedburner.com/chikuyonok/vikk?format=xml', defaultCategory: 'Frontend' },
+    { name: 'csstricks', target: 'http://feeds.feedburner.com/CssTricks', defaultCategory: 'CSS' },
 ];
