@@ -41,7 +41,7 @@ export function createEntry(item: FeedParser.Item, ant: Ant) {
     }
     return {
         title: item.title,
-        link: entryLink(item.link),
+        link: entryLink(item),
         date: entryDate(item),
         category: entryCategory(category),
     };

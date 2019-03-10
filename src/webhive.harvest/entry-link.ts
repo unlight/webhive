@@ -1,11 +1,25 @@
+import * as assert from 'assert';
 import { URL } from 'url';
+import { Item } from 'feedparser';
 
-export function entryLink(link: string) {
-    if (!link) {
-        throw new TypeError('Expected link argument not empty');
+export function entryLink(object: string | Item) {
+    if (!object) {
+        throw new TypeError('Expected not empty argument');
+    }
+    let item: Item | undefined = undefined;
+    let link: string = undefined as unknown as string;
+    if (typeof object === 'object') {
+        item = object;
+        link = item.link;
+        if (item.origlink) {
+            link = item.origlink;
+        }
+    } else {
+        link = object;
     }
     let result = link;
     let components: URL;
+    assert(link);
     if (link.startsWith('https://javascriptkicks.com/r')) {
         components = new URL(link);
         let testurl = components.searchParams.get('url');
