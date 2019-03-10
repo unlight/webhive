@@ -11,7 +11,6 @@ import { Entry } from './entry';
 export function initialize({ router }: AppContext) {
     router.on('GET', '/', home);
     router.on('GET', '/search', search);
-    // router.on('GET', '/env', env);
 }
 
 export async function home(context: IRouterContext, next: Function) {

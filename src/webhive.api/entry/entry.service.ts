@@ -40,7 +40,7 @@ export class EntryService {
     }
 
     async browse(entryBrowseRequest: Partial<EntryBrowseRequest> = {}) {
-        let { skip = 0, limit = 100, q } = entryBrowseRequest;
+        let { skip = 0, limit = 100, q } = entryBrowseRequest; // tslint:disable-line:prefer-const
         if (limit > 100 || limit <= 0) {
             limit = 100;
         }

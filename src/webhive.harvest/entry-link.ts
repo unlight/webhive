@@ -6,8 +6,8 @@ export function entryLink(object: string | Item) {
     if (!object) {
         throw new TypeError('Expected not empty argument');
     }
-    let item: Item | undefined = undefined;
-    let link: string = undefined as unknown as string;
+    let item: Item | undefined;
+    let link: string;
     if (typeof object === 'object') {
         item = object;
         link = item.link;

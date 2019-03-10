@@ -1,5 +1,4 @@
 ## TODO
-* delete db.getCollection('entry2').find({link: /feedproxy\.google\.com/})
 * Auto create collection if not exists
 * Once function (when injects)
 * Create indexes
