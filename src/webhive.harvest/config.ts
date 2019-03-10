@@ -22,7 +22,7 @@ const schema = {
     },
     apiUrl: {
         doc: 'API url',
-        default: 'http://localhost:3000',
+        default: 'http://localhost:8000/api',
         env: 'API_URL',
         arg: 'api_url',
     },

@@ -19,4 +19,10 @@ describe('entryLink', () => {
     it('source', () => {
         expect(entryLink('https://codeburst.io/react-360-by-example-part-3-165eedb2d0b0?source=rss----61061eb0c96b---4')).toEqual('https://codeburst.io/react-360-by-example-part-3-165eedb2d0b0');
     });
+
+    it('google tracks', () => {
+        expect(entryLink('https://apiko.com/blog/serverless-architecture-benefits/?utm_source=echojs&utm_medium=serverless-architecture-benefits&utm_campaign=blogpost'))
+            .toEqual('https://apiko.com/blog/serverless-architecture-benefits/');
+
+    });
 });

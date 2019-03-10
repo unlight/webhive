@@ -20,6 +20,9 @@ export function entryLink(link: string) {
     components = new URL(result);
     components.searchParams.delete('gi');
     components.searchParams.delete('source');
+    components.searchParams.delete('utm_source');
+    components.searchParams.delete('utm_medium');
+    components.searchParams.delete('utm_campaign');
     result = components.toString();
     return result;
 }

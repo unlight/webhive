@@ -31,7 +31,7 @@ export class EntryRepository {
     }
 
     async find(options: Partial<EntryGetOptions>) {
-        const { skip, limit, sort, filter } = { ...entryGetOptionsDefaults, ...options };
+        const { skip, limit, sort: $sort, filter } = { ...entryGetOptionsDefaults, ...options };
         const collection = this.database.collection('entry2');
         const $lookup = {
             from: 'category',
@@ -42,10 +42,9 @@ export class EntryRepository {
         const $match = filter || {};
         const $unwind = '$category';
         return collection
-            .aggregate([{ $match }, { $lookup }, { $unwind }])
+            .aggregate([{ $match }, { $lookup }, { $unwind }, { $sort }])
             .skip(skip)
             .limit(limit)
-            .sort(sort)
             .toArray();
-    }
+}
 }

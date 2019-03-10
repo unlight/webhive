@@ -11,7 +11,7 @@
     "npm": ">=3"
   },
   "scripts": {
-    "dev": "run-p dev:api dev:web",
+    "dev": "run-p dev:web",
     "dev:api": "ts-node-dev --no-deps --transpileOnly -- src/webhive.api/main.ts",
     "dev:api:d": "ts-node-dev --no-deps --transpileOnly --inspect -- src/webhive.api/main.ts",
     "dev:web": "ts-node-dev --no-deps --transpileOnly -- src/webhive.web/main.ts",
