@@ -6,6 +6,7 @@ import * as koaBodyparser from 'koa-bodyparser';
 import { ServerResponse } from 'http';
 import { inject } from 'njct';
 import { mongoClientInstance } from './store/mongo';
+import { execSync } from 'child_process';
 const koaJsonError = require('koa-json-error');
 
 if (config.get('environment') === 'development' || config.get('environment') === 'test') {
@@ -47,6 +48,8 @@ export async function getApp() {
 if (!module.parent) {
     main().then(app => {
         app.listen(config.get('port'), () => {
+            const out = execSync('hostname').toString();
+            console.log('api.hostname', out);
             console.log(`API server running on port ${config.get('port')}`); // eslint-disable-line no-console
         });
     }, err => {
