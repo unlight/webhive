@@ -1,10 +1,11 @@
 import { config } from './config';
 import { ServerResponse } from 'http';
-import { execSync } from 'child_process';
 import * as Koa from 'koa';
 import * as Router from 'koa-tree-router';
 import * as favicon from 'koa-favicon';
 import * as serve from 'koa-static';
+import * as mount from 'koa-mount';
+import { getApp as getApi } from '../webhive.api/main';
 
 if (config.get('environment') === 'development' || config.get('environment') === 'test') {
     require('loud-rejection/register');
@@ -30,6 +31,7 @@ async function main() {
     app.use(favicon(`${__dirname}/public_html/favicon.ico`));
     app.use(serve(`${__dirname}/public_html`));
     app.use(router.routes());
+    app.use(mount('/api', await getApi()));
     return app;
 }
 
@@ -43,8 +45,6 @@ export async function getApp() {
 if (!module.parent) {
     main().then(app => {
         app.listen(config.get('port'), () => {
-            const out = execSync('hostname').toString();
-            console.log('api.hostname', out);
             console.log(`Web server running on port ${config.get('port')}`); // eslint-disable-line no-console
         });
     }, err => {

@@ -8,7 +8,7 @@ const schema = {
         env: 'NODE_ENV',
         arg: 'node_env',
     },
-    port: {
+    apiPort: {
         format: 'port',
         default: 3000,
         env: 'API_PORT',
