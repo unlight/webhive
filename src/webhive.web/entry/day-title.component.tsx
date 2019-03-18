@@ -1,6 +1,7 @@
 import * as h from 'vhtml';
-const tinydate = require('tinydate');
-const dayTitle = tinydate('{YYYY}-{MM}-{DD}');
+import * as dayjs from 'dayjs';
+
+const dayTitle = (date: Date) => dayjs(date).format('ddd, D MMM, YYYY')
 /**
  * Shows day title between entries.
  * Thu, 7th Mar, 2019
