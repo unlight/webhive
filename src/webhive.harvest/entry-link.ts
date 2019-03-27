@@ -37,6 +37,7 @@ export function entryLink(object: string | Item) {
     components.searchParams.delete('utm_source');
     components.searchParams.delete('utm_medium');
     components.searchParams.delete('utm_campaign');
+    components.searchParams.delete('sk');
     result = components.toString();
     return result;
 }
