@@ -5,7 +5,9 @@ import * as got from 'got';
 import { ants } from './ants';
 import { harvestResource, createEntry } from './harvest.functions';
 import { config } from './config';
+import { inspect } from 'util';
 import ms = require('ms');
+import 'longjohn';
 const argv = require('yargs').argv;
 
 async function program() {
@@ -19,8 +21,12 @@ async function program() {
         console.group('Starting', ant.name);
         const feedItems = await harvestResource({ url: ant.target });
         for (const feedItem of feedItems) {
-            console.group('Saving', feedItem.title);
             const entry = createEntry(feedItem, ant);
+            if (argv.save === false) {
+                console.log(inspect(entry, undefined, Infinity));
+                continue;
+            }
+            console.group('Saving', feedItem.title);
             try {
                 await got.post(`${config.get('apiUrl')}/entry`, { json: true, body: entry, headers: { 'api-token': config.get('apiToken') } });
                 console.log(entry.link);
