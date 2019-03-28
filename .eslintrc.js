@@ -26,6 +26,7 @@ module.exports = {
         'no-unused-vars': 0,
         'indent': 0,
         'no-dupe-class-members': 0,
+        'unicorn/prevent-abbreviations': 0,
         'unicorn/import-index': 0,
         'unicorn/catch-error-name': 0,
         'import/newline-after-import': 0,

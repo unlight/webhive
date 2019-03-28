@@ -8,7 +8,7 @@ import * as mount from 'koa-mount';
 import { getApp as getApi } from '../webhive.api/main';
 
 if (config.get('environment') === 'development' || config.get('environment') === 'test') {
-    require('loud-rejection/register');
+    require('longjohn');
 }
 
 const app = new Koa();
