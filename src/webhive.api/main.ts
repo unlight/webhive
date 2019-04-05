@@ -9,7 +9,7 @@ import { mongoClientInstance } from './store/mongo';
 const koaJsonError = require('koa-json-error');
 
 if (config.get('environment') === 'development' || config.get('environment') === 'test') {
-    require('loud-rejection/register');
+    require('longjohn');
 }
 const app = new Koa();
 const router = new Router();

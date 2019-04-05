@@ -50,6 +50,8 @@ export class EntryService {
         let filter: any;
         if (q) {
             filter = { title: new RegExp(q, 'i') };
+            const categoryMatch = { 'category.name': new RegExp(q, 'i') };
+            filter = { $or: [filter, categoryMatch] };
         }
         const sort = { date: -1 };
         return this.entryRepository.find({ skip, limit, sort, filter });

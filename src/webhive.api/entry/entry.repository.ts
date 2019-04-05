@@ -40,9 +40,8 @@ export class EntryRepository {
             as: 'category',
         };
         const $match = filter || {};
-        const $unwind = '$category';
         return collection
-            .aggregate([{ $match }, { $lookup }, { $unwind }, { $sort }])
+            .aggregate([{ $lookup }, { $match }, { $sort }])
             .skip(skip)
             .limit(limit)
             .toArray();
