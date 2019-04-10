@@ -20,4 +20,10 @@ export class CategoryRepository {
         }
         return result;
     }
+
+    async find() {
+        return this.database.collection<CategoryModel>('category')
+            .find()
+            .toArray();
+    }
 }

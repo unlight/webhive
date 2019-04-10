@@ -6,6 +6,7 @@ import * as koaBodyparser from 'koa-bodyparser';
 import { ServerResponse } from 'http';
 import { inject } from 'njct';
 import { mongoClientInstance } from './store/mongo';
+import { ApolloServer, gql } from 'apollo-server-koa';
 const koaJsonError = require('koa-json-error');
 
 if (config.get('environment') === 'development' || config.get('environment') === 'test') {
@@ -34,6 +35,10 @@ async function main() {
     await import('./entry/entry.module').then(m => m.initialize(appContext));
     app.use(koaBodyparser({ strict: false }));
     app.use(router.routes());
+    // GraphQL
+    const graphql = await import('./graphql');
+    const server = new ApolloServer({ schema: graphql.schema, debug: true, playground: { endpoint: '/api/graphql' } });
+    server.applyMiddleware({ app });
     return app;
 }
 
