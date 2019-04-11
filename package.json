@@ -13,6 +13,7 @@
   "scripts": {
     "dev": "run-p dev:web",
     "dev:api": "ts-node-dev --no-deps --transpileOnly -- src/webhive.api/main.ts",
+    "dev:d": "ts-node-dev --no-deps --transpileOnly --inspect -- src/webhive.web/main.ts",
     "dev:api:d": "ts-node-dev --no-deps --transpileOnly --inspect -- src/webhive.api/main.ts",
     "dev:web": "ts-node-dev --no-deps --transpileOnly -- src/webhive.web/main.ts",
     "test": "npm run eslint && npm run tscheck && npm run test:cov",
@@ -47,6 +48,7 @@
     "feedparser": "2.2.9",
     "got": "9.6.0",
     "graphql": "14.2.1",
+    "graphql-tag": "2.10.1",
     "graphql-tools": "4.0.4",
     "koa": "2.7.0",
     "koa-bodyparser": "4.2.1",

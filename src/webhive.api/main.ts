@@ -37,7 +37,7 @@ async function main() {
     app.use(router.routes());
     // GraphQL
     const graphql = await import('./graphql');
-    const server = new ApolloServer({ schema: graphql.schema, debug: true, playground: { endpoint: '/api/graphql' } });
+    const server = new ApolloServer({ schema: graphql.schema, debug: true, playground: { endpoint: '/api/graphql' }, context: { x: 458 } });
     server.applyMiddleware({ app });
     return app;
 }

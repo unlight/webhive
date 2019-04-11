@@ -1,6 +1,6 @@
 import { inject } from 'njct';
 import { EntryModel } from './entry.model';
-import { mongoDatabaseInstance } from '../store/mongo';
+import { mongoDatabaseInstance, ObjectId } from '../store/mongo';
 
 const entryGetOptionsDefaults = {
     sort: undefined as unknown as (object | object[]),
@@ -30,6 +30,11 @@ export class EntryRepository {
         return collection.findOne({ link });
     }
 
+    async getById(objectId: string) {
+        const collection = this.database.collection('entry2');
+        return collection.findOne<EntryModel>({ _id: objectId });
+    }
+
     async find(options: Partial<EntryGetOptions>) {
         const { skip, limit, sort: $sort, filter } = { ...entryGetOptionsDefaults, ...options };
         const collection = this.database.collection('entry2');
@@ -45,6 +50,14 @@ export class EntryRepository {
             .aggregate([{ $lookup }, { $match }, { $unwind }, { $sort }])
             .skip(skip)
             .limit(limit)
+            .toArray();
+    }
+
+    async getLatest() {
+        return this.database.collection('entry2')
+            .find()
+            .sort('date', 1)
+            .limit(100)
             .toArray();
     }
 }

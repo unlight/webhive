@@ -13,4 +13,8 @@ export class CategoryService {
     async findOrCreate(name: string) {
         return this.categoryRepository.findOrCreate(name);
     }
+
+    async browse({ count = 100 }) {
+        return this.categoryRepository.browse({ count });
+    }
 }

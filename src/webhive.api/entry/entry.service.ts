@@ -56,4 +56,8 @@ export class EntryService {
         const sort = { date: -1 };
         return this.entryRepository.find({ skip, limit, sort, filter });
     }
+
+    async getById(objectId: string) {
+        return this.entryRepository.getById(objectId);
+    }
 }

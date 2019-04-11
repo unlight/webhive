@@ -21,9 +21,10 @@ export class CategoryRepository {
         return result;
     }
 
-    async find() {
+    async browse({ count }) {
         return this.database.collection<CategoryModel>('category')
             .find()
+            .limit(count)
             .toArray();
     }
 }
