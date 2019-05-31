@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/tslint/config, import/max-dependencies */
 import { MongoClient } from 'mongodb';
-import MongoMemoryServer from 'mongodb-memory-server';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 
 export async function mockMongoDatabase() {
     const mongoServer = new MongoMemoryServer();

@@ -6,7 +6,7 @@ import { MongoClient, Db } from 'mongodb';
 import { injector } from 'njct';
 import { mockMongoDatabase, mockMongoDatabaseClose } from '../testing/mock-mongo-database';
 import * as Koa from 'koa';
-import MongoMemoryServer from 'mongodb-memory-server';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 const sham = require('koa-sham');
 
 describe('home api', () => {
