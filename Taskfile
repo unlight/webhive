@@ -10,3 +10,5 @@ build() {
 eslint_run() {
     eslint src --ext ts
 }
+
+"$@"
