@@ -4,6 +4,7 @@ import { entryLink } from './entry-link';
 import * as url from 'url';
 import * as got from 'got';
 import * as FeedParser from 'feedparser';
+import * as striptags from 'striptags';
 
 export type HarvestResourceArguments = {
     url?: string;
@@ -40,7 +41,7 @@ export function createEntry(item: FeedParser.Item, ant: Ant) {
         category = item.categories[0];
     }
     return {
-        title: item.title,
+        title: entryTitle(item),
         link: entryLink(item),
         date: entryDate(item),
         category: entryCategory(category),
@@ -53,4 +54,16 @@ export function entryCategory(name: string) {
 
 export function entryDate(item: FeedParser.Item) {
     return new Date();
+}
+
+function entryTitle(item: FeedParser.Item) {
+    if (item.title) {
+        return item.title;
+    }
+    const description = striptags(item.description, [], '\n');
+    let [result] = String(description).trim().split('\n');
+    if (result.length > 120) {
+        result = result.slice(0, 120) + '...';
+    }
+    return result;
 }
