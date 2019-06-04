@@ -4,7 +4,7 @@ import loadScript from 'load-script';
 page('/', async (context, next) => {
     document.body.innerText = 'main';
 });
-page('/about', load('./page.about.js'));
+page('/about', load('./about.js'));
 page('*', (context, next) => {
     document.body.innerText = 'NOT FOUND';
 });

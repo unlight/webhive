@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = async (options) => ({
     entry: {
         app: `${__dirname}/app/main.ts`,
-        // about: `${__dirname}/page.about/page.about.ts`,
+        about: `${__dirname}/page.about/page.about.ts`,
     },
     output: {
         path: `${__dirname}/dist`,
@@ -45,6 +45,7 @@ module.exports = async (options) => ({
         new HtmlWebpackPlugin({
             template: `${__dirname}/app/index.html`,
             filename: 'index.html',
+            inject: false,
         }),
     ]
 });
