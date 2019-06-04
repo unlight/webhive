@@ -1,0 +1,19 @@
+{
+  "name": "webhive.frontend",
+  "scripts": {
+    "dev": "webpack-dev-server"
+  },
+  "dependencies": {
+    "page": "^1.11.4"
+  },
+  "devDependencies": {
+    "@types/page": "^1.8.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "source-map-loader": "^0.2.4",
+    "ts-loader": "^6.0.2",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.5.1"
+  }
+}
