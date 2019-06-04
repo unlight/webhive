@@ -13,7 +13,7 @@
     "removeComments": false,
     "sourceMap": true,
     "declaration": true,
-    "declarationMap": true,
+    "declarationMap": false,
     "skipLibCheck": true,
     "lib": [
       "dom",
@@ -21,9 +21,9 @@
     ]
   },
   "include": [
-    "src/**/*.ts"
+    "app/**/*.ts"
   ],
   "exclude": [
-    "src/**/*.spec.ts"
+    "**/*.spec.ts"
   ]
 }
