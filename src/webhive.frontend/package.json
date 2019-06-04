@@ -4,6 +4,7 @@
     "dev": "webpack-dev-server"
   },
   "dependencies": {
+    "load-script": "^1.0.0",
     "page": "^1.11.4"
   },
   "devDependencies": {

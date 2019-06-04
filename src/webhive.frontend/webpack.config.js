@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = async (options) => ({
     entry: {
         app: `${__dirname}/app/main.ts`,
+        // about: `${__dirname}/page.about/page.about.ts`,
     },
     output: {
         path: `${__dirname}/dist`,
@@ -38,6 +39,7 @@ module.exports = async (options) => ({
     },
     devServer: {
         contentBase: `${__dirname}/dist`,
+        historyApiFallback: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
