@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = async (options) => ({
     entry: {
         app: `${__dirname}/app/main.ts`,
-        about: `${__dirname}/page.about/page.about.ts`,
+        header: `${__dirname}/header.component/header.component.ts`,
     },
     output: {
         path: `${__dirname}/dist`,

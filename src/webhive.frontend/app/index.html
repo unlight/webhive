@@ -1,8 +1,27 @@
-<!DOCTYPE html>
+<!-- return <html>
+    -- head --
+    <body>
+        <main>
+            -- <h1>Web Hive</h1> -- header-component
+            <nav>
+                    <ul>
+                        <li><a href="/">Home</a></li> {}
+                        <li><a href="/search">Search</a></li>
+                    </ul>
+                </nav>
+            {entries.map((entry, index) => [
+                <DayTitle previousDate={entries[index - 1] && entries[index - 1].date}
+                    currentDate={entry.date}></DayTitle>,
+                <EntryComponent entry={entry}></EntryComponent>
+            ])}
+        </main>
+    </body>
+</html>; -->
 <html>
 <head>
-    <title>Webhive</title>
     <script type="text/javascript" src="app.js" defer></script>
+    <!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
+    <title>Web Hive</title>
 </head>
 <body>
 </body>

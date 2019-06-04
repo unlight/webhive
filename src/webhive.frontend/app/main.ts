@@ -1,24 +1,21 @@
 import page from 'page';
-import loadScript from 'load-script';
+import { loadScript } from './load-script';
+import { noop } from './noop';
+import { documentBody } from './document-body';
 
-page('/', async (context, next) => {
-    document.body.innerText = 'main';
-});
-page('/about', load('./about.js'));
-page('*', (context, next) => {
-    document.body.innerText = 'NOT FOUND';
-});
+page('/',
+    documentBody(() => require('./home.html')),
+    loadScript(['./header.js']),
+    noop,
+);
+
+page('/about',
+    documentBody(() => 'about'),
+    noop,
+);
+
+page('*',
+    documentBody(() => 'NOT FOUND'),
+);
+
 page();
-
-
-function load(file: string) {
-    return (c, next) => {
-        debugger
-        loadScript(file, err => {
-            if (err) {
-                throw err;
-            }
-            debugger;
-        });
-    };
-}
