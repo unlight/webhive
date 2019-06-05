@@ -4,6 +4,7 @@ module.exports = async (options) => ({
     entry: {
         app: `${__dirname}/app/main.ts`,
         header: `${__dirname}/header.component/header.component.ts`,
+        nav: `${__dirname}/nav.component/nav.component.ts`,
     },
     output: {
         path: `${__dirname}/dist`,
@@ -30,6 +31,17 @@ module.exports = async (options) => ({
                 test: /\.html$/,
                 use: [
                     { loader: 'html-loader', options: { minimize: false } },
+                ],
+            },
+            {
+                test: /style\.css$/i,
+                use: [
+                    { loader: 'style-loader' },
+                ],
+            }, {
+                test: /\.css$/i,
+                use: [
+                    { loader: 'css-loader' },
                 ],
             },
         ]
