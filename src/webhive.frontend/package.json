@@ -14,6 +14,7 @@
     "@types/webpack-dev-server": "^3.1.6",
     "@types/webpack-env": "^1.13.9",
     "css-loader": "^2.1.1",
+    "file-loader": "^4.0.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "source-map-loader": "^0.2.4",

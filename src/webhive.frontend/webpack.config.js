@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = async (options) => ({
+module.exports = async (options = {}) => ({
     entry: {
         app: `${__dirname}/app/main.ts`,
         header: `${__dirname}/header.component/header.component.ts`,
@@ -34,20 +34,22 @@ module.exports = async (options) => ({
                 ],
             },
             {
-                test: /style\.css$/i,
-                use: [
-                    { loader: 'style-loader' },
-                ],
-            }, {
                 test: /\.css$/i,
-                use: [
-                    { loader: 'css-loader' },
+                oneOf: [
+                    {
+                        test: /style\.css$/i,
+                        use: [
+                            { loader: 'style-loader/url', options: { hmr: false } },
+                            { loader: 'file-loader', options: { name: `[name]${options.prod ? '-[hash:6]' : ''}.[ext]` } },
+                        ],
+                    },
+                    { use: 'css-loader' },
                 ],
             },
         ]
     },
     resolve: {
-        extensions: ['.js', '.ts', '.tsx'],
+        extensions: ['.js', '.ts', '.tsx', '.json'],
     },
     devServer: {
         contentBase: `${__dirname}/dist`,
