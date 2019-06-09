@@ -11,7 +11,8 @@ page('/',
 );
 
 page('/search',
-    documentBody(() => 'search'),
+    loadScript(['http://localhost:3994/app.js']),
+    documentBody(() => '<counter-element></counter-element>'),
     noop,
 );
 
