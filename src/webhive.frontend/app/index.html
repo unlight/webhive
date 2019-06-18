@@ -1,8 +1,15 @@
 <html>
+
 <head>
-    <script type="text/javascript" src="app.js" defer></script>
     <title>Web Hive</title>
 </head>
+
 <body>
+    <header-component></header-component>
+    <nav-component></nav-component>
+    <a-router>
+        <a-route path="/" element="entry-list-component" import="/src/my-page2.js"></a-route>
+    </a-router>
 </body>
+
 </html>

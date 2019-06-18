@@ -1,4 +1,4 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = async (options = {}) => ({
     entry: {
@@ -8,14 +8,16 @@ module.exports = async (options = {}) => ({
     },
     output: {
         path: `${__dirname}/dist`,
-        filename: '[name].js',
+        chunkFilename: `[name]${options.prod ? '-[hash:6]' : ''}.js`,
+        filename: `[name]${options.prod ? '-[hash:6]' : ''}.js`,
     },
     mode: 'development',
     devtool: 'source-map',
     module: {
         rules: [
             {
-                test: /\.js$/,
+                exclude: path.join(__dirname, 'app'),
+                test: /\.(js|css)$/,
                 enforce: 'pre',
                 use: 'source-map-loader',
             },
@@ -52,14 +54,19 @@ module.exports = async (options = {}) => ({
         extensions: ['.js', '.ts', '.tsx', '.json'],
     },
     devServer: {
-        contentBase: `${__dirname}/dist`,
+        contentBase: [`${__dirname}/dist`],
         historyApiFallback: true,
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: `${__dirname}/app/index.html`,
-            filename: 'index.html',
-            inject: false,
-        }),
+        (() => {
+            const HtmlWebpackPlugin = require('html-webpack-plugin');
+            return new HtmlWebpackPlugin({
+                template: `${__dirname}/app/index.html`,
+                filename: 'index.html',
+                inject: true,
+                chunks: ['app'],
+                config: { ...options },
+            });
+        })(),
     ]
 });
