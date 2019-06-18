@@ -1,7 +1,10 @@
-const style = require('./nav.component.css');
-const template = require('./nav.component.html');
+const styles = document.createElement('style');
+styles.textContent = require('./entry-list-component.css');
 
-export class NavComponent extends HTMLElement {
+const template = document.createElement('template');
+template.innerHTML = require('./entry-list-component.html');
+
+export class EntryListComponent extends HTMLElement {
 
     /**
      * Return an array containing the names of the attributes you want to observe.
@@ -21,18 +24,18 @@ export class NavComponent extends HTMLElement {
      * have been fully parsed
      */
     connectedCallback() {
-        this.shadowRoot.innerHTML = `
-            <style>${String(style)}</style>
-            ${template}
-        `;
-        this.shadowRoot.addEventListener('click', this);
+        if (this.shadowRoot) {
+            this.shadowRoot.appendChild(styles.cloneNode(true));
+            const element = document.importNode(template.content, true).firstElementChild;
+            this.shadowRoot.appendChild(<Node>element);
+        }
     }
 
     /**
      * Invoked each time the custom element is disconnected from the document's DOM.
      */
     disconnectedCallback() {
-        this.shadowRoot.removeEventListener('click', this);
+
     }
 
     /**
@@ -43,15 +46,6 @@ export class NavComponent extends HTMLElement {
 
     }
 
-    handleEvent(event: Event) {
-        const anchor = (event.target as HTMLAnchorElement);
-        if (event.type === 'click' && anchor && anchor.nodeName === 'A') {
-            event.preventDefault();
-            const detail = { path: anchor.getAttribute('href') };
-            this.shadowRoot.dispatchEvent(new CustomEvent('navigatepath', { composed: true, bubbles: true, detail }));
-        }
-    }
-
 }
 
-customElements.define('nav-component', NavComponent);
+customElements.define('entry-list-component', EntryListComponent);

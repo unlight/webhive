@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <base href="/">
     <title>Web Hive</title>
 </head>
 
@@ -8,7 +9,12 @@
     <header-component></header-component>
     <nav-component></nav-component>
     <a-router>
-        <a-route path="/" element="entry-list-component" import="/src/my-page2.js"></a-route>
+        <an-outlet><entry-list></entry-list></an-outlet>
+        <a-route path="/" element="entry-list-component" import="entry-list.js"></a-route>
+        <a-route path="" element="entry-list-component" import="entry-list.js"></a-route>
+        <a-route path="http://localhost:8080/" element="entry-list-component" import="entry-list.js"></a-route>
+        <a-route path="http://localhost:8080/" element="entry-list-component" import="entry-list.js"></a-route>
+        <a-route path="*"><template>Page not found</template></a-route>
     </a-router>
 </body>
 

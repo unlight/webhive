@@ -2,9 +2,10 @@ const path = require('path');
 
 module.exports = async (options = {}) => ({
     entry: {
-        app: `${__dirname}/app/main.ts`,
-        header: `${__dirname}/header.component/header.component.ts`,
-        nav: `${__dirname}/nav.component/nav.component.ts`,
+        'app': `${__dirname}/app/main.ts`,
+        'header': `${__dirname}/header.component/header.component.ts`,
+        'nav': `${__dirname}/nav.component/nav.component.ts`,
+        'entry-list': `${__dirname}/entry-list.component/entry-list-component.ts`,
     },
     output: {
         path: `${__dirname}/dist`,
