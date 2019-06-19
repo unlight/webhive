@@ -36,6 +36,8 @@ module.exports = async (options = {}) => {
         context,
         entry: {
             app: `${sourcePath}/main.ts`,
+            header: `${__dirname}/header.component/header.component.ts`,
+            nav: `${__dirname}/nav.component/nav.component.ts`,
         },
         output: {
             path: buildPath,
@@ -140,10 +142,10 @@ module.exports = async (options = {}) => {
             (() => {
                 const HtmlWebpackPlugin = require('html-webpack-plugin');
                 return new HtmlWebpackPlugin({
-                    // template: './src/index.html',
+                    template: './app/index.html',
                     filename: 'index.html',
                     inject: true,
-                    // chunks: ['app'],
+                    chunks: ['libs', 'app'],
                     config: { ...options },
                 });
             })(),
