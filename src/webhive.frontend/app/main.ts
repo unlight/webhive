@@ -12,27 +12,26 @@ async function main() {
 
     router.map(route => {
         route('app', { path: '/', abstract: true }, () => {
-            route('home', { path: '' });
-            route('search', { path: 'search' });
+            route('home', { path: '/', url: './entry_list.js', element: 'entry-list-component' });
+            route('search', { path: '/search', url: './entry_list.js', element: 'entry-list-component' });
         });
     });
 
-    router.use(({ routes, params, query }) => {
-        console.log("mw 1 routes", routes);
-        routes.forEach((route, index) => {
-            // console.log("route", route);
-        });
-        //     route.view = handlers[route.name]({
-        //         params: transition.params,
-        //         query: transition.query
-        //     })
-        //     var parent = transition.routes[i - 1]
-        //     var containerEl = parent ? parent.view.el.querySelector('.outlet') : document.body
-        //     containerEl.appendChild(view.render().el)
-        // })
+    router.use(async (transition) => {
+        const route = transition.routes.find(route => route.options.url && route.options.path === transition.path);
+        if (route) {
+            const { path, url, element } = route.options;
+            await loadScript(url);
+            // const parent = transition.routes[i - 1]
+            // var containerEl = parent ? parent.view.el.querySelector('.outlet') : document.body
+            // containerEl.appendChild(view.render().el)
+            const primaryOutletElement = document.querySelector('[data-role="primary-outlet"]');
+            primaryOutletElement.appendChild(document.createElement(element));
+        }
     });
 
     router.listen();
+
     document.addEventListener('navigate', event => {
         console.log('navigate', event.detail.href);
         router.transitionTo(event.detail.href)

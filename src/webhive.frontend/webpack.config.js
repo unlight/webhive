@@ -36,8 +36,9 @@ module.exports = async (options = {}) => {
         context,
         entry: {
             app: `${sourcePath}/main.ts`,
-            header: `${__dirname}/header.component/header.component.ts`,
-            nav: `${__dirname}/nav.component/nav.component.ts`,
+            header: `${sourcePath}/header.component/header.component.ts`,
+            nav: `${sourcePath}/nav.component/nav.component.ts`,
+            entry_list: `${sourcePath}/entry-list.component/entry-list.component.ts`,
         },
         output: {
             path: buildPath,
