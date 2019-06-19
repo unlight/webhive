@@ -46,9 +46,9 @@ export class NavComponent extends HTMLElement {
     handleEvent(event: Event) {
         const anchor = (event.target as HTMLAnchorElement);
         if (event.type === 'click' && anchor && anchor.nodeName === 'A') {
-            event.preventDefault();
-            const detail = { path: anchor.getAttribute('href') };
-            this.shadowRoot.dispatchEvent(new CustomEvent('navigatepath', { composed: true, bubbles: true, detail }));
+            // event.preventDefault();
+            const detail = { href: anchor.getAttribute('href') };
+            window.dispatchEvent(new CustomEvent('navigate', { detail }));
         }
     }
 
