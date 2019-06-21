@@ -1,5 +1,8 @@
-const style = require('./nav.component.css');
-const template = require('./nav.component.html');
+const styles = document.createElement('style');
+styles.textContent = require('./nav.component.css');
+
+const template = document.createElement('template');
+template.innerHTML = require('./nav.component.html');
 
 export class NavComponent extends HTMLElement {
 
@@ -21,10 +24,11 @@ export class NavComponent extends HTMLElement {
      * have been fully parsed
      */
     connectedCallback() {
-        this.shadowRoot.innerHTML = `
-            <style>${String(style)}</style>
-            ${template}
-        `;
+        if (!this.shadowRoot.firstChild) {
+            this.shadowRoot.appendChild(styles.cloneNode(true));
+            const element = document.importNode(template.content, true).firstElementChild;
+            this.shadowRoot.appendChild(<Node>element);
+        }
         this.shadowRoot.addEventListener('click', this);
     }
 
