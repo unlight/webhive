@@ -1,34 +1,36 @@
 import * as loadScript from '@shinin/load-script';
-import 'a-wc-router/src/router';
-import './style.css';
+import * as createRouter from 'space-router';
+import { App } from './app';
 
-loadScript('header.js');
-loadScript('nav.js');
+const Home = props => `<div>Home</div>`;
+const Channels = props => `<div>Channels</div>`;
+const Channel = props => `<div>Channel ${props.params.id}</div>`;
+const NotFound = props => `<div>404</div>`;
 
-window.addEventListener('onRouterAdded', (e) => {
-    console.log('onRouterAdded', e);
-});
+const routes = [
+    ['', App, [
+        ['/', Home],
+        ['/channels', Channels],
+        ['/channels/:id', Channel],
+        ['*', NotFound],
+    ]],
+];
+const router = createRouter(routes).start(render);
 
-window.addEventListener('onRouteMatch', (e) => {
-    console.log('onRouteMatch', e);
-});
+function render(route, components) {
+    let app = components.reduceRight(
+        (children, Component) => {
+            // route.params children
+            // h(Component)
+            const html = Component({ params: route.params, children });
+            return html;
+        },
+        null
+    );
+    document.body.innerHTML = app;
+}
 
-window.addEventListener('onRouteLeave', (e) => {
-    console.log('onRouteLeave', e);
-});
-
-window.addEventListener('onRouteNotHandled', (e) => {
-    console.log('onRouteNotHandled', e);
-});
-
-window.addEventListener('onRouteCancelled', (e) => {
-    console.log('onRouteCancelled', e);
-});
-
-window.addEventListener('onLinkActiveStatusUpdated', (e) => {
-    console.log('onLinkActiveStatusUpdated', e);
-});
-
-window.addEventListener('onOutletUpdated', (e) => {
-    console.log('onOutletUpdated', e);
-});
+if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => app.close());
+}

@@ -5,12 +5,12 @@
   },
   "dependencies": {
     "@shinin/load-script": "^1.0.4",
-    "a-wc-router": "^1.1.4"
+    "space-router": "^0.7.0"
   },
   "devDependencies": {
     "@types/html-webpack-plugin": "^3.2.0",
     "@types/page": "^1.8.0",
-    "@types/webpack": "^4.4.32",
+    "@types/webpack": "^4.4.34",
     "@types/webpack-dev-server": "^3.1.6",
     "@types/webpack-env": "^1.13.9",
     "css-loader": "^3.0.0",
