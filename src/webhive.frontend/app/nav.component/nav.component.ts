@@ -18,25 +18,32 @@ export class NavComponent extends HTMLElement {
         this.attachShadow({ mode: 'open' });
     }
 
+    private get shadow() {
+        if (!this.shadowRoot) {
+            throw new Error('shadowRoot is null');
+        }
+        return this.shadowRoot;
+    }
+
     /**
      * Invoked each time the custom element is appended into a document-connected element.
      * This will happen each time the node is moved, and may happen before the element's contents
      * have been fully parsed
      */
     connectedCallback() {
-        if (!this.shadowRoot.firstChild) {
-            this.shadowRoot.appendChild(styles.cloneNode(true));
+        if (!this.shadow.firstChild) {
+            this.shadow.appendChild(styles.cloneNode(true));
             const element = document.importNode(template.content, true).firstElementChild;
-            this.shadowRoot.appendChild(<Node>element);
+            this.shadow.appendChild(<Node>element);
         }
-        this.shadowRoot.addEventListener('click', this);
+        this.shadow.addEventListener('click', this);
     }
 
     /**
      * Invoked each time the custom element is disconnected from the document's DOM.
      */
     disconnectedCallback() {
-        this.shadowRoot.removeEventListener('click', this);
+        this.shadow.removeEventListener('click', this);
     }
 
     /**
@@ -50,9 +57,9 @@ export class NavComponent extends HTMLElement {
     handleEvent(event: Event) {
         const anchor = (event.target as HTMLAnchorElement);
         if (event.type === 'click' && anchor && anchor.nodeName === 'A') {
-            // event.preventDefault();
             const detail = { href: anchor.getAttribute('href') };
             window.dispatchEvent(new CustomEvent('navigate', { detail }));
+            event.preventDefault();
         }
     }
 

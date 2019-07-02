@@ -1,10 +1,12 @@
+export const Home = props => `<div>Home</div>`;
+export const Channels = props => `<div>Channels</div>`;
+export const Channel = props => `<div>Channel ${props.params.id}</div>`;
+export const NotFound = props => `<div>Not Found</div>`;
+
 export function App({ children }) {
-    return `<div className="App">
-        <div className="Nav">
-            <a href="/">Home</a>
-            <a href="/channels">Channels</a>
-            <a href="/channels/5">Channel 5</a>
-        </div>
-        <div className="Content">${children}</div>
-    </div>`;
+    return `
+        <header-component></header-component>
+        <nav-component></nav-component>
+        ${children}
+    `;
 };

@@ -1,18 +1,17 @@
 import * as loadScript from '@shinin/load-script';
 import * as createRouter from 'space-router';
 import { App } from './app';
+import * as app from './app';
 
-const Home = props => `<div>Home</div>`;
-const Channels = props => `<div>Channels</div>`;
-const Channel = props => `<div>Channel ${props.params.id}</div>`;
-const NotFound = props => `<div>404</div>`;
+import './style.css';
+
+loadScript('header.js');
+loadScript('nav.js');
 
 const routes = [
     ['', App, [
-        ['/', Home],
-        ['/channels', Channels],
-        ['/channels/:id', Channel],
-        ['*', NotFound],
+        ['/', app.Home],
+        ['*', app.NotFound],
     ]],
 ];
 const options = { mode: 'hash' };
@@ -31,7 +30,18 @@ function render(route, components) {
     document.body.innerHTML = app;
 }
 
+function handleEvent(event: any) {
+    if (event.type === 'navigate') {
+        router.push(event.detail.href);
+    }
+}
+
+window.addEventListener('navigate', handleEvent);
+
 if (module.hot) {
     module.hot.accept();
-    module.hot.dispose(() => router.stop());
+    module.hot.dispose(() => {
+        router.stop();
+        window.removeEventListener('navigate', handleEvent);
+    });
 }
