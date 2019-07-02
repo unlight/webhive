@@ -1,8 +1,8 @@
 const styles = document.createElement('style');
-styles.textContent = require('./entry-list-component.css');
+styles.textContent = require('./entry-list.component.css');
 
 const template = document.createElement('template');
-template.innerHTML = require('./entry-list-component.html');
+template.innerHTML = require('./entry-list.component.html');
 
 export class EntryListComponent extends HTMLElement {
 

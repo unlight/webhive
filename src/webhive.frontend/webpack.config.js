@@ -3,9 +3,9 @@ const path = require('path');
 module.exports = async (options = {}) => ({
     entry: {
         'app': `${__dirname}/app/main.ts`,
-        'header': `${__dirname}/header.component/header.component.ts`,
-        'nav': `${__dirname}/nav.component/nav.component.ts`,
-        'entry-list': `${__dirname}/entry-list.component/entry-list-component.ts`,
+        'header': `${__dirname}/app/header.component/header.component.ts`,
+        'nav': `${__dirname}/app/nav.component/nav.component.ts`,
+        'entry-list': `${__dirname}/app/entry-list.component/entry-list.component.ts`,
     },
     output: {
         path: `${__dirname}/dist`,
@@ -56,7 +56,7 @@ module.exports = async (options = {}) => ({
     },
     devServer: {
         contentBase: [`${__dirname}/dist`],
-        historyApiFallback: true,
+        historyApiFallback: false,
     },
     plugins: [
         (() => {
