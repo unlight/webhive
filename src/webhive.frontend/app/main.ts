@@ -15,7 +15,8 @@ const routes = [
         ['*', NotFound],
     ]],
 ];
-const router = createRouter(routes).start(render);
+const options = { mode: 'hash' };
+const router = createRouter(routes, options).start(render);
 
 function render(route, components) {
     let app = components.reduceRight(
@@ -32,5 +33,5 @@ function render(route, components) {
 
 if (module.hot) {
     module.hot.accept();
-    module.hot.dispose(() => app.close());
+    module.hot.dispose(() => router.stop());
 }
