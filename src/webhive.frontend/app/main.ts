@@ -1,29 +1,37 @@
-import page from 'page';
-import { loadScript } from './load-script';
-import { noop } from './noop';
-import { documentBody } from './document-body';
-import './style.css';
+import * as loadScript from '@shinin/load-script';
+import * as createRouter from 'space-router';
+import { App } from './app';
 
-page('/',
-    documentBody(() => require('./home.html')),
-    loadScript(['header.js', 'nav.js']),
-    noop,
-);
+const Home = props => `<div>Home</div>`;
+const Channels = props => `<div>Channels</div>`;
+const Channel = props => `<div>Channel ${props.params.id}</div>`;
+const NotFound = props => `<div>404</div>`;
 
-page('/search',
-    loadScript(['http://localhost:3994/app.js']),
-    documentBody(() => '<counter-element></counter-element>'),
-    noop,
-);
+const routes = [
+    ['', App, [
+        ['/', Home],
+        ['/channels', Channels],
+        ['/channels/:id', Channel],
+        ['*', NotFound],
+    ]],
+];
+const options = { mode: 'hash' };
+const router = createRouter(routes, options).start(render);
 
-page('*',
-    documentBody(() => 'NOT FOUND'),
-);
+function render(route, components) {
+    let app = components.reduceRight(
+        (children, Component) => {
+            // route.params children
+            // h(Component)
+            const html = Component({ params: route.params, children });
+            return html;
+        },
+        null
+    );
+    document.body.innerHTML = app;
+}
 
-page({
-    click: false,
-});
-
-document.addEventListener('navigatepath', (event: any) => {
-    page(event.detail.path);
-});
+if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => router.stop());
+}
