@@ -5,7 +5,8 @@
   },
   "dependencies": {
     "@shinin/load-script": "^1.0.4",
-    "space-router": "^0.7.0"
+    "space-router": "^0.7.0",
+    "vhtml": "^2.1.0"
   },
   "devDependencies": {
     "@types/html-webpack-plugin": "^3.2.0",

@@ -1,3 +1,6 @@
+import { EntryListService } from './entry-list.service';
+import * as h from 'vhtml';
+
 const styles = document.createElement('style');
 styles.textContent = require('./entry-list.component.css');
 
@@ -5,6 +8,9 @@ const template = document.createElement('template');
 template.innerHTML = require('./entry-list.component.html');
 
 export class EntryListComponent extends HTMLElement {
+
+    private readonly service: EntryListService;
+    private readonly root: HTMLElement;
 
     /**
      * Return an array containing the names of the attributes you want to observe.
@@ -16,6 +22,16 @@ export class EntryListComponent extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
+        this.shadow.appendChild(styles.cloneNode(true));
+        this.root = this.shadow.appendChild(template.content.cloneNode(true).firstChild as HTMLElement);
+        this.service = new EntryListService(this);
+    }
+
+    private get shadow() {
+        if (!this.shadowRoot) {
+            throw new Error('shadowRoot is null');
+        }
+        return this.shadowRoot;
     }
 
     /**
@@ -23,12 +39,9 @@ export class EntryListComponent extends HTMLElement {
      * This will happen each time the node is moved, and may happen before the element's contents
      * have been fully parsed
      */
-    connectedCallback() {
-        if (!this.shadowRoot.firstChild) {
-            this.shadowRoot.appendChild(styles.cloneNode(true));
-            const element = document.importNode(template.content, true).firstElementChild;
-            this.shadowRoot.appendChild(<Node>element);
-        }
+    async connectedCallback() {
+        const entries = await this.service.find();
+        this.root.innerHTML = entries.map(entry => <div>{entry.title}</div>).join('');
     }
 
     /**
@@ -47,4 +60,6 @@ export class EntryListComponent extends HTMLElement {
 
 }
 
-customElements.define('entry-list-component', EntryListComponent);
+if (!customElements.get('entry-list-component')) {
+    customElements.define('entry-list-component', EntryListComponent);
+}

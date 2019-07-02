@@ -16,6 +16,8 @@
     "declaration": true,
     "declarationMap": false,
     "skipLibCheck": true,
+    "jsx": "react",
+    "jsxFactory": "h",
     "lib": [
       "dom",
       "esnext"

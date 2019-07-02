@@ -5,7 +5,7 @@ module.exports = async (options = {}) => ({
         'app': `${__dirname}/app/main.ts`,
         'header': `${__dirname}/app/header.component/header.component.ts`,
         'nav': `${__dirname}/app/nav.component/nav.component.ts`,
-        'entry-list': `${__dirname}/app/entry-list.component/entry-list.component.ts`,
+        'entry-list': `${__dirname}/app/entry-list.component/entry-list.component.tsx`,
     },
     output: {
         path: `${__dirname}/dist`,

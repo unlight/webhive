@@ -16,6 +16,8 @@ export class NavComponent extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
+        this.shadow.appendChild(styles.cloneNode(true));
+        this.shadow.appendChild(template.content.cloneNode(true).firstChild as Node);
     }
 
     private get shadow() {
@@ -31,11 +33,6 @@ export class NavComponent extends HTMLElement {
      * have been fully parsed
      */
     connectedCallback() {
-        if (!this.shadow.firstChild) {
-            this.shadow.appendChild(styles.cloneNode(true));
-            const element = document.importNode(template.content, true).firstElementChild;
-            this.shadow.appendChild(<Node>element);
-        }
         this.shadow.addEventListener('click', this);
     }
 
@@ -58,11 +55,13 @@ export class NavComponent extends HTMLElement {
         const anchor = (event.target as HTMLAnchorElement);
         if (event.type === 'click' && anchor && anchor.nodeName === 'A') {
             const detail = { href: anchor.getAttribute('href') };
-            window.dispatchEvent(new CustomEvent('navigate', { detail }));
+            dispatchEvent(new CustomEvent('navigate', { detail }));
             event.preventDefault();
         }
     }
 
 }
 
-customElements.define('nav-component', NavComponent);
+if (!customElements.get('nav-component')) {
+    customElements.define('nav-component', NavComponent);
+}

@@ -1,4 +1,9 @@
-export const Home = props => `<div>Home</div>`;
+import * as loadScript from '@shinin/load-script';
+
+export const Home = props => {
+    loadScript('entry-list.js');
+    return `<entry-list-component></entry-list-component>`;
+};
 export const Channels = props => `<div>Channels</div>`;
 export const Channel = props => `<div>Channel ${props.params.id}</div>`;
 export const NotFound = props => `<div>Not Found</div>`;
