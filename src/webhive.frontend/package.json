@@ -1,7 +1,8 @@
 {
   "name": "webhive.frontend",
   "scripts": {
-    "dev": "webpack-dev-server"
+    "dev": "node node_modules/webpack-dev-server/bin/webpack-dev-server",
+    "build:prod": "node node_modules/webpack/bin/webpack --env.mode=production"
   },
   "dependencies": {
     "@shinin/load-script": "^1.0.4",

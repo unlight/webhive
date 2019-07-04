@@ -7,7 +7,7 @@ const defaultOptions = {
     style: false,
     test: false,
     coverage: false,
-    prod: false,
+    prod: process.argv.includes('--env.mode=production'),
     nomin: true,
     debug: false,
     get dev() {
@@ -40,8 +40,8 @@ module.exports = (options = {}) => {
         },
         output: {
             path: `${__dirname}/dist`,
-            chunkFilename: `[name]${options.prod ? '-[hash:6]' : ''}.js`,
-            filename: `[name]${options.prod ? '-[hash:6]' : ''}.js`,
+            chunkFilename: `[name].js`,
+            filename: `[name].js`,
         },
         mode: options.mode,
         devtool: (() => {
