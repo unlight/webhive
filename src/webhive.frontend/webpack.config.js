@@ -1,73 +1,113 @@
 const path = require('path');
+const buildPath = path.join(__dirname, 'dist');
+const context = __dirname;
 
-module.exports = async (options = {}) => ({
-    entry: {
-        'app': `${__dirname}/app.component/src/main.ts`,
-        'header': `${__dirname}/header.component/src/header.component.ts`,
-        'nav': `${__dirname}/nav.component/src/nav.component.ts`,
-        'entry-list': `${__dirname}/entry-list.component/src/entry-list.component.tsx`,
+const defaultOptions = {
+    libs: false,
+    style: false,
+    test: false,
+    coverage: false,
+    prod: false,
+    nomin: true,
+    debug: false,
+    get dev() {
+        return !this.prod;
     },
-    output: {
-        path: `${__dirname}/dist`,
-        chunkFilename: `[name]${options.prod ? '-[hash:6]' : ''}.js`,
-        filename: `[name]${options.prod ? '-[hash:6]' : ''}.js`,
+    get minimize() {
+        return !this.nomin;
     },
-    mode: 'development',
-    devtool: 'source-map',
-    module: {
-        rules: [
-            {
-                include: path.join(__dirname, 'node_modules'),
-                test: /\.(js|css)$/,
-                enforce: 'pre',
-                use: 'source-map-loader',
-            },
-            {
-                test: /\.tsx?$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'ts-loader',
-                    options: { transpileOnly: true },
-                }
-            },
-            {
-                test: /\.html$/,
-                use: [
-                    { loader: 'html-loader', options: { minimize: false } },
-                ],
-            },
-            {
-                test: /\.css$/i,
-                oneOf: [
-                    {
-                        test: /[^\.\-]style\.css$/i,
-                        use: [
-                            { loader: 'style-loader/url', options: { hmr: false } },
-                            { loader: 'file-loader', options: { name: `[name]${options.prod ? '-[hash:6]' : ''}.[ext]` } },
-                        ],
-                    },
-                    { use: 'css-loader' },
-                ],
-            },
-        ]
+    get devtool() {
+        return ('webpack_devtool' in process.env) ? process.env.webpack_devtool : 'cheap-source-map';
     },
-    resolve: {
-        extensions: ['.js', '.ts', '.tsx', '.json'],
+    get sourceMap() {
+        const devtool = this.devtool;
+        return (!devtool || devtool === '0') ? false : true;
     },
-    devServer: {
-        contentBase: [`${__dirname}/dist`],
-        historyApiFallback: false,
-    },
-    plugins: [
-        (() => {
-            const HtmlWebpackPlugin = require('html-webpack-plugin');
-            return new HtmlWebpackPlugin({
-                template: `${__dirname}/app.component/src/index.html`,
-                filename: 'index.html',
-                inject: true,
-                chunks: ['app'],
-                config: { ...options },
-            });
+    get mode() {
+        return this.prod ? 'production' : 'development';
+    }
+};
+
+module.exports = (options = {}) => {
+    options = { ...defaultOptions, ...options };
+    for (const [key, value] of Object.entries(options)) process.stdout.write(`${key}:${value} `);
+    let config = {
+        entry: {
+            'app': `${__dirname}/app.component/src/main.ts`,
+            'header': `${__dirname}/header.component/src/header.component.ts`,
+            'nav': `${__dirname}/nav.component/src/nav.component.ts`,
+            'entry-list': `${__dirname}/entry-list.component/src/entry-list.component.tsx`,
+        },
+        output: {
+            path: `${__dirname}/dist`,
+            chunkFilename: `[name]${options.prod ? '-[hash:6]' : ''}.js`,
+            filename: `[name]${options.prod ? '-[hash:6]' : ''}.js`,
+        },
+        mode: options.mode,
+        devtool: (() => {
+            if (options.test) return 'inline-source-map';
+            if (options.prod) return 'source-map';
+            return options.devtool;
         })(),
-    ]
-});
+        resolve: {
+            extensions: ['.js', '.ts', '.tsx', '.json'],
+        },
+        devServer: {
+            contentBase: [buildPath],
+            historyApiFallback: false,
+        },
+        module: {
+            rules: [
+                { parser: { amd: false } },
+                {
+                    include: path.join(__dirname, 'node_modules'),
+                    test: /\.(js|css)$/,
+                    enforce: 'pre',
+                    use: 'source-map-loader',
+                },
+                {
+                    test: /\.tsx?$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'ts-loader',
+                        options: { transpileOnly: true },
+                    }
+                },
+                {
+                    test: /\.html$/,
+                    use: [
+                        { loader: 'html-loader', options: { minimize: false } },
+                    ],
+                },
+                {
+                    test: /\.css$/i,
+                    oneOf: [
+                        {
+                            test: /[^\.\-]style\.css$/i,
+                            use: [
+                                { loader: 'style-loader/url', options: { hmr: false } },
+                                { loader: 'file-loader', options: { name: `[name]${options.prod ? '-[hash:6]' : ''}.[ext]` } },
+                            ],
+                        },
+                        { use: 'css-loader' },
+                    ],
+                },
+            ]
+        },
+        plugins: [
+            (() => {
+                const HtmlWebpackPlugin = require('html-webpack-plugin');
+                return new HtmlWebpackPlugin({
+                    template: `${__dirname}/app.component/src/index.html`,
+                    filename: 'index.html',
+                    inject: true,
+                    chunks: ['app'],
+                    config: { ...options },
+                });
+            })(),
+        ]
+    };
+
+    return config;
+}
+
