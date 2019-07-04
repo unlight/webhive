@@ -2,10 +2,10 @@ const path = require('path');
 
 module.exports = async (options = {}) => ({
     entry: {
-        'app': `${__dirname}/app/main.ts`,
-        'header': `${__dirname}/app/header.component/header.component.ts`,
-        'nav': `${__dirname}/app/nav.component/nav.component.ts`,
-        'entry-list': `${__dirname}/app/entry-list.component/entry-list.component.tsx`,
+        'app': `${__dirname}/app.component/src/main.ts`,
+        'header': `${__dirname}/header.component/src/header.component.ts`,
+        'nav': `${__dirname}/nav.component/src/nav.component.ts`,
+        'entry-list': `${__dirname}/entry-list.component/src/entry-list.component.tsx`,
     },
     output: {
         path: `${__dirname}/dist`,
@@ -17,7 +17,7 @@ module.exports = async (options = {}) => ({
     module: {
         rules: [
             {
-                exclude: path.join(__dirname, 'app'),
+                include: path.join(__dirname, 'node_modules'),
                 test: /\.(js|css)$/,
                 enforce: 'pre',
                 use: 'source-map-loader',
@@ -62,7 +62,7 @@ module.exports = async (options = {}) => ({
         (() => {
             const HtmlWebpackPlugin = require('html-webpack-plugin');
             return new HtmlWebpackPlugin({
-                template: `${__dirname}/app/index.html`,
+                template: `${__dirname}/app.component/src/index.html`,
                 filename: 'index.html',
                 inject: true,
                 chunks: ['app'],
