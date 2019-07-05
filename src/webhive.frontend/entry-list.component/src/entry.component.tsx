@@ -1,15 +1,20 @@
-import { EntryListService } from './entry-list.service';
+import { Entry } from './entry';
 import * as h from 'vhtml';
 
-const styles = document.createElement('style');
-styles.textContent = require('./entry-list.component.css');
+// export function EntryComponent({ entry }: { entry: Entry }) {
+//     return <div class="entry">
+//         <span class="entry__category">{entry.category.name}</span> <a href={entry.link}>{entry.title}</a>
+//     </div>;
+// }
 
-const template = document.createElement('template');
-template.innerHTML = require('./entry-list.component.html');
+// const styles = document.createElement('style');
+// styles.textContent = require('./entry.component.css');
 
-export class EntryListComponent extends HTMLElement {
+// const template = document.createElement('template');
+// template.innerHTML = require('./entry.component.html');
 
-    private readonly service: EntryListService;
+export class EntryComponent extends HTMLElement {
+
     private readonly root: HTMLElement;
 
     /**
@@ -22,9 +27,8 @@ export class EntryListComponent extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        this.shadow.appendChild(styles.cloneNode(true));
-        this.root = this.shadow.appendChild(template.content.cloneNode(true).firstChild as HTMLElement);
-        this.service = new EntryListService(this);
+        // this.shadow.appendChild(styles.cloneNode(true));
+        // this.root = this.shadow.appendChild(template.content.cloneNode(true).firstChild as HTMLElement);
     }
 
     private get shadow() {
@@ -39,9 +43,7 @@ export class EntryListComponent extends HTMLElement {
      * This will happen each time the node is moved, and may happen before the element's contents
      * have been fully parsed
      */
-    async connectedCallback() {
-        const entries = await this.service.find();
-        this.root.innerHTML = entries.map(entry => <entry-component title={entry.title}></entry-component>).join('');
+    connectedCallback() {
     }
 
     /**
@@ -55,11 +57,10 @@ export class EntryListComponent extends HTMLElement {
      * Which attributes to notice change for is specified in a static get observedAttributes method
      */
     attributeChangedCallback(name, oldValue, newValue) {
-
     }
 
 }
 
-if (!customElements.get('entry-list-component')) {
-    customElements.define('entry-list-component', EntryListComponent);
+if (!customElements.get('entry-component')) {
+    customElements.define('entry-component', EntryComponent);
 }

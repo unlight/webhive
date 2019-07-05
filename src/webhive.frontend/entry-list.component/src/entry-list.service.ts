@@ -2,6 +2,8 @@ import { EntryListComponent } from './entry-list.component';
 
 export class EntryListService {
 
+    // todo: one abort signal for all
+
     constructor(
         private host: EntryListComponent,
     ) { }
@@ -11,7 +13,7 @@ export class EntryListService {
             method: 'GET',
         };
         // todo: get from props
-        return fetch('http://localhost:3000/entry', requestOptions)
+        return fetch('http://webhive.herokuapp.com/api/entry', requestOptions)
             .then(response => response.json());
     }
 
