@@ -15,7 +15,7 @@ body {
 }
 
 .logo {
-    transform: rotateX(180deg) translateY(-8px);
+    transform: translateY(-4px);
     display: inline-block;
     text-decoration: none;
     color: inherit;
