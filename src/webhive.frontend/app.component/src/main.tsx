@@ -5,6 +5,7 @@ import { App } from './app/app.component';
 import { Home } from './app/home/home.component';
 import { NotFound } from './app/notfound/notfound.component';
 import { Channels, Channel } from './app/channels/channels.component';
+import { h, render } from 'preact';
 
 loadScript('header.js');
 loadScript('nav.js');
@@ -20,32 +21,15 @@ const routes = [
 const options = { mode: 'hash' };
 const router = createRouter(routes, options);
 
-document.addEventListener('DOMContentLoaded', () => router.start(render), { once: true });
+document.addEventListener('DOMContentLoaded', () => router.start(transition), { once: true });
 
-const Preact = require('preact');
-
-function render(route, components) {
-    let app = components.reduceRight(
-        (children, Component) => <Component params={ route.params } > { children } < /Component>,
-    null
+function transition(route, components) {
+    const app = components.reduceRight(
+        (children, Component) => <Component params={route.params}>{children}</Component>,
+        null
     );
-    Preact.render(app, document.body, document.body.lastElementChild)
+    render(app, document.body);
 }
-
-// function render(route, components) {
-//     console.log("components", components);
-//     let app = components.reduceRight(
-//         (children, Component) => {
-//             // route.params children
-//             // h(Component)
-//             const html = Component({ params: route.params, children });
-//             return html;
-//         },
-//         null
-//     );
-//     // todo: performacnce issue (find virtual dom render)
-//     document.body.innerHTML = app;
-// }
 
 interface NavigateEventDetail {
     href: string;

@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@shinin/load-script": "^1.0.4",
-    "preact": "^8.4.2",
+    "preact": "^10.0.0-beta.3",
     "space-router": "^0.7.0",
     "vhtml": "^2.1.0"
   },

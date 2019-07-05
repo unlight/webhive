@@ -10,6 +10,7 @@ export class EntryListService {
         const requestOptions: RequestInit = {
             method: 'GET',
         };
+        // todo: get from props
         return fetch('http://localhost:3000/entry', requestOptions)
             .then(response => response.json());
     }
