@@ -1,5 +1,5 @@
 import { EntryListService } from './entry-list.service';
-import { createElement as h } from 'tsx-create-html-element';
+import { h, render, Fragment } from 'preact';
 import './entry.component';
 
 const styles = document.createElement('style');
@@ -11,7 +11,6 @@ template.innerHTML = '<div></div>';
 export class EntryListComponent extends HTMLElement {
 
     private readonly service: EntryListService;
-    private readonly root: HTMLElement;
 
     /**
      * Return an array containing the names of the attributes you want to observe.
@@ -24,7 +23,6 @@ export class EntryListComponent extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
         this.shadow.appendChild(styles.cloneNode(true));
-        this.root = this.shadow.appendChild(template.content.cloneNode(true).firstChild as HTMLElement);
         this.service = new EntryListService(this);
     }
 
@@ -41,8 +39,9 @@ export class EntryListComponent extends HTMLElement {
      * have been fully parsed
      */
     async connectedCallback() {
-        const entries = await this.service.find();
-        this.root.append(...entries.map(entry => <entry-component entry={entry}></entry-component>));
+        const entries = (await this.service.find())
+            .map(entry => <entry-component entry={entry}></entry-component>);
+        render(entries, this.shadow);
     }
 
     /**
