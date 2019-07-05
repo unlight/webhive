@@ -22,20 +22,30 @@ const router = createRouter(routes, options);
 
 document.addEventListener('DOMContentLoaded', () => router.start(render), { once: true });
 
+const Preact = require('preact');
+
 function render(route, components) {
-    console.log("components", components);
     let app = components.reduceRight(
-        (children, Component) => {
-            // route.params children
-            // h(Component)
-            const html = Component({ params: route.params, children });
-            return html;
-        },
-        null
+        (children, Component) => <Component params={ route.params } > { children } < /Component>,
+    null
     );
-    // todo: performacnce issue (find virtual dom render)
-    document.body.innerHTML = app;
+    Preact.render(app, document.body, document.body.lastElementChild)
 }
+
+// function render(route, components) {
+//     console.log("components", components);
+//     let app = components.reduceRight(
+//         (children, Component) => {
+//             // route.params children
+//             // h(Component)
+//             const html = Component({ params: route.params, children });
+//             return html;
+//         },
+//         null
+//     );
+//     // todo: performacnce issue (find virtual dom render)
+//     document.body.innerHTML = app;
+// }
 
 interface NavigateEventDetail {
     href: string;
