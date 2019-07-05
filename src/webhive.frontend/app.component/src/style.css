@@ -10,3 +10,8 @@ body {
             sans-serif;
     font-size: medium;
 }
+
+main {
+    max-width: 960px;
+    margin: 0 auto;
+}
