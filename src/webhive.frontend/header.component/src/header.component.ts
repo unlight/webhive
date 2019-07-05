@@ -10,7 +10,9 @@ export class HeaderComponent extends HTMLElement {
      * have been fully parsed
      */
     connectedCallback() {
-        this.innerHTML = '<h1>Web Hive</h1>';
+        this.innerHTML = `
+            <h1><a class="logo" href="/">&#128376;</a> Web Hive</h1>
+        `;
     }
 
     /**

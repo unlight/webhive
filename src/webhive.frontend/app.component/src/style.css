@@ -9,9 +9,14 @@ body {
             "Helvetica Neue",
             sans-serif;
     font-size: medium;
-}
-
-main {
     max-width: 960px;
     margin: 0 auto;
+    color: #000;
+}
+
+.logo {
+    transform: rotateX(180deg) translateY(-8px);
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
 }

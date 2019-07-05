@@ -34,18 +34,26 @@ function render(route, components) {
     document.body.innerHTML = app;
 }
 
-function handleEvent(event: any) {
-    if (event.type === 'navigate') {
+interface NavigateEventDetail {
+    href: string;
+}
+
+function isNavigateCustomEvent(event: any): event is CustomEvent<NavigateEventDetail> {
+    return event.type === 'navigate' && event.detail && typeof event.detail.href === 'string';
+}
+
+function handleEvents(event: Event) {
+    if (isNavigateCustomEvent(event)) {
         router.push(event.detail.href);
     }
 }
 
-window.addEventListener('navigate', handleEvent);
+window.addEventListener('navigate', handleEvents);
 
 if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => {
         router.stop();
-        window.removeEventListener('navigate', handleEvent);
+        window.removeEventListener('navigate', handleEvents);
     });
 }
