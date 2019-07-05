@@ -18,9 +18,12 @@ const routes = [
     ]],
 ];
 const options = { mode: 'hash' };
-const router = createRouter(routes, options).start(render);
+const router = createRouter(routes, options);
+
+document.addEventListener('DOMContentLoaded', () => router.start(render), { once: true });
 
 function render(route, components) {
+    console.log("components", components);
     let app = components.reduceRight(
         (children, Component) => {
             // route.params children

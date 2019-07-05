@@ -100,7 +100,7 @@ module.exports = (options = {}) => {
                 return new HtmlWebpackPlugin({
                     template: `${__dirname}/app.component/src/index.html`,
                     filename: 'index.html',
-                    inject: true,
+                    inject: 'head',
                     chunks: ['app'],
                     config: { ...options },
                 });
