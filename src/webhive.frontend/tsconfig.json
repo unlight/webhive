@@ -24,6 +24,7 @@
     ]
   },
   "include": [
-    "app.component/**/*.ts"
+    "app.component/**/*.ts",
+    "app.component/**/*.tsx"
   ]
 }

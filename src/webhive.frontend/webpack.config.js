@@ -33,10 +33,10 @@ module.exports = (options = {}) => {
     for (const [key, value] of Object.entries(options)) process.stdout.write(`${key}:${value} `);
     let config = {
         entry: {
-            'app': `${__dirname}/app.component/src/main.ts`,
-            'header': `${__dirname}/header.component/src/header.component.ts`,
-            'nav': `${__dirname}/nav.component/src/nav.component.ts`,
-            'entry-list': `${__dirname}/entry-list.component/src/entry-list.component.tsx`,
+            'app': `${__dirname}/app.component/src/main`,
+            'header': `${__dirname}/header.component/src/header.component`,
+            'nav': `${__dirname}/nav.component/src/nav.component`,
+            'entry-list': `${__dirname}/entry-list.component/src/entry-list.component`,
         },
         output: {
             path: `${__dirname}/dist`,
