@@ -1,8 +1,11 @@
 {
   "name": "webhive.frontend",
+  "private": true,
   "scripts": {
     "dev": "node node_modules/webpack-dev-server/bin/webpack-dev-server",
-    "build:prod": "node node_modules/webpack/bin/webpack --env.mode=production"
+    "build:prod": "node node_modules/webpack/bin/webpack --env.mode=production",
+    "tscheck": "echo tscheck... && tsc --noEmit",
+    "tscheck:w": "npm run tscheck -- --watch"
   },
   "dependencies": {
     "@shinin/load-script": "^1.0.4",
@@ -22,6 +25,7 @@
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.1",
     "ts-loader": "^6.0.2",
+    "typescript": "^3.5.2",
     "webpack": "^4.34.0",
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.1"
