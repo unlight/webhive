@@ -5,9 +5,9 @@ export function App({ children }) {
     return <Fragment>
         <header-component></header-component>
         <nav-component></nav-component>
-        <div>
+        {/*<div>
             <a href="/channels">Channels</a> <a href="/channels/5">Channel 5</a>
-        </div>
+        </div>*/}
         {children}
     </Fragment>;
 };

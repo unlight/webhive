@@ -1,4 +1,5 @@
 import { EntryListComponent } from './entry-list.component';
+import { Entry } from './entry';
 
 export class EntryListService {
 
@@ -8,7 +9,7 @@ export class EntryListService {
         private host: EntryListComponent,
     ) { }
 
-    async find() {
+    async find(): Promise<Entry[]> {
         const requestOptions: RequestInit = {
             method: 'GET',
         };

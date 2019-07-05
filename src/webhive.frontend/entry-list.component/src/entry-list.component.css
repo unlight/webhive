@@ -1,2 +1,33 @@
 :host {
+    /* self element styles */
+}
+
+entry-component {
+    padding: 0.25em 0.25em;
+    display: grid;
+    grid-template-columns: 10% 1fr;
+    grid-column-gap: 0.5em;
+}
+
+entry-component a {
+    color: #000;
+    text-decoration: none;
+}
+
+entry-component a:hover {
+    text-decoration: underline;
+}
+
+entry-component:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+entry-component .category {
+    border-radius: 0.25em;
+    background: #888;
+    color: #fff;
+    padding: 0 0.5em;
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
 }

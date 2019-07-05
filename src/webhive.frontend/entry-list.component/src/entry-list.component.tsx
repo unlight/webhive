@@ -1,11 +1,12 @@
 import { EntryListService } from './entry-list.service';
-import * as h from 'vhtml';
+import { createElement as h } from 'tsx-create-html-element';
+import './entry.component';
 
 const styles = document.createElement('style');
 styles.textContent = require('./entry-list.component.css');
 
 const template = document.createElement('template');
-template.innerHTML = require('./entry-list.component.html');
+template.innerHTML = '<div></div>';
 
 export class EntryListComponent extends HTMLElement {
 
@@ -41,7 +42,7 @@ export class EntryListComponent extends HTMLElement {
      */
     async connectedCallback() {
         const entries = await this.service.find();
-        this.root.innerHTML = entries.map(entry => <entry-component title={entry.title}></entry-component>).join('');
+        this.root.append(...entries.map(entry => <entry-component entry={entry}></entry-component>));
     }
 
     /**
@@ -55,7 +56,6 @@ export class EntryListComponent extends HTMLElement {
      * Which attributes to notice change for is specified in a static get observedAttributes method
      */
     attributeChangedCallback(name, oldValue, newValue) {
-
     }
 
 }

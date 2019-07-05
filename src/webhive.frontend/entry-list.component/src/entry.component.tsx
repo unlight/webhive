@@ -1,17 +1,4 @@
 import { Entry } from './entry';
-import * as h from 'vhtml';
-
-// export function EntryComponent({ entry }: { entry: Entry }) {
-//     return <div class="entry">
-//         <span class="entry__category">{entry.category.name}</span> <a href={entry.link}>{entry.title}</a>
-//     </div>;
-// }
-
-// const styles = document.createElement('style');
-// styles.textContent = require('./entry.component.css');
-
-// const template = document.createElement('template');
-// template.innerHTML = require('./entry.component.html');
 
 export class EntryComponent extends HTMLElement {
 
@@ -24,26 +11,16 @@ export class EntryComponent extends HTMLElement {
         return [];
     }
 
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        // this.shadow.appendChild(styles.cloneNode(true));
-        // this.root = this.shadow.appendChild(template.content.cloneNode(true).firstChild as HTMLElement);
-    }
-
-    private get shadow() {
-        if (!this.shadowRoot) {
-            throw new Error('shadowRoot is null');
-        }
-        return this.shadowRoot;
-    }
-
     /**
      * Invoked each time the custom element is appended into a document-connected element.
      * This will happen each time the node is moved, and may happen before the element's contents
      * have been fully parsed
      */
     connectedCallback() {
+        const entry = this.entry;
+        this.innerHTML = `
+            <span class="category">${entry.category.name}</span> <a href=${entry.link}>${entry.title}</a>
+        </div>`;
     }
 
     /**
@@ -57,6 +34,14 @@ export class EntryComponent extends HTMLElement {
      * Which attributes to notice change for is specified in a static get observedAttributes method
      */
     attributeChangedCallback(name, oldValue, newValue) {
+    }
+
+    private _entry: Entry;
+    public get entry(): Entry {
+        return this._entry;
+    }
+    public set entry(v: Entry) {
+        this._entry = v;
     }
 
 }
