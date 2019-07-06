@@ -8,7 +8,7 @@ const defaultOptions = {
     test: false,
     coverage: false,
     prod: process.argv.includes('--env.mode=production'),
-    nomin: true,
+    nomin: false,
     debug: false,
     get dev() {
         return !this.prod;
@@ -51,6 +51,10 @@ module.exports = (options = {}) => {
         })(),
         resolve: {
             extensions: ['.js', '.ts', '.tsx', '.json'],
+            modules: [
+                `${__dirname}/app_modules`,
+                'node_modules',
+            ],
         },
         devServer: {
             contentBase: [buildPath],
@@ -112,7 +116,21 @@ module.exports = (options = {}) => {
                     config: { ...options },
                 });
             })(),
-        ]
+        ],
+        optimization: {
+            minimizer: [
+                (options.minimize ? () => {
+                    const TerserPlugin = require('terser-webpack-plugin');
+                    return new TerserPlugin({
+                        terserOptions: {
+                            output: {
+                                comments: false,
+                            },
+                        },
+                    });
+                } : () => undefined)(),
+            ].filter(Boolean),
+        },
     };
 
     return config;
