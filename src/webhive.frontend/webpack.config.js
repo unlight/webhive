@@ -55,6 +55,13 @@ module.exports = (options = {}) => {
         devServer: {
             contentBase: [buildPath],
             historyApiFallback: false,
+            proxy: {
+                '/api': {
+                    target: 'http://webhive.herokuapp.com',
+                    changeOrigin: true,
+                    logLevel: 'info',
+                }
+            },
         },
         module: {
             rules: [

@@ -4,7 +4,6 @@ import './style.css';
 import { App } from './app/app.component';
 import { Home } from './app/home/home.component';
 import { NotFound } from './app/notfound/notfound.component';
-import { Channels, Channel } from './app/channels/channels.component';
 import { h, render } from 'preact';
 
 loadScript('header.js');
@@ -13,8 +12,6 @@ loadScript('nav.js');
 const routes = [
     ['', App, [
         ['/', Home],
-        ['/channels', Channels],
-        ['/channels/:id', Channel],
         ['*', NotFound],
     ]],
 ];

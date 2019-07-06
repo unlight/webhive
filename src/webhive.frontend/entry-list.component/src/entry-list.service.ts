@@ -14,7 +14,7 @@ export class EntryListService {
             method: 'GET',
         };
         // todo: get from props
-        return fetch('http://webhive.herokuapp.com/api/entry', requestOptions)
+        return fetch('/api/entry', requestOptions)
             .then(response => response.json());
     }
 
