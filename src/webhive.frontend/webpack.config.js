@@ -37,6 +37,7 @@ module.exports = (options = {}) => {
             'header': `${__dirname}/header.component/src/header.component`,
             'nav': `${__dirname}/nav.component/src/nav.component`,
             'entry-list': `${__dirname}/entry-list.component/src/entry-list.component`,
+            'search-page': `${__dirname}/search.page`,
         },
         output: {
             path: `${__dirname}/dist`,

@@ -12,6 +12,8 @@ loadScript('nav.js');
 const routes = [
     ['', App, [
         ['/', Home],
+        // todo: refactor this
+        ['/search', () => { loadScript('search-page.js'); return <search-page-element />; }],
         ['*', NotFound],
     ]],
 ];
