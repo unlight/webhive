@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "@shinin/load-script": "1.0.4",
+    "main-loop": "3.4.0",
     "preact": "10.0.0-beta.3",
-    "space-router": "0.7.0"
+    "space-router": "0.7.0",
+    "virtual-dom": "2.1.1"
   },
   "devDependencies": {
     "@types/html-webpack-plugin": "3.2.0",
@@ -24,6 +26,7 @@
     "html-webpack-plugin": "3.2.0",
     "source-map-loader": "0.2.4",
     "style-loader": "0.23.1",
+    "terser-webpack-plugin": "1.3.0",
     "ts-loader": "6.0.2",
     "typescript": "3.5.2",
     "webpack": "4.34.0",

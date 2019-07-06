@@ -1,12 +1,23 @@
 import { EntryListService } from './entry-list.service';
-import { h, render, Fragment } from 'preact';
 import './entry.component';
+import { Entry } from './entry';
+import { h } from 'virtual-dom-h-proxy';
+const mainLoop = require('main-loop');
 
 const styles = document.createElement('style');
 styles.textContent = require('./entry-list.component.css');
 
-const template = document.createElement('template');
-template.innerHTML = '<div></div>';
+function render(state: Entry[]) {
+    return <div>
+        {state.map(entry => <entry-component entry={entry}></entry-component>)}
+    </div>;
+}
+
+const loop = mainLoop([], render, {
+    create: require('virtual-dom/create-element'),
+    diff: require('virtual-dom/diff'),
+    patch: require('virtual-dom/patch'),
+});
 
 export class EntryListComponent extends HTMLElement {
 
@@ -19,18 +30,19 @@ export class EntryListComponent extends HTMLElement {
         return [];
     }
 
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        this.shadow.appendChild(styles.cloneNode(true));
-        this.service = new EntryListService(this);
-    }
-
     private get shadow() {
         if (!this.shadowRoot) {
             throw new Error('shadowRoot is null');
         }
         return this.shadowRoot;
+    }
+
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        this.shadow.append(styles.cloneNode(true));
+        this.shadow.append(loop.target);
+        this.service = new EntryListService(this);
     }
 
     /**
@@ -39,9 +51,8 @@ export class EntryListComponent extends HTMLElement {
      * have been fully parsed
      */
     async connectedCallback() {
-        const entries = (await this.service.find())
-            .map(entry => <entry-component entry={entry}></entry-component>);
-        render(entries, this.shadow);
+        const entries = await this.service.find();
+        loop.update(entries);
     }
 
     /**
