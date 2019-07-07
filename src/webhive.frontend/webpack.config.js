@@ -113,7 +113,7 @@ module.exports = (options = {}) => {
                 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
                 return [
                     new HtmlWebpackPlugin({
-                        template: `${__dirname}/app.component/src/index.ejs`,
+                        template: `${__dirname}/app.component/src/index.xhtml`,
                         filename: 'index.html',
                         inject: 'head',
                         chunks: ['app'],
