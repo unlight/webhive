@@ -4,9 +4,8 @@ import { Entry } from './entry';
 import { h } from 'virtual-dom-h-proxy';
 import { createMainLoop } from 'create-main-loop';
 
-const link = document.createElement('link');
-link.setAttribute('rel', 'stylesheet');
-link.setAttribute('href', require('./entry-list.link.css'));
+const style = document.createElement('style');
+style.textContent = require('./entry-list.component.css');
 
 const loop = createMainLoop(function render(state: Entry[]) {
     return <div>
@@ -35,7 +34,7 @@ export class EntryListComponent extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        this.shadow.append(link);
+        this.shadow.append(style);
         this.shadow.append(loop.target);
         this.service = new EntryListService(this);
     }
