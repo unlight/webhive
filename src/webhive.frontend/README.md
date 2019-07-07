@@ -13,7 +13,8 @@
 ### CSS Variables
 
 ## TODO
-* nav component try use, link rel
+* 
+* [DONT (FOUT)] nav component try use, link rel
 * analize
 * preact move to app only
 ```

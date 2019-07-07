@@ -30,26 +30,42 @@ function transition(route, components) {
     render(app, document.body);
 }
 
-interface NavigateEventDetail {
+interface NavigatePushEventDetail {
     url: string;
+    options?: NavigateSetEventDetail;
 }
 
-function isNavigateCustomEvent(event: any): event is CustomEvent<NavigateEventDetail> {
-    return event.type === 'navigate' && event.detail && typeof event.detail.url === 'string';
+interface NavigateSetEventDetail {
+    replace?: boolean;
+    params?: any;
+    query?: any;
+    hash?: any;
+}
+
+function isNavigatePushCustomEvent(event: any): event is CustomEvent<NavigatePushEventDetail> {
+    return event.type === 'navigate.push' && event.detail && typeof event.detail.url === 'string';
+}
+
+function isNavigateSetCustomEvent(event: any): event is CustomEvent<NavigatePushEventDetail> {
+    return event.type === 'navigate.set' && event.detail;
 }
 
 function handleEvents(event: Event) {
-    if (isNavigateCustomEvent(event)) {
-        router.push(event.detail.url);
+    if (isNavigatePushCustomEvent(event)) {
+        router.push(event.detail.url, event.detail.options);
+    } else if (isNavigateSetCustomEvent(event)) {
+        router.set(event.detail);
     }
 }
 
-window.addEventListener('navigate', handleEvents);
+window.addEventListener('navigate.push', handleEvents);
+window.addEventListener('navigate.set', handleEvents);
 
 if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => {
         router.stop();
-        window.removeEventListener('navigate', handleEvents);
+        window.removeEventListener('navigate.set', handleEvents);
+        window.removeEventListener('navigate.push', handleEvents);
     });
 }

@@ -1,4 +1,4 @@
-import { CustomElement, Listen } from 'custom-elements-ts';
+import { CustomElement, Listen, DispatchEmitter, Dispatch } from 'custom-elements-ts';
 
 @CustomElement({
     tag: 'search-page-element',
@@ -7,11 +7,18 @@ import { CustomElement, Listen } from 'custom-elements-ts';
 })
 export class SearchPageElement extends HTMLElement {
 
+    @Dispatch('navigate.set') navigate: DispatchEmitter;
+
     @Listen('submit', 'form')
     submit(event: Event) {
         const form = new FormData(event.target);
         event.preventDefault();
-        // todo: replace url with navigate
-        // get api
+        const q = form.get('q');
+        if (!q) {
+            return false;
+        }
+        const detail = { query: { q } };
+        this.navigate.emit({ detail, bubbles: true, composed: true });
     }
+
 }

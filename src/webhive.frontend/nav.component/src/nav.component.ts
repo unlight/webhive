@@ -57,7 +57,7 @@ export class NavComponent extends HTMLElement {
             const detail = {
                 url: anchor.getAttribute('href'),
             };
-            dispatchEvent(new CustomEvent('navigate', { detail }));
+            dispatchEvent(new CustomEvent('navigate.push', { detail }));
             event.preventDefault();
         }
     }
