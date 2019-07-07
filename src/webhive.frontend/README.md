@@ -13,7 +13,7 @@
 ### CSS Variables
 
 ## TODO
-* 
+* create loadable component
 * [DONT (FOUT)] nav component try use, link rel
 * analize
 * preact move to app only
