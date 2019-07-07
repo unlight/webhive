@@ -3,7 +3,7 @@
 }
 
 entry-component {
-    padding: 0.25em 0.25em;
+    padding: 0.25em 0;
     display: grid;
     grid-template-columns: 10% 1fr;
     grid-column-gap: 0.5em;
