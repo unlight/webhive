@@ -8,6 +8,18 @@ const link = document.createElement('link');
 link.setAttribute('rel', 'stylesheet');
 link.setAttribute('href', require('./entry-list.link.css'));
 
+function render(state: Entry[]) {
+    return <div>
+        {state.map(entry => <entry-component entry={entry}></entry-component>)}
+    </div>;
+}
+
+const loop = mainLoop([], render, {
+    create: require('virtual-dom/create-element'),
+    diff: require('virtual-dom/diff'),
+    patch: require('virtual-dom/patch'),
+});
+
 export class EntryListComponent extends HTMLElement {
 
     private readonly service: EntryListService;
@@ -26,24 +38,12 @@ export class EntryListComponent extends HTMLElement {
         return this.shadowRoot;
     }
 
-    private loop = mainLoop([], this.render, {
-        create: require('virtual-dom/create-element'),
-        diff: require('virtual-dom/diff'),
-        patch: require('virtual-dom/patch'),
-    });
-
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
         this.shadow.append(link.cloneNode(true));
-        this.shadow.append(this.loop.target);
+        this.shadow.append(loop.target);
         this.service = new EntryListService(this);
-    }
-
-    render(state: Entry[]) {
-        return <div>
-            {state.map(entry => <entry-component entry={entry}></entry-component>)}
-        </div>;
     }
 
     /**
@@ -53,7 +53,7 @@ export class EntryListComponent extends HTMLElement {
      */
     async connectedCallback() {
         const entries = await this.service.find();
-        this.loop.update(entries);
+        loop.update(entries);
     }
 
     /**
