@@ -107,15 +107,22 @@ module.exports = (options = {}) => {
             ]
         },
         plugins: [
-            (() => {
+            ...(() => {
                 const HtmlWebpackPlugin = require('html-webpack-plugin');
-                return new HtmlWebpackPlugin({
-                    template: `${__dirname}/app.component/src/index.html`,
-                    filename: 'index.html',
-                    inject: 'head',
-                    chunks: ['app'],
-                    config: { ...options },
-                });
+                const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+                return [
+                    new HtmlWebpackPlugin({
+                        template: `${__dirname}/app.component/src/index.html`,
+                        filename: 'index.html',
+                        inject: 'head',
+                        chunks: ['app'],
+                        config: { ...options },
+                        xhtml: true,
+                    }),
+                    new ScriptExtHtmlWebpackPlugin({
+                        defaultAttribute: 'defer',
+                    }),
+                ]
             })(),
         ],
         optimization: {
