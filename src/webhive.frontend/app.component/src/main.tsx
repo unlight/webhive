@@ -5,73 +5,66 @@ import { App } from './app/app.component';
 import { Home } from './app/home/home.component';
 import { NotFound } from './app/notfound/notfound.component';
 import { h, render } from 'preact';
+import { isNavigatePushCustomEvent, isNavigateSetCustomEvent } from './app/events';
 
-const components = {
-    header: { enabled: true, location: 'header.js', },
-    nav: { enabled: true, location: 'nav.js', },
-};
-
-Object.values(components)
-    .filter(c => c.enabled)
-    .map(c => loadScript(c.location));
-
-const routes = [
-    ['', App, [
-        ['/', Home],
-        // todo: refactor this (plugin system)
-        ['/search', () => { loadScript('search-page.js'); return <search-page-element />; }],
-        ['*', NotFound],
-    ]],
-];
-const options = { mode: 'hash' };
-const router = createRouter(routes, options);
-
-document.addEventListener('DOMContentLoaded', () => router.start(transition), { once: true });
-
-function transition(route, components) {
-    const app = components.reduceRight(
-        (children, Component) => <Component params={route.params}>{children}</Component>,
-        null
-    );
-    render(app, document.body);
-}
-
-interface NavigatePushEventDetail {
-    url: string;
-    options?: NavigateSetEventDetail;
-}
-
-interface NavigateSetEventDetail {
-    replace?: boolean;
-    params?: any;
-    query?: any;
-    hash?: any;
-}
-
-function isNavigatePushCustomEvent(event: any): event is CustomEvent<NavigatePushEventDetail> {
-    return event.type === 'navigate.push' && event.detail && typeof event.detail.url === 'string';
-}
-
-function isNavigateSetCustomEvent(event: any): event is CustomEvent<NavigatePushEventDetail> {
-    return event.type === 'navigate.set' && event.detail;
-}
-
-function handleEvents(event: Event) {
-    if (isNavigatePushCustomEvent(event)) {
-        router.push(event.detail.url, event.detail.options);
-    } else if (isNavigateSetCustomEvent(event)) {
-        router.set(event.detail);
+async function main() {
+    const components = {
+        header: { enabled: true, location: 'header.js', },
+        nav: { enabled: true, location: 'nav.js', },
+    };
+    const loadingComponents = Object.values(components)
+        .filter(c => c.enabled)
+        .map(c => loadScript(c.location) as Promise<any>);
+    const routes = [
+        ['', App, [
+            ['/', Home],
+            // todo: refactor this (plugin system)
+            ['/search', () => { loadScript('search-page.js'); return <search-page-element />; }],
+            ['*', NotFound],
+        ]],
+    ];
+    const router = createRouter(routes, { mode: 'hash' });
+    await Promise.all(loadingComponents);
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startApplication, { once: true });
+    } else {
+        startApplication();
     }
+    window.addEventListener('navigate.push', handleEvents);
+    window.addEventListener('navigate.set', handleEvents);
+    window.addEventListener('route.transition', console.log);
+
+    function startApplication() {
+        dispatchEvent(new CustomEvent('application.start', { detail: { router, routes } }));
+        router.start(transition);
+    }
+
+    function handleEvents(event: Event) {
+        if (isNavigatePushCustomEvent(event)) {
+            router.push(event.detail.url, event.detail.options);
+        } else if (isNavigateSetCustomEvent(event)) {
+            router.set(event.detail);
+        }
+    }
+
+    function transition(route, components) {
+        dispatchEvent(new CustomEvent('route.transition', { detail: { route } }));
+        const app = components.reduceRight(
+            (children, Component) => <Component params={route.params}>{children}</Component>,
+            null
+        );
+        render(app, document.body);
+    }
+
+    if (module.hot) {
+        module.hot.accept();
+        module.hot.dispose(() => {
+            router.stop();
+            window.removeEventListener('navigate.set', handleEvents);
+            window.removeEventListener('navigate.push', handleEvents);
+        });
+    }
+
 }
 
-window.addEventListener('navigate.push', handleEvents);
-window.addEventListener('navigate.set', handleEvents);
-
-if (module.hot) {
-    module.hot.accept();
-    module.hot.dispose(() => {
-        router.stop();
-        window.removeEventListener('navigate.set', handleEvents);
-        window.removeEventListener('navigate.push', handleEvents);
-    });
-}
+main();
