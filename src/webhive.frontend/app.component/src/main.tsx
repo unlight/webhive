@@ -6,6 +6,7 @@ import { Home } from './app/home/home.component';
 import { NotFound } from './app/notfound/notfound.component';
 import { h, render } from 'preact';
 import { isNavigatePushCustomEvent, isNavigateSetCustomEvent } from './app/events';
+import * as on from 'space-router/src/on';
 
 async function main() {
     const components = {
@@ -30,9 +31,11 @@ async function main() {
     } else {
         startApplication();
     }
-    window.addEventListener('navigate.push', handleEvents);
-    window.addEventListener('navigate.set', handleEvents);
-    window.addEventListener('route.transition', console.log);
+
+    const subsriptions = [
+        on(window, 'navigate.push', handleEvents),
+        on(window, 'navigate.set', handleEvents),
+    ];
 
     function startApplication() {
         dispatchEvent(new CustomEvent('application.start', { detail: { router, routes } }));
@@ -60,8 +63,7 @@ async function main() {
         module.hot.accept();
         module.hot.dispose(() => {
             router.stop();
-            window.removeEventListener('navigate.set', handleEvents);
-            window.removeEventListener('navigate.push', handleEvents);
+            subsriptions.forEach(unsubscribe => unsubscribe());
         });
     }
 
