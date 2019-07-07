@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev": "run-p dev:web",
-    "harvest:d": "node --inspect-brk -r ts-node/register/transpile-only src/webhive.harvest/program.ts --ant=webplatformnews",
+    "harvest:d": "node --inspect-brk -r ts-node/register/transpile-only src/webhive.harvest/program.ts --ant=webapplog --no-save",
     "harvest": "npx ts-node src/webhive.harvest/program.ts --ant=everylayout",
     "dev:api": "ts-node-dev --no-deps --transpileOnly -- src/webhive.api/main.ts",
     "dev:api:d": "ts-node-dev --no-deps --transpileOnly --inspect -- src/webhive.api/main.ts",
