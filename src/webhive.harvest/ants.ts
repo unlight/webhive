@@ -64,6 +64,7 @@ export const ants: Ant[] = [
     { name: 'xakep', target: 'https://xakep.ru/category/coding/feed/', defaultCategory: 'Dev' },
     { name: 'stackshare', target: 'https://stackshare.io/featured-posts.atom', defaultCategory: 'News' },
     { name: 'zerotoprod', target: 'https://zerotoprod.com/index.xml', defaultCategory: 'DevOps' },
+    { name: 'webapplog', target: 'https://webapplog.com/feed/', defaultCategory: 'Web' },
     // { name: 'toddmotto', target: 'https://toddmotto.com/feed.xml', defaultCategory: 'Web' },
     // { name: 'not_rss', target: 'http://padabum.com/', defaultCategory: 'Web' },
     // { name: 'not_rss', target: 'http://nodetuts.com/', defaultCategory: 'Web' },
