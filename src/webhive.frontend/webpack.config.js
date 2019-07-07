@@ -1,6 +1,7 @@
 const path = require('path');
 const buildPath = path.join(__dirname, 'dist');
 const context = __dirname;
+const title = 'Web Hive';
 
 const defaultOptions = {
     libs: false,
@@ -112,12 +113,13 @@ module.exports = (options = {}) => {
                 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
                 return [
                     new HtmlWebpackPlugin({
-                        template: `${__dirname}/app.component/src/index.html`,
+                        template: `${__dirname}/app.component/src/index.ejs`,
                         filename: 'index.html',
                         inject: 'head',
                         chunks: ['app'],
                         config: { ...options },
                         xhtml: true,
+                        title,
                     }),
                     new ScriptExtHtmlWebpackPlugin({
                         defaultAttribute: 'defer',
