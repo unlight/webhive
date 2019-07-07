@@ -6,13 +6,19 @@ import { Home } from './app/home/home.component';
 import { NotFound } from './app/notfound/notfound.component';
 import { h, render } from 'preact';
 
-loadScript('header.js');
-loadScript('nav.js');
+const components = {
+    header: { enabled: true, location: 'header.js', },
+    nav: { enabled: true, location: 'nav.js', },
+};
+
+Object.values(components)
+    .filter(c => c.enabled)
+    .map(c => loadScript(c.location));
 
 const routes = [
     ['', App, [
         ['/', Home],
-        // todo: refactor this
+        // todo: refactor this (plugin system)
         ['/search', () => { loadScript('search-page.js'); return <search-page-element />; }],
         ['*', NotFound],
     ]],

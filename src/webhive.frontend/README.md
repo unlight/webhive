@@ -13,6 +13,8 @@
 ### CSS Variables
 
 ## TODO
+* idea vanilla framework
+  - entry point for plugins (index.js) esm
 * create loadable component
 * [DONT (FOUT)] nav component try use, link rel
 * analize
