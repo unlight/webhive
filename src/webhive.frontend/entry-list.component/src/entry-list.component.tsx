@@ -26,19 +26,19 @@ export class EntryListComponent extends HTMLElement {
         return this.shadowRoot;
     }
 
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        this.shadow.append(link.cloneNode(true));
-        this.shadow.append(loop.target);
-        this.service = new EntryListService(this);
-    }
-
     private loop = mainLoop([], this.render, {
         create: require('virtual-dom/create-element'),
         diff: require('virtual-dom/diff'),
         patch: require('virtual-dom/patch'),
     });
+
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        this.shadow.append(link.cloneNode(true));
+        this.shadow.append(this.loop.target);
+        this.service = new EntryListService(this);
+    }
 
     render(state: Entry[]) {
         return <div>
