@@ -4,20 +4,9 @@ import { Entry } from './entry';
 import { h } from 'virtual-dom-h-proxy';
 const mainLoop = require('main-loop');
 
-const styles = document.createElement('style');
-styles.textContent = require('./entry-list.component.css');
-
-function render(state: Entry[]) {
-    return <div>
-        {state.map(entry => <entry-component entry={entry}></entry-component>)}
-    </div>;
-}
-
-const loop = mainLoop([], render, {
-    create: require('virtual-dom/create-element'),
-    diff: require('virtual-dom/diff'),
-    patch: require('virtual-dom/patch'),
-});
+const link = document.createElement('link');
+link.setAttribute('rel', 'stylesheet');
+link.setAttribute('href', require('./entry-list.link.css'));
 
 export class EntryListComponent extends HTMLElement {
 
@@ -40,9 +29,21 @@ export class EntryListComponent extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        this.shadow.append(styles.cloneNode(true));
+        this.shadow.append(link.cloneNode(true));
         this.shadow.append(loop.target);
         this.service = new EntryListService(this);
+    }
+
+    private loop = mainLoop([], this.render, {
+        create: require('virtual-dom/create-element'),
+        diff: require('virtual-dom/diff'),
+        patch: require('virtual-dom/patch'),
+    });
+
+    render(state: Entry[]) {
+        return <div>
+            {state.map(entry => <entry-component entry={entry}></entry-component>)}
+        </div>;
     }
 
     /**
@@ -52,7 +53,7 @@ export class EntryListComponent extends HTMLElement {
      */
     async connectedCallback() {
         const entries = await this.service.find();
-        loop.update(entries);
+        this.loop.update(entries);
     }
 
     /**
