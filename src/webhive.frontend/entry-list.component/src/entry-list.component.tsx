@@ -2,22 +2,16 @@ import { EntryListService } from './entry-list.service';
 import './entry.component';
 import { Entry } from './entry';
 import { h } from 'virtual-dom-h-proxy';
-const mainLoop = require('main-loop');
+import { createMainLoop } from 'create-main-loop';
 
 const link = document.createElement('link');
 link.setAttribute('rel', 'stylesheet');
 link.setAttribute('href', require('./entry-list.link.css'));
 
-function render(state: Entry[]) {
+const loop = createMainLoop(function render(state: Entry[]) {
     return <div>
         {state.map(entry => <entry-component entry={entry}></entry-component>)}
     </div>;
-}
-
-const loop = mainLoop([], render, {
-    create: require('virtual-dom/create-element'),
-    diff: require('virtual-dom/diff'),
-    patch: require('virtual-dom/patch'),
 });
 
 export class EntryListComponent extends HTMLElement {
@@ -41,7 +35,7 @@ export class EntryListComponent extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        this.shadow.append(link.cloneNode(true));
+        this.shadow.append(link);
         this.shadow.append(loop.target);
         this.service = new EntryListService(this);
     }
