@@ -54,7 +54,9 @@ export class NavComponent extends HTMLElement {
     handleEvent(event: Event) {
         const anchor = (event.target as HTMLAnchorElement);
         if (event.type === 'click' && anchor && anchor.nodeName === 'A') {
-            const detail = { href: anchor.getAttribute('href') };
+            const detail = {
+                url: anchor.getAttribute('href'),
+            };
             dispatchEvent(new CustomEvent('navigate', { detail }));
             event.preventDefault();
         }

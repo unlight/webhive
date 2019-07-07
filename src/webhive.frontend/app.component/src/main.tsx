@@ -31,16 +31,16 @@ function transition(route, components) {
 }
 
 interface NavigateEventDetail {
-    href: string;
+    url: string;
 }
 
 function isNavigateCustomEvent(event: any): event is CustomEvent<NavigateEventDetail> {
-    return event.type === 'navigate' && event.detail && typeof event.detail.href === 'string';
+    return event.type === 'navigate' && event.detail && typeof event.detail.url === 'string';
 }
 
 function handleEvents(event: Event) {
     if (isNavigateCustomEvent(event)) {
-        router.push(event.detail.href);
+        router.push(event.detail.url);
     }
 }
 
