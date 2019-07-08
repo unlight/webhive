@@ -4,15 +4,17 @@ import './style.css';
 import { App } from './app/app.component';
 import { Home } from './app/home/home.component';
 import { NotFound } from './app/notfound/notfound.component';
-import { h, render } from 'preact';
 import { isNavigatePushCustomEvent, isNavigateSetCustomEvent } from './app/events';
 import * as on from 'space-router/src/on';
 
+const components = {
+    'example.component': { enabled: true, location: 'example.component.plugin.js' },
+};
+
+loadScript('header.js');
+loadScript('nav.js');
+
 async function main() {
-    const components = {
-        header: { enabled: true, location: 'header.js', },
-        nav: { enabled: true, location: 'nav.js', },
-    };
     const loadingComponents = Object.values(components)
         .filter(c => c.enabled)
         .map(c => loadScript(c.location) as Promise<any>);
@@ -20,7 +22,7 @@ async function main() {
         ['', App, [
             ['/', Home],
             // todo: refactor this (plugin system)
-            ['/search', () => { loadScript('search-page.js'); return <search-page-element />; }],
+            ['/search', () => { loadScript('search-page.js'); return `<search-page-element />`; }],
             ['*', NotFound],
         ]],
     ];
@@ -52,11 +54,10 @@ async function main() {
 
     function transition(route, components) {
         dispatchEvent(new CustomEvent('route.transition', { detail: { route } }));
-        const app = components.reduceRight(
-            (children, Component) => <Component params={route.params}>{children}</Component>,
-            null
-        );
-        render(app, document.body);
+        const html = components.reduceRight((children, Component) => {
+            return Component({ params: route.params, children });
+        }, null);
+        document.body.innerHTML = html;
     }
 
     if (module.hot) {

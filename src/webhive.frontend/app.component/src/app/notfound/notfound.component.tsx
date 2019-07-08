@@ -1,5 +1,3 @@
-import { h } from 'preact';
-
 export function NotFound(props) {
-    return <div>Not Found</div>;
+    return `<div>Not Found</div>`;
 }
