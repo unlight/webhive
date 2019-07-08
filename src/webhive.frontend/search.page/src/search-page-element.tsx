@@ -7,7 +7,7 @@ import { CustomElement, Listen, DispatchEmitter, Dispatch } from 'custom-element
 })
 export class SearchPageElement extends HTMLElement {
 
-    @Dispatch('navigate.set') navigate: DispatchEmitter;
+    @Dispatch('route.navigate.set') navigate: DispatchEmitter;
 
     @Listen('submit', 'form')
     submit(event: Event) {

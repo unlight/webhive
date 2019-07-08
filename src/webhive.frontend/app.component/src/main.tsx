@@ -35,8 +35,8 @@ async function main() {
     }
 
     const subsriptions = [
-        on(window, 'navigate.push', handleEvents),
-        on(window, 'navigate.set', handleEvents),
+        on(window, 'route.navigate.push', handleEvents),
+        on(window, 'route.navigate.set', handleEvents),
     ];
 
     function startApplication() {
@@ -53,11 +53,12 @@ async function main() {
     }
 
     function transition(route, components) {
-        dispatchEvent(new CustomEvent('route.transition', { detail: { route } }));
-        const html = components.reduceRight((children, Component) => {
+        dispatchEvent(new CustomEvent('route.transition.start', { detail: { route, components } }));
+        const appHtml = components.reduceRight((children, Component) => {
             return Component({ params: route.params, children });
         }, null);
-        document.body.innerHTML = html;
+        dispatchEvent(new CustomEvent('route.transition.end', { detail: { route, components, appHtml } }));
+        document.body.innerHTML = appHtml;
     }
 
     if (module.hot) {

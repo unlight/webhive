@@ -11,9 +11,9 @@ interface NavigateSetEventDetail {
 }
 
 export function isNavigatePushCustomEvent(event: any): event is CustomEvent<NavigatePushEventDetail> {
-    return event.type === 'navigate.push' && event.detail && typeof event.detail.url === 'string';
+    return event.type === 'route.navigate.push' && event.detail && typeof event.detail.url === 'string';
 }
 
 export function isNavigateSetCustomEvent(event: any): event is CustomEvent<NavigatePushEventDetail> {
-    return event.type === 'navigate.set' && event.detail != null;
+    return event.type === 'route.navigate.set' && event.detail != null;
 }

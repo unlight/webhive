@@ -7,3 +7,11 @@ export const ComponentInfo = {
     version: '1.0.0',
     author: 'Me',
 };
+
+addEventListener('route.transition.end', ({ detail: { appHtml } }) => {
+    console.log("appHtml", appHtml);
+});
+
+addEventListener('navcomponent.connected.callback', event => {
+    event.target.addItem('/example', 'Example');
+});

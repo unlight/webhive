@@ -1,3 +1,5 @@
+import { createElement as h } from 'tsx-create-html-element';
+
 const styles = document.createElement('style');
 styles.textContent = require('./nav.component.css');
 
@@ -13,18 +15,18 @@ export class NavComponent extends HTMLElement {
         return [];
     }
 
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        this.shadow.appendChild(styles.cloneNode(true));
-        this.shadow.appendChild(template.content.cloneNode(true).firstChild as Node);
-    }
-
     private get shadow() {
         if (!this.shadowRoot) {
             throw new Error('shadowRoot is null');
         }
         return this.shadowRoot;
+    }
+
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        this.shadow.appendChild(styles.cloneNode(true));
+        this.shadow.appendChild(template.content.cloneNode(true) as Node);
     }
 
     /**
@@ -34,6 +36,7 @@ export class NavComponent extends HTMLElement {
      */
     connectedCallback() {
         this.shadow.addEventListener('click', this);
+        this.dispatchEvent(new CustomEvent('navcomponent.connected.callback', { detail: { }, bubbles: true, composed: true }));
     }
 
     /**
@@ -57,11 +60,14 @@ export class NavComponent extends HTMLElement {
             const detail = {
                 url: anchor.getAttribute('href'),
             };
-            dispatchEvent(new CustomEvent('navigate.push', { detail }));
+            dispatchEvent(new CustomEvent('route.navigate.push', { detail }));
             event.preventDefault();
         }
     }
 
+    addItem(href: string, description: string) {
+        this.shadow.querySelector('nav ul').append(<li><a href={href}>{description}</a></li>);
+    }
 }
 
 if (!customElements.get('nav-component')) {
