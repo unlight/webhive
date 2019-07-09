@@ -36,7 +36,6 @@ export class NavComponent extends HTMLElement {
      */
     connectedCallback() {
         this.shadow.addEventListener('click', this);
-        window.addEventListener('route.transition.end', this);
         this.dispatchEvent(new CustomEvent('navcomponent.connected.callback', { detail: {}, bubbles: true, composed: true }));
     }
 
@@ -45,7 +44,6 @@ export class NavComponent extends HTMLElement {
      */
     disconnectedCallback() {
         this.shadow.removeEventListener('click', this);
-        window.removeEventListener('route.transition.end', this);
     }
 
     /**
