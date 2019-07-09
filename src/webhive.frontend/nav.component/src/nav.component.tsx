@@ -66,7 +66,7 @@ export class NavComponent extends HTMLElement {
     }
 
     addItem(href: string, description: string) {
-        this.shadow.querySelector('nav ul').append(<li><a href={href}>{description}</a></li>);
+        this.shadow.querySelector('nav > ul').append(<li><a href={href}>{description}</a></li>);
     }
 }
 
