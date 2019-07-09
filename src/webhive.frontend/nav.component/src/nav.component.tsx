@@ -36,7 +36,8 @@ export class NavComponent extends HTMLElement {
      */
     connectedCallback() {
         this.shadow.addEventListener('click', this);
-        this.dispatchEvent(new CustomEvent('navcomponent.connected.callback', { detail: { }, bubbles: true, composed: true }));
+        window.addEventListener('route.transition.end', this);
+        this.dispatchEvent(new CustomEvent('navcomponent.connected.callback', { detail: {}, bubbles: true, composed: true }));
     }
 
     /**
@@ -44,6 +45,7 @@ export class NavComponent extends HTMLElement {
      */
     disconnectedCallback() {
         this.shadow.removeEventListener('click', this);
+        window.removeEventListener('route.transition.end', this);
     }
 
     /**
@@ -55,8 +57,8 @@ export class NavComponent extends HTMLElement {
     }
 
     handleEvent(event: Event) {
-        const anchor = (event.target as HTMLAnchorElement);
-        if (event.type === 'click' && anchor && anchor.nodeName === 'A') {
+        if (event.type === 'click' && event.target && (event.target as HTMLAnchorElement).nodeName === 'A') {
+            const anchor = (event.target as HTMLAnchorElement);
             const detail = {
                 url: anchor.getAttribute('href'),
             };

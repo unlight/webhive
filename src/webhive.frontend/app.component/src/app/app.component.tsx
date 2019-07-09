@@ -1,9 +1,10 @@
 import * as loadScript from '@shinin/load-script';
+import { createElement as h } from 'tsx-create-html-element';
 
-// todo: tsx create
 export function App({ children }) {
-    return `
+    return <main>
         <header-component></header-component>
-        <nav-component></nav-component>
-        ${children}`;
+        <div id="nav"></div>
+        <div id="body">{children}</div>
+    </main>;
 };

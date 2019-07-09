@@ -8,10 +8,6 @@ export const ComponentInfo = {
     author: 'Me',
 };
 
-addEventListener('route.transition.end', ({ detail: { appHtml } }) => {
-    console.log("appHtml", appHtml);
-});
-
 addEventListener('navcomponent.connected.callback', event => {
     event.target.addItem('/example', 'Example');
 });
