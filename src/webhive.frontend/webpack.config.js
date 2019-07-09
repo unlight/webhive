@@ -35,7 +35,7 @@ module.exports = (options = {}) => {
     let config = {
         entry: {
             'app': `${__dirname}/app.component/src/main`,
-            'header': `${__dirname}/header.component/src/header.component`,
+            'header': `${__dirname}/header.component/src`,
             'nav': `${__dirname}/nav.component/src`,
             'entry-list': `${__dirname}/entry-list.component/src/entry-list.component`,
             'search-page': `${__dirname}/search.page`,

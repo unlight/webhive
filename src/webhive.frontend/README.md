@@ -13,6 +13,7 @@
 ### CSS Variables
 
 ## TODO
+* extract mini css plugin
 * idea vanilla framework
   - entry point for plugins (index.js) esm
 * create loadable component
