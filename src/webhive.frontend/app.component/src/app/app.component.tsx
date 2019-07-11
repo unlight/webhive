@@ -1,5 +1,5 @@
 import * as loadScript from '@shinin/load-script';
-import { createElement as h } from 'tsx-create-html-element';
+import { createElement as h } from 'h-document-element';
 
 export function App({ children }) {
     return <main>

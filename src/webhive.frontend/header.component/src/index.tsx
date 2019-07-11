@@ -1,4 +1,4 @@
-import { createElement as h } from 'tsx-create-html-element';
+import { createElement as h } from 'h-document-element';
 import './header.component';
 
 window.addEventListener('route.transition.end', (event: any) => {

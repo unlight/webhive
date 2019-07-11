@@ -6,12 +6,13 @@ import { Home } from './app/home/home.component';
 import { NotFound } from './app/notfound/notfound.component';
 import { isNavigatePushCustomEvent, isNavigateSetCustomEvent } from './app/events';
 import * as on from 'space-router/src/on';
-import { createElement as h } from 'tsx-create-html-element';
+import { createElement as h } from 'h-document-element';
 
 // todo: move to config
 const components = {
     'header.component': { enabled: true, main: 'header.js' },
     'nav.component': { enabled: true, main: 'nav.js' },
+    'search.page': { enabled: true, main: 'search-page.js' },
     'example.component': { enabled: true, main: 'example.component.plugin.js' },
 };
 
@@ -19,15 +20,13 @@ async function main() {
     const loadingComponents = Object.values(components)
         .filter(c => c.enabled)
         .map(c => loadScript(c.main) as Promise<any>);
+    let router;
     const routes = [
         ['', App, [
             ['/', Home],
-            // todo: refactor this (plugin system)
-            ['/search', () => { loadScript('search-page.js'); return <search-page-element />; }],
             ['*', NotFound],
         ]],
     ];
-    const router = createRouter(routes, { mode: 'hash' });
     await Promise.all(loadingComponents);
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', startApplication, { once: true });
@@ -41,7 +40,8 @@ async function main() {
     ];
 
     function startApplication() {
-        dispatchEvent(new CustomEvent('application.start', { detail: { router, routes } }));
+        dispatchEvent(new CustomEvent('application.start', { detail: { routes } }));
+        router = createRouter(routes, { mode: 'hash' });
         router.start(transition);
     }
 
