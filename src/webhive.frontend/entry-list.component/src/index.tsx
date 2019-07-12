@@ -1,7 +1,7 @@
 import './entry-list.component';
 
 addEventListener('navcomponent.connected.callback', event => {
-    event.target.addItem('/', 'Home');
+    event.target.addItem('/', 'Home', 0);
 });
 
 addEventListener('application.start', event => {

@@ -4,7 +4,7 @@ import { createElement as h } from 'h-document-element';
 // todo: lazy load
 
 addEventListener('navcomponent.connected.callback', event => {
-    event.target.addItem('/search', 'Search');
+    event.target.addItem('/search', 'Search', 1);
 });
 
 addEventListener('application.start', event => {

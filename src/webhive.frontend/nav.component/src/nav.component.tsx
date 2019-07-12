@@ -65,8 +65,15 @@ export class NavComponent extends HTMLElement {
         }
     }
 
-    addItem(href: string, description: string) {
-        this.shadow.querySelector('nav > ul').append(<li><a href={href}>{description}</a></li>);
+    addItem(href: string, description: string, position = -1) {
+        const container = this.shadow.querySelector('nav > ul');
+        const newItem = <li><a href={href}>{description}</a></li>;
+        const refItem = container.querySelectorAll('li').item(position);
+        if (!refItem) {
+            container.append(newItem);
+        } else {
+            container.insertBefore(newItem, refItem.nextSibling);
+        }
     }
 }
 
