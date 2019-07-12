@@ -55,7 +55,7 @@ async function main() {
     function transition(route, components) {
         dispatchEvent(new CustomEvent('route.transition.start', { detail: { route, components } }));
         const app = components.reduceRight((children, Component) => {
-            return Component({ params: route.params, children });
+            return Component({ params: route.params, query: route.query, children });
         }, null);
         dispatchEvent(new CustomEvent('route.transition.end', { detail: { route, components, app } }));
         document.body.firstChild!.replaceWith(app);
