@@ -11,5 +11,5 @@ addEventListener('application.start', event => {
     const router = event.detail.router;
     const [rootRoutes] = event.detail.routes;
     const [appRoutes] = rootRoutes.slice(-1);
-    appRoutes.unshift(['/search', () => <search-page-element/>]);
+    appRoutes.unshift(['/search', () => <search-page-element />]);
 }, { once: true });

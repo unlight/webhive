@@ -37,7 +37,7 @@ module.exports = (options = {}) => {
             'app': `${__dirname}/app.component/src/main`,
             'header': `${__dirname}/header.component/src`,
             'nav': `${__dirname}/nav.component/src`,
-            'entry-list': `${__dirname}/entry-list.component/src/entry-list.component`,
+            'entry-list': `${__dirname}/entry-list.component`,
             'search-page': `${__dirname}/search.page`,
             'example.component.plugin': `${__dirname}/example.component/example.component.plugin`,
         },

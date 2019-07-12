@@ -13,18 +13,9 @@
 ### CSS Variables
 
 ## TODO
+* global modules wich can be used by plugins
+* css minification
 * extract mini css plugin
 * idea vanilla framework
   - entry point for plugins (index.js) esm
 * create loadable component
-* [DONT (FOUT)] nav component try use, link rel
-* analize
-* preact move to app only
-```
-import { NamedRouting } from 'a-wc-router/src/named-routing';
-NamedRouting.importCustomElement = async (importSrc, tagName) => {
-    if (importSrc && customElements.get(tagName) === undefined) {
-        await loadScript(importSrc);
-    }
-};
-```

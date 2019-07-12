@@ -2,7 +2,6 @@ import * as loadScript from '@shinin/load-script';
 import * as createRouter from 'space-router';
 import './style.css';
 import { App } from './app/app.component';
-import { Home } from './app/home/home.component';
 import { NotFound } from './app/notfound/notfound.component';
 import { isNavigatePushCustomEvent, isNavigateSetCustomEvent } from './app/events';
 import * as on from 'space-router/src/on';
@@ -12,6 +11,7 @@ import { createElement as h } from 'h-document-element';
 const components = {
     'header.component': { enabled: true, main: 'header.js' },
     'nav.component': { enabled: true, main: 'nav.js' },
+    'entry-list.component': { enabled: true, main: 'entry-list.js' },
     'search.page': { enabled: true, main: 'search-page.js' },
     'example.component': { enabled: true, main: 'example.component.plugin.js' },
 };
@@ -23,7 +23,6 @@ async function main() {
     let router;
     const routes = [
         ['', App, [
-            ['/', Home],
             ['*', NotFound],
         ]],
     ];
