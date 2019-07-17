@@ -7,17 +7,9 @@ import { isNavigatePushCustomEvent, isNavigateSetCustomEvent } from './app/event
 import * as on from 'space-router/src/on';
 import { createElement as h } from 'h-document-element';
 
-// todo: move to config
-const components = {
-    'header.component': { enabled: true, main: 'header.js' },
-    'nav.component': { enabled: true, main: 'nav.js' },
-    'entry-list.component': { enabled: true, main: 'entry-list.js' },
-    'search.page': { enabled: true, main: 'search-page.js' },
-    'example.component': { enabled: true, main: 'example.component.plugin.js' },
-};
-
 async function main() {
-    const loadingComponents = Object.values(components)
+    const config = await import(/* webpackIgnore: true */ './app.component.config.js');
+    const loadingComponents = Object.values(config.components as any[])
         .filter(c => c.enabled)
         .map(c => loadScript(c.main) as Promise<any>);
     let router;

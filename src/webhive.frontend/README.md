@@ -13,9 +13,8 @@
 ### CSS Variables
 
 ## TODO
+* try https://github.com/WebReflection/import.js
 * global modules wich can be used by plugins
 * css minification
 * extract mini css plugin
-* idea vanilla framework
-  - entry point for plugins (index.js) esm
 * create loadable component

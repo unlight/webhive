@@ -60,7 +60,10 @@ module.exports = (options = {}) => {
             ],
         },
         devServer: {
-            contentBase: [buildPath],
+            contentBase: [
+                `${__dirname}/app.component/src`,
+                buildPath,
+            ],
             historyApiFallback: false,
             proxy: {
                 '/api': {
