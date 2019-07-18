@@ -6,9 +6,12 @@ import { NotFound } from './app/notfound/notfound.component';
 import { isNavigatePushCustomEvent, isNavigateSetCustomEvent } from './app/events';
 import * as on from 'space-router/src/on';
 import { createElement as h } from 'h-document-element';
+import createLoadRemoteModule from '@paciolan/remote-module-loader';
+
+const remoteModuleLoader = createLoadRemoteModule();
 
 async function main() {
-    const config = await import(/* webpackIgnore: true */ './app.component.config.js');
+    const config = await remoteModuleLoader('./app.component.config.js');
     const loadingComponents = Object.values(config.components as any[])
         .filter(c => c.enabled)
         .map(c => loadScript(c.main) as Promise<any>);
