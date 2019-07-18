@@ -1,8 +1,6 @@
 export { SearchPageElement } from './search-page-element';
 import { createElement as h } from 'h-document-element';
 
-// todo: lazy load
-
 addEventListener('navcomponent.connected.callback', event => {
     event.target.addItem('/search', 'Search', 1);
 });
@@ -15,5 +13,6 @@ addEventListener('application.start', event => {
 }, { once: true });
 
 function SearchPage({ query }) {
+    // todo: lazy load
     return <search-page-element q={query.q} />;
 }
