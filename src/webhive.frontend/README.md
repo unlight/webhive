@@ -14,6 +14,7 @@
 
 ## TODO
 * create loadable component
+* cache busting
 * global modules wich can be used by plugins
 * css minification
 * extract mini css plugin
