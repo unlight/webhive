@@ -17,5 +17,5 @@ exports.components["search.page"].enabled = true
 exports.components["search.page"].main = "search-page.js"
 
 exports.components["example.component"] = {}
-exports.components["example.component"].enabled = true
+exports.components["example.component"].enabled = false
 exports.components["example.component"].main = "example.component.plugin.js"

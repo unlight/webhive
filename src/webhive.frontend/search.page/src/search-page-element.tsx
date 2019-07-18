@@ -11,6 +11,10 @@ export class SearchPageElement extends HTMLElement {
     @Prop() q: string;
     private entryList: HTMLElement;
 
+    update() {
+        this.shadow.querySelector<HTMLInputElement>('input[name=q]').value = this.q;
+    }
+
     @Dispatch('route.navigate.set') navigate: DispatchEmitter;
 
     private get shadow() {
@@ -44,5 +48,6 @@ export class SearchPageElement extends HTMLElement {
             this.shadow.appendChild(entryList);
         }
         this.entryList = this.shadow.querySelector('entry-list-component');
+        this.update();
     }
 }

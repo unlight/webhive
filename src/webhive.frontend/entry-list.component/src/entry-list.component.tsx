@@ -44,15 +44,19 @@ export class EntryListComponent extends HTMLElement {
      * This will happen each time the node is moved, and may happen before the element's contents
      * have been fully parsed
      */
-    async connectedCallback() {
-        const entries = await this.service.find({ q: this._q });
-        loop.update(entries);
+    connectedCallback() {
+        this.update();
     }
 
     /**
      * Invoked each time the custom element is disconnected from the document's DOM.
      */
     disconnectedCallback() {
+    }
+
+    async update() {
+        const entries = await this.service.find({ q: this._q });
+        loop.update(entries);
     }
 
     /**
