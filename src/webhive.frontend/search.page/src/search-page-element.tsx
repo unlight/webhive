@@ -11,10 +11,6 @@ export class SearchPageElement extends HTMLElement {
     @Prop() q: string;
     private entryList: HTMLElement;
 
-    update() {
-        this.shadow.querySelector<HTMLInputElement>('input[name=q]').value = this.q;
-    }
-
     @Dispatch('route.navigate.set') navigate: DispatchEmitter;
 
     private get shadow() {
@@ -22,6 +18,10 @@ export class SearchPageElement extends HTMLElement {
             throw new Error('shadowRoot is null');
         }
         return this.shadowRoot;
+    }
+
+    update() {
+        this.shadow.querySelector<HTMLInputElement>('input[name=q]').value = this.q;
     }
 
     @Listen('submit', 'form')
