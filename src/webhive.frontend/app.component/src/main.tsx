@@ -53,7 +53,10 @@ async function main() {
             return Component({ params: route.params, query: route.query, children });
         }, null);
         dispatchEvent(new CustomEvent('route.transition.end', { detail: { route, components, app } }));
-        document.body.firstChild!.replaceWith(app);
+        if (!document.body.firstElementChild) {
+            document.body.append(document.createElement('main'));
+        }
+        document.body.firstElementChild!.replaceWith(app);
     }
 
     if (module.hot) {

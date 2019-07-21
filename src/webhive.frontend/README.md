@@ -13,7 +13,12 @@
 ### CSS Variables
 
 ## TODO
+* rework search.page (it depends on entry-list component)
+  - after submit fired redirect to home where q handler by entry list component
+* request flicking for search page
+* lazy load search
 * create loadable component
+* move h-document-element to global bundle
 * cache busting
 * global modules wich can be used by plugins
 * css minification
