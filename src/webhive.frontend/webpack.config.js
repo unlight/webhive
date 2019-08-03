@@ -154,6 +154,10 @@ module.exports = (options = {}) => {
                         },
                     });
                 } : () => undefined)(),
+                (options.minimize ? () => {
+                    const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+                    return new OptimizeCSSAssetsPlugin({});
+                } : () => undefined)(),
             ].filter(Boolean),
         },
     };
