@@ -102,7 +102,7 @@ module.exports = (options = {}) => {
                         {
                             test: /style\.css$/i,
                             use: [
-                                { loader: 'style-loader/url', options: { hmr: false } },
+                                { loader: 'style-loader', options: { injectType: 'linkTag' } },
                                 { loader: 'file-loader', options: { name: `[name]${options.prod ? '-[hash:6]' : ''}.[ext]` } },
                             ],
                         },
