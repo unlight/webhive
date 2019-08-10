@@ -106,17 +106,6 @@ module.exports = (options = {}) => {
                                 { loader: 'file-loader', options: { name: `[name]${options.prod ? '-[hash:6]' : ''}.[ext]` } },
                             ],
                         },
-                        {
-                            test: /\.link\.css$/i,
-                            use: [
-                                {
-                                    loader: 'file-loader',
-                                    options: { name: `[name]${options.prod ? '-[hash:6]' : ''}.[ext]` },
-                                },
-                                'extract-loader',
-                                'css-loader',
-                            ],
-                        },
                         { use: 'css-loader' },
                     ],
                 },
