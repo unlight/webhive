@@ -162,6 +162,18 @@ module.exports = (options = {}) => {
         },
     };
 
-    return config;
+    const appLibsConfig = {
+        ...config,
+        entry: {
+            'h-document-element': ['h-document-element'],
+        },
+        output: {
+            path: `${__dirname}/dist`,
+            filename: `[name].js`,
+            libraryTarget: 'commonjs',
+        },
+    };
+
+    return [config, appLibsConfig];
 }
 

@@ -13,6 +13,8 @@
 ### CSS Variables
 
 ## TODO
+* create own cdn system unpkg
+  - proxy semver https://github.com/npm/node-semver#ranges-1 
 * rework search.page (it depends on entry-list component)
   - after submit fired redirect to home where q handler by entry list component
 * request flicking for search page

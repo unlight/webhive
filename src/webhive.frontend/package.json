@@ -8,7 +8,7 @@
     "tscheck:w": "npm run tscheck -- --watch"
   },
   "dependencies": {
-    "@paciolan/remote-module-loader": "2.3.0",
+    "@paciolan/remote-module-loader": "2.4.0",
     "@shinin/load-script": "1.0.4",
     "custom-elements-ts": "0.0.16",
     "h-document-element": "2.0.0",
@@ -37,6 +37,6 @@
     "typescript": "3.5.3",
     "webpack": "4.39.1",
     "webpack-cli": "3.3.6",
-    "webpack-dev-server": "3.7.2"
+    "webpack-dev-server": "3.8.0"
   }
 }
