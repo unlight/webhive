@@ -1,10 +1,24 @@
+export const componentInfo = {
+    name: 'Header Component',
+    description: 'Header bar.',
+    required: {
+        'h-document-element': '>=2.0.0',
+    },
+    version: '1.0.0',
+    author: 'Me',
+};
+
 import './header.component';
-import createLoadRemoteModule, { createRequires } from '@paciolan/remote-module-loader';
 
-const remoteModuleLoader = createLoadRemoteModule();
+window.addEventListener('application.start', startHeaderComponent, { once: true });
 
-window.addEventListener('route.transition.end', async (event: any) => {
-    const { app } = event.detail;
-    const { h } = await remoteModuleLoader('/h-document-element.js');
-    app.querySelector('#header').append(<header-component />);
-});
+function startHeaderComponent(event: CustomEvent) {
+
+    const { dimport } = event.detail;
+
+    window.addEventListener('route.transition.end', async (event: any) => {
+        const { app } = event.detail;
+        const { h } = await dimport('h-document-element.js');
+        app.querySelector('#header').append(<header-component />);
+    });
+}

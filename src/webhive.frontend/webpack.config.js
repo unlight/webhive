@@ -45,6 +45,8 @@ module.exports = (options = {}) => {
             path: `${__dirname}/dist`,
             chunkFilename: `[name].js`,
             filename: `[name].js`,
+            libraryTarget: 'var',
+            library: '$$app',
         },
         mode: options.mode,
         devtool: (() => {
@@ -120,7 +122,7 @@ module.exports = (options = {}) => {
                         template: `${__dirname}/app.component/src/index.xhtml`,
                         filename: 'index.html',
                         inject: 'head',
-                        chunks: ['app'],
+                        chunks: [],
                         config: { ...options },
                         xhtml: true,
                         title,
@@ -129,6 +131,10 @@ module.exports = (options = {}) => {
                         defaultAttribute: 'defer',
                     }),
                 ]
+            })(),
+            (() => {
+                const EsmWebpackPlugin = require('@purtuga/esm-webpack-plugin');
+                return new EsmWebpackPlugin();
             })(),
         ],
         optimization: {
@@ -159,7 +165,8 @@ module.exports = (options = {}) => {
         output: {
             path: `${__dirname}/dist`,
             filename: `[name].js`,
-            libraryTarget: 'commonjs',
+            libraryTarget: 'var',
+            library: '$$lib',
         },
     };
 

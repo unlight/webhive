@@ -1,20 +1,24 @@
-import * as loadScript from '@shinin/load-script';
 import * as createRouter from 'space-router';
-import './style.css';
 import { App } from './app/app.component';
 import { NotFound } from './app/notfound/notfound.component';
 import { isNavigatePushCustomEvent, isNavigateSetCustomEvent } from './app/events';
 import * as on from 'space-router/src/on';
-import { createElement as h } from 'h-document-element';
-import createLoadRemoteModule from '@paciolan/remote-module-loader';
-
-const remoteModuleLoader = createLoadRemoteModule();
+import dimport from 'dimport';
+import './style.css';
 
 async function main() {
-    const config = await remoteModuleLoader('./app.component.config.js');
+    const config = await dimport('./app.component.config.js');
+    const componentsDependencies: Promise<any>[] = [];
     const loadingComponents = Object.values(config.components as any[])
         .filter(c => c.enabled)
-        .map(c => loadScript(c.main) as Promise<any>);
+        .map(c => (dimport(c.main) as Promise<any>).then(({ componentInfo }) => {
+            // componentsDependencies[componentInfo.name] = componentInfo.required;
+            if (componentInfo.required) {
+                Object.keys(componentInfo.required).forEach((name) => {
+                    componentsDependencies.push(dimport(`${name}.js`));
+                });
+            }
+        }));
     let router;
     const routes = [
         ['', App, [
@@ -22,6 +26,7 @@ async function main() {
         ]],
     ];
     await Promise.all(loadingComponents);
+    await Promise.all(componentsDependencies);
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', startApplication, { once: true });
     } else {
@@ -34,7 +39,7 @@ async function main() {
     ];
 
     function startApplication() {
-        dispatchEvent(new CustomEvent('application.start', { detail: { routes } }));
+        dispatchEvent(new CustomEvent('application.start', { detail: { routes, dimport } }));
         router = createRouter(routes, { mode: 'hash' });
         router.start(transition);
     }

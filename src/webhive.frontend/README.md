@@ -13,6 +13,8 @@
 ### CSS Variables
 
 ## TODO
+* component mustbe compiled to esm modules
+* webpack create esmodules
 * create own cdn system unpkg
   - proxy semver https://github.com/npm/node-semver#ranges-1 
 * rework search.page (it depends on entry-list component)

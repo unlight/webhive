@@ -1,21 +1,21 @@
-exports.components = {}
+export const components = {}
 
-exports.components["header.component"] = {}
-exports.components["header.component"].enabled = true
-exports.components["header.component"].main = "header.js"
+components["header.component"] = {}
+components["header.component"].enabled = true
+components["header.component"].main = "header.js"
 
-exports.components["nav.component"] = {}
-exports.components["nav.component"].enabled = true
-exports.components["nav.component"].main = "nav.js"
+components["nav.component"] = {}
+components["nav.component"].enabled = false
+components["nav.component"].main = "nav.js"
 
-exports.components["entry-list.component"] = {}
-exports.components["entry-list.component"].enabled = true
-exports.components["entry-list.component"].main = "entry-list.js"
+components["entry-list.component"] = {}
+components["entry-list.component"].enabled = false
+components["entry-list.component"].main = "entry-list.js"
 
-exports.components["search.page"] = {}
-exports.components["search.page"].enabled = true
-exports.components["search.page"].main = "search-page.js"
+components["search.page"] = {}
+components["search.page"].enabled = false
+components["search.page"].main = "search-page.js"
 
-exports.components["example.component"] = {}
-exports.components["example.component"].enabled = false
-exports.components["example.component"].main = "example.component.plugin.js"
+components["example.component"] = {}
+components["example.component"].enabled = false
+components["example.component"].main = "example.component.plugin.js"

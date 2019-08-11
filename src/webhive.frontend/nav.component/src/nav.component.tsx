@@ -1,4 +1,4 @@
-import { createElement as h } from 'h-document-element';
+// import { createElement as h } from 'h-document-element';
 
 const styles = document.createElement('style');
 styles.textContent = require('./nav.component.css');
