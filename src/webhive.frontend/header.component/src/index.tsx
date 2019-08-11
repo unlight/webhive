@@ -17,8 +17,9 @@ function startHeaderComponent(event: CustomEvent) {
     const { dimport } = event.detail;
 
     window.addEventListener('route.transition.end', async (event: any) => {
-        const { app } = event.detail;
+        // todo: I dont like this
         const { h } = await dimport('h-document-element.js');
+        const { app } = event.detail;
         app.querySelector('#header').append(<header-component />);
     });
 }
