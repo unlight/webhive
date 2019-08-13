@@ -1,4 +1,3 @@
-import * as loadScript from '@shinin/load-script';
 import { createElement as h } from 'h-document-element';
 
 export function App({ children }) {
