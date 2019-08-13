@@ -5,7 +5,7 @@ components["header.component"].enabled = true
 components["header.component"].main = "header.js"
 
 components["nav.component"] = {}
-components["nav.component"].enabled = false
+components["nav.component"].enabled = true
 components["nav.component"].main = "nav.js"
 
 components["entry-list.component"] = {}

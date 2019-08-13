@@ -8,17 +8,9 @@ import './style.css';
 
 async function main() {
     const config = await dimport('./app.component.config.js');
-    const componentsDependencies: Promise<any>[] = [];
     const loadingComponents = Object.values(config.components as any[])
         .filter(c => c.enabled)
-        .map(c => (dimport(c.main) as Promise<any>).then(({ componentInfo }) => {
-            // componentsDependencies[componentInfo.name] = componentInfo.required;
-            if (componentInfo.required) {
-                Object.keys(componentInfo.required).forEach((name) => {
-                    componentsDependencies.push(dimport(`${name}.js`));
-                });
-            }
-        }));
+        .map(c => importComponent(c));
     let router;
     const routes = [
         ['', App, [
@@ -26,7 +18,6 @@ async function main() {
         ]],
     ];
     await Promise.all(loadingComponents);
-    await Promise.all(componentsDependencies);
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', startApplication, { once: true });
     } else {
@@ -62,6 +53,16 @@ async function main() {
             document.body.append(document.createElement('main'));
         }
         document.body.firstElementChild!.replaceWith(app);
+    }
+
+    async function importComponent(c) {
+        const module = await dimport(c.main);
+        const componentInfo = module.componentInfo;
+        if (componentInfo.required) {
+            Object.keys(componentInfo.required).forEach((name) => {
+                dimport(`${name}.js`);
+            });
+        }
     }
 
     if (module.hot) {

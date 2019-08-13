@@ -1,25 +1,20 @@
-// import { createElement as h } from 'h-document-element';
 import './nav.component';
-// import dimport from 'dimport';
-
-// let h = () => { };
-
-// dimport('//unpkg.com/h-document-element?module').then(exports => {
-//     h = exports.h;
-// });
 
 window.addEventListener('application.start', startNavComponent, { once: true });
 
-function startNavComponent() {
-    window.addEventListener('route.transition.end', (event: any) => {
+function startNavComponent(event: CustomEvent) {
+
+    const { dimport } = event.detail;
+
+    window.addEventListener('route.transition.end', async (event: any) => {
         const { app } = event.detail;
+        // todo: I dont like this
+        const { h } = await dimport('h-document-element.js');
         app.querySelector('#nav').append(<nav-component />);
     });
 }
 
-// h-document-element
-
-export const ComponentInfo = {
+export const componentInfo = {
     name: 'Nav Component',
     description: 'Shows main navigation menu.',
     required: {
@@ -28,7 +23,3 @@ export const ComponentInfo = {
     version: '1.0.0',
     author: 'Me',
 };
-
-document.currentScript.setAttribute('ComponentInfo', JSON.stringify(ComponentInfo));
-
-// console.log("document.currentScript", document.currentScript);
