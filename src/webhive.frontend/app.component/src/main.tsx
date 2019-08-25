@@ -1,30 +1,22 @@
-import * as loadScript from '@shinin/load-script';
 import * as createRouter from 'space-router';
-import './style.css';
 import { App } from './app/app.component';
-import { Home } from './app/home/home.component';
 import { NotFound } from './app/notfound/notfound.component';
-import { h, render } from 'preact';
 import { isNavigatePushCustomEvent, isNavigateSetCustomEvent } from './app/events';
 import * as on from 'space-router/src/on';
+import dimport from 'dimport';
+import './style.css';
 
 async function main() {
-    const components = {
-        header: { enabled: true, location: 'header.js', },
-        nav: { enabled: true, location: 'nav.js', },
-    };
-    const loadingComponents = Object.values(components)
+    const config = await dimport('./app.component.config.js');
+    const loadingComponents = Object.values(config.components as any[])
         .filter(c => c.enabled)
-        .map(c => loadScript(c.location) as Promise<any>);
+        .map(c => importComponent(c));
+    let router;
     const routes = [
         ['', App, [
-            ['/', Home],
-            // todo: refactor this (plugin system)
-            ['/search', () => { loadScript('search-page.js'); return <search-page-element />; }],
             ['*', NotFound],
         ]],
     ];
-    const router = createRouter(routes, { mode: 'hash' });
     await Promise.all(loadingComponents);
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', startApplication, { once: true });
@@ -33,12 +25,13 @@ async function main() {
     }
 
     const subsriptions = [
-        on(window, 'navigate.push', handleEvents),
-        on(window, 'navigate.set', handleEvents),
+        on(window, 'route.navigate.push', handleEvents),
+        on(window, 'route.navigate.set', handleEvents),
     ];
 
     function startApplication() {
-        dispatchEvent(new CustomEvent('application.start', { detail: { router, routes } }));
+        dispatchEvent(new CustomEvent('application.start', { detail: { routes, dimport } }));
+        router = createRouter(routes, { mode: 'hash' });
         router.start(transition);
     }
 
@@ -51,12 +44,25 @@ async function main() {
     }
 
     function transition(route, components) {
-        dispatchEvent(new CustomEvent('route.transition', { detail: { route } }));
-        const app = components.reduceRight(
-            (children, Component) => <Component params={route.params}>{children}</Component>,
-            null
-        );
-        render(app, document.body);
+        dispatchEvent(new CustomEvent('route.transition.start', { detail: { route, components } }));
+        const app = components.reduceRight((children, Component) => {
+            return Component({ params: route.params, query: route.query, children });
+        }, null);
+        dispatchEvent(new CustomEvent('route.transition.end', { detail: { route, components, app } }));
+        if (!document.body.firstElementChild) {
+            document.body.append(document.createElement('main'));
+        }
+        document.body.firstElementChild!.replaceWith(app);
+    }
+
+    async function importComponent(c) {
+        const module = await dimport(c.main);
+        const componentInfo = module.componentInfo;
+        if (componentInfo.required) {
+            Object.keys(componentInfo.required).forEach((name) => {
+                dimport(`${name}.js`);
+            });
+        }
     }
 
     if (module.hot) {

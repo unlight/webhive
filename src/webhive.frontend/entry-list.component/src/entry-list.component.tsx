@@ -21,7 +21,7 @@ export class EntryListComponent extends HTMLElement {
      * Return an array containing the names of the attributes you want to observe.
      */
     static get observedAttributes() {
-        return [];
+        return ['q'];
     }
 
     private get shadow() {
@@ -44,15 +44,19 @@ export class EntryListComponent extends HTMLElement {
      * This will happen each time the node is moved, and may happen before the element's contents
      * have been fully parsed
      */
-    async connectedCallback() {
-        const entries = await this.service.find();
-        loop.update(entries);
+    connectedCallback() {
+        this.update();
     }
 
     /**
      * Invoked each time the custom element is disconnected from the document's DOM.
      */
     disconnectedCallback() {
+    }
+
+    async update() {
+        const entries = await this.service.find({ q: this._q });
+        loop.update(entries);
     }
 
     /**
@@ -62,6 +66,15 @@ export class EntryListComponent extends HTMLElement {
     attributeChangedCallback(name, oldValue, newValue) {
     }
 
+    private _q: string;
+
+    public get q(): string {
+        return this._q;
+    }
+
+    public set q(v: string) {
+        this._q = v;
+    }
 }
 
 if (!customElements.get('entry-list-component')) {

@@ -1,4 +1,5 @@
-import { CustomElement, Listen, DispatchEmitter, Dispatch } from 'custom-elements-ts';
+import { CustomElement, Listen, DispatchEmitter, Dispatch, Prop, Watch } from 'custom-elements-ts';
+import { createElement as h } from 'h-document-element';
 
 @CustomElement({
     tag: 'search-page-element',
@@ -7,7 +8,21 @@ import { CustomElement, Listen, DispatchEmitter, Dispatch } from 'custom-element
 })
 export class SearchPageElement extends HTMLElement {
 
-    @Dispatch('navigate.set') navigate: DispatchEmitter;
+    @Prop() q: string;
+    private entryList: HTMLElement;
+
+    @Dispatch('route.navigate.set') navigate: DispatchEmitter;
+
+    private get shadow() {
+        if (!this.shadowRoot) {
+            throw new Error('shadowRoot is null');
+        }
+        return this.shadowRoot;
+    }
+
+    update() {
+        this.shadow.querySelector<HTMLInputElement>('input[name=q]').value = this.q;
+    }
 
     @Listen('submit', 'form')
     submit(event: Event) {
@@ -21,4 +36,18 @@ export class SearchPageElement extends HTMLElement {
         this.navigate.emit({ detail, bubbles: true, composed: true });
     }
 
+    @Watch('q')
+    queryChange() {
+        if (!this.q) {
+            return;
+        }
+        const entryList = <entry-list-component q={this.q} />;
+        if (this.entryList) {
+            this.entryList.replaceWith(entryList);
+        } else {
+            this.shadow.appendChild(entryList);
+        }
+        this.entryList = this.shadow.querySelector('entry-list-component');
+        this.update();
+    }
 }

@@ -35,15 +35,18 @@ module.exports = (options = {}) => {
     let config = {
         entry: {
             'app': `${__dirname}/app.component/src/main`,
-            'header': `${__dirname}/header.component/src/header.component`,
-            'nav': `${__dirname}/nav.component/src/nav.component`,
-            'entry-list': `${__dirname}/entry-list.component/src/entry-list.component`,
+            'header': `${__dirname}/header.component/src`,
+            'nav': `${__dirname}/nav.component/src`,
+            'entry-list': `${__dirname}/entry-list.component`,
             'search-page': `${__dirname}/search.page`,
+            'example.component.plugin': `${__dirname}/example.component/example.component.plugin`,
         },
         output: {
             path: `${__dirname}/dist`,
             chunkFilename: `[name].js`,
             filename: `[name].js`,
+            libraryTarget: 'var',
+            library: '$$app',
         },
         mode: options.mode,
         devtool: (() => {
@@ -59,7 +62,10 @@ module.exports = (options = {}) => {
             ],
         },
         devServer: {
-            contentBase: [buildPath],
+            contentBase: [
+                `${__dirname}/app.component/src`,
+                buildPath,
+            ],
             historyApiFallback: false,
             proxy: {
                 '/api': {
@@ -98,19 +104,8 @@ module.exports = (options = {}) => {
                         {
                             test: /style\.css$/i,
                             use: [
-                                { loader: 'style-loader/url', options: { hmr: false } },
+                                { loader: 'style-loader', options: { injectType: 'linkTag' } },
                                 { loader: 'file-loader', options: { name: `[name]${options.prod ? '-[hash:6]' : ''}.[ext]` } },
-                            ],
-                        },
-                        {
-                            test: /\.link\.css$/i,
-                            use: [
-                                {
-                                    loader: 'file-loader',
-                                    options: { name: `[name]${options.prod ? '-[hash:6]' : ''}.[ext]` },
-                                },
-                                'extract-loader',
-                                'css-loader',
                             ],
                         },
                         { use: 'css-loader' },
@@ -127,7 +122,7 @@ module.exports = (options = {}) => {
                         template: `${__dirname}/app.component/src/index.xhtml`,
                         filename: 'index.html',
                         inject: 'head',
-                        chunks: ['app'],
+                        chunks: [],
                         config: { ...options },
                         xhtml: true,
                         title,
@@ -136,6 +131,10 @@ module.exports = (options = {}) => {
                         defaultAttribute: 'defer',
                     }),
                 ]
+            })(),
+            (() => {
+                const EsmWebpackPlugin = require('@purtuga/esm-webpack-plugin');
+                return new EsmWebpackPlugin();
             })(),
         ],
         optimization: {
@@ -150,10 +149,27 @@ module.exports = (options = {}) => {
                         },
                     });
                 } : () => undefined)(),
+                (options.minimize ? () => {
+                    const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+                    return new OptimizeCSSAssetsPlugin({});
+                } : () => undefined)(),
             ].filter(Boolean),
         },
     };
 
-    return config;
+    const appLibsConfig = {
+        ...config,
+        entry: {
+            'h-document-element': 'h-document-element',
+        },
+        output: {
+            path: `${__dirname}/dist`,
+            filename: `[name].js`,
+            libraryTarget: 'var',
+            library: '$$lib',
+        },
+    };
+
+    return [config, appLibsConfig];
 }
 

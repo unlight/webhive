@@ -46,6 +46,4 @@ export class EntryComponent extends HTMLElement {
 
 }
 
-if (!customElements.get('entry-component')) {
-    customElements.define('entry-component', EntryComponent);
-}
+customElements.define('entry-component', EntryComponent);

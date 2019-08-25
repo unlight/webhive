@@ -7,6 +7,10 @@ nav > ul > li {
     display: inline-block;
 }
 
+nav > ul > li + li {
+    margin-left: 0.5em;
+}
+
 a {
     text-decoration: none;
     color: #ed0db1;

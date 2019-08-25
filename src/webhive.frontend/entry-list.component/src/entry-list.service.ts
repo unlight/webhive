@@ -9,12 +9,21 @@ export class EntryListService {
         private host: EntryListComponent,
     ) { }
 
-    async find(): Promise<Entry[]> {
+    async find({ q }): Promise<Entry[]> {
+        let url = '/api/entry';
+        const params = new URLSearchParams();
+        if (q) {
+            params.set('q', q);
+        }
         const requestOptions: RequestInit = {
             method: 'GET',
         };
+        const query = params.toString();
+        if (query) {
+            url += '?' + query;
+        }
         // todo: get from props
-        return fetch('/api/entry', requestOptions)
+        return fetch(url, requestOptions)
             .then(response => response.json());
     }
 

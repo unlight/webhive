@@ -1,10 +1,9 @@
-import * as loadScript from '@shinin/load-script';
-import { h, Fragment } from 'preact';
+import { createElement as h } from 'h-document-element';
 
 export function App({ children }) {
-    return <Fragment>
-        <header-component></header-component>
-        <nav-component></nav-component>
-        {children}
-    </Fragment>;
+    return <main>
+        <div id="header"></div>
+        <div id="nav"></div>
+        <div id="body">{children}</div>
+    </main>;
 };
