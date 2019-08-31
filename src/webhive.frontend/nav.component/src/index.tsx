@@ -1,15 +1,13 @@
+import { h } from /* webpackIgnore: true */ '//unpkg.com/h-document-element?module';
+
 import './nav.component';
 
 window.addEventListener('application.start', startNavComponent, { once: true });
 
 function startNavComponent(event: CustomEvent) {
 
-    const { dimport } = event.detail;
-
-    window.addEventListener('route.transition.end', async (event: any) => {
+    window.addEventListener('route.transition.end', (event: CustomEvent) => {
         const { app } = event.detail;
-        // todo: I dont like this
-        const { h } = await dimport('h-document-element.js');
         app.querySelector('#nav').append(<nav-component />);
     });
 }

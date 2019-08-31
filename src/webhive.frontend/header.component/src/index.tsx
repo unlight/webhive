@@ -1,3 +1,5 @@
+import { h } from /* webpackIgnore: true */ '//unpkg.com/h-document-element?module';
+
 export const componentInfo = {
     name: 'Header Component',
     description: 'Header bar.',
@@ -14,11 +16,7 @@ window.addEventListener('application.start', startHeaderComponent, { once: true 
 
 function startHeaderComponent(event: CustomEvent) {
 
-    const { dimport } = event.detail;
-
-    window.addEventListener('route.transition.end', async (event: any) => {
-        // todo: I dont like this
-        const { h } = await dimport('h-document-element.js');
+    window.addEventListener('route.transition.end', (event: any) => {
         const { app } = event.detail;
         app.querySelector('#header').append(<header-component />);
     });

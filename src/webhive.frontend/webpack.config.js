@@ -136,6 +136,10 @@ module.exports = (options = {}) => {
                 const EsmWebpackPlugin = require('@purtuga/esm-webpack-plugin');
                 return new EsmWebpackPlugin();
             })(),
+            (() => {
+                const { StaticImportWebpackPlugin } = require('static-import-webpack-plugin');
+                return new StaticImportWebpackPlugin();
+            })(),
         ],
         optimization: {
             minimizer: [
@@ -157,19 +161,19 @@ module.exports = (options = {}) => {
         },
     };
 
-    const appLibsConfig = {
-        ...config,
-        entry: {
-            'h-document-element': 'h-document-element',
-        },
-        output: {
-            path: `${__dirname}/dist`,
-            filename: `[name].js`,
-            libraryTarget: 'var',
-            library: '$$lib',
-        },
-    };
+    // const appLibsConfig = {
+    //     ...config,
+    //     entry: {
+    //         'h-document-element': 'h-document-element',
+    //     },
+    //     output: {
+    //         path: `${__dirname}/dist`,
+    //         filename: `[name].js`,
+    //         libraryTarget: 'var',
+    //         library: '$$lib',
+    //     },
+    // };
 
-    return [config, appLibsConfig];
+    return [config];
 }
 

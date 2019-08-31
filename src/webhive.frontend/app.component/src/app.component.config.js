@@ -9,11 +9,11 @@ components["nav.component"].enabled = true
 components["nav.component"].main = "nav.js"
 
 components["entry-list.component"] = {}
-components["entry-list.component"].enabled = false
+components["entry-list.component"].enabled = true
 components["entry-list.component"].main = "entry-list.js"
 
 components["search.page"] = {}
-components["search.page"].enabled = false
+components["search.page"].enabled = true
 components["search.page"].main = "search-page.js"
 
 components["example.component"] = {}

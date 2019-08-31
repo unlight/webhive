@@ -1,4 +1,4 @@
-import { createElement as h } from 'h-document-element';
+declare const h: any;
 
 export function NotFound(props) {
     return <div>Not Found Page</div>;

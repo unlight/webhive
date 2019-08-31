@@ -1,15 +1,14 @@
 import * as createRouter from 'space-router';
+import * as on from 'space-router/src/on';
+import dimport from 'dimport';
 import { App } from './app/app.component';
 import { NotFound } from './app/notfound/notfound.component';
 import { isNavigatePushCustomEvent, isNavigateSetCustomEvent } from './app/events';
-import * as on from 'space-router/src/on';
-import dimport from 'dimport';
 import './style.css';
 
 async function main() {
     const config = await dimport('./app.component.config.js');
     const loadingComponents = Object.values(config.components as any[])
-        .filter(c => c.enabled)
         .map(c => importComponent(c));
     let router;
     const routes = [
@@ -30,7 +29,7 @@ async function main() {
     ];
 
     function startApplication() {
-        dispatchEvent(new CustomEvent('application.start', { detail: { routes, dimport } }));
+        dispatchEvent(new CustomEvent('application.start', { detail: { routes } }));
         router = createRouter(routes, { mode: 'hash' });
         router.start(transition);
     }
@@ -55,14 +54,14 @@ async function main() {
         document.body.firstElementChild!.replaceWith(app);
     }
 
-    async function importComponent(c) {
-        const module = await dimport(c.main);
-        const componentInfo = module.componentInfo;
-        if (componentInfo.required) {
-            Object.keys(componentInfo.required).forEach((name) => {
-                dimport(`${name}.js`);
-            });
+    async function importComponent(component) {
+        const name = `Component %c${component.name || component.main}`;
+        const state = component.enabled ? 'is loading' : 'is not loaded (disabled)';
+        console.log(`${name} %c${state}`, 'font-weight:bold', '');
+        if (!component.enabled) {
+            return;
         }
+        return dimport(component.main);
     }
 
     if (module.hot) {

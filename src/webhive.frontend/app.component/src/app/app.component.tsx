@@ -1,4 +1,4 @@
-import { createElement as h } from 'h-document-element';
+import { h } from /* webpackIgnore: true */ '//unpkg.com/h-document-element?module';
 
 export function App({ children }) {
     return <main>
