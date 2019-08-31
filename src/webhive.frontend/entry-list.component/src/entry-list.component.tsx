@@ -1,21 +1,15 @@
 import { EntryListService } from './entry-list.service';
 import './entry.component';
 import { Entry } from './entry';
-import { h } from 'virtual-dom-h-proxy';
-import { createMainLoop } from 'create-main-loop';
+import { h, render } from 'preact';
 
 const style = document.createElement('style');
 style.textContent = require('./entry-list.component.css');
 
-const loop = createMainLoop(function render(state: Entry[]) {
-    return <div>
-        {state.map(entry => <entry-component entry={entry}></entry-component>)}
-    </div>;
-});
-
 export class EntryListComponent extends HTMLElement {
 
     private readonly service: EntryListService;
+    private readonly body: HTMLDivElement;
 
     /**
      * Return an array containing the names of the attributes you want to observe.
@@ -35,7 +29,7 @@ export class EntryListComponent extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
         this.shadow.append(style);
-        this.shadow.append(loop.target);
+        this.shadow.append(this.body = document.createElement('div'));
         this.service = new EntryListService(this);
     }
 
@@ -56,7 +50,7 @@ export class EntryListComponent extends HTMLElement {
 
     async update() {
         const entries = await this.service.find({ q: this._q });
-        loop.update(entries);
+        render(entries.map(entry => <entry-component entry={entry}></entry-component>), this.body);
     }
 
     /**

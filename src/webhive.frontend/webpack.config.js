@@ -161,19 +161,6 @@ module.exports = (options = {}) => {
         },
     };
 
-    // const appLibsConfig = {
-    //     ...config,
-    //     entry: {
-    //         'h-document-element': 'h-document-element',
-    //     },
-    //     output: {
-    //         path: `${__dirname}/dist`,
-    //         filename: `[name].js`,
-    //         libraryTarget: 'var',
-    //         library: '$$lib',
-    //     },
-    // };
-
-    return [config];
+    return config;
 }
 

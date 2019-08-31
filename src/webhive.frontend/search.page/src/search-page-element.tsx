@@ -1,5 +1,4 @@
 import { CustomElement, Listen, DispatchEmitter, Dispatch, Prop, Watch } from 'custom-elements-ts';
-import { createElement as h } from 'h-document-element';
 
 @CustomElement({
     tag: 'search-page-element',

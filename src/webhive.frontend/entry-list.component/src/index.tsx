@@ -1,9 +1,5 @@
 import './entry-list.component';
 
-addEventListener('navcomponent.connected.callback', event => {
-    event.target.addItem('/', 'Home', 0);
-});
-
 addEventListener('application.start', (event: CustomEvent) => {
     const router = event.detail.router;
     const [rootRoutes] = event.detail.routes;

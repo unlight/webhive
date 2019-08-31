@@ -16,6 +16,7 @@
 
 
 ## TODO
+* entry-list component replace by preact X
 * component mustbe compiled to esm modules
 * webpack create esmodules
 * create own cdn system unpkg
