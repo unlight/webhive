@@ -140,7 +140,13 @@ module.exports = (options = {}) => {
                 const { StaticImportWebpackPlugin } = require('static-import-webpack-plugin');
                 return new StaticImportWebpackPlugin();
             })(),
-        ],
+            (options.prod ? () => {
+                const CopyWebpackPlugin = require('copy-webpack-plugin');
+                return new CopyWebpackPlugin([
+                    { from: 'app.component/src/app.component.config.js', to: '' },
+                ], { debug: 'info' });
+            } : () => undefined)(),
+        ].filter(Boolean),
         optimization: {
             minimizer: [
                 (options.minimize ? () => {
