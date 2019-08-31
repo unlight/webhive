@@ -48,6 +48,27 @@ module.exports = (options = {}) => {
             libraryTarget: 'var',
             library: '$$app',
         },
+        stats: (options.prod ? () => {
+            return {
+                chunksSort: 'size',
+                maxModules: Number.POSITIVE_INFINITY,
+                excludeModules: false,
+                entrypoints: true,
+                chunkGroups: true,
+                modules: false,
+                chunks: true,
+                chunkModules: true,
+                chunkOrigins: true,
+                depth: true,
+                env: true,
+                reasons: true,
+                optimizationBailout: true,
+                errorDetails: true,
+                publicPath: true,
+                logging: true,
+                exclude: false,
+            };
+        } : () => undefined)(),
         mode: options.mode,
         devtool: (() => {
             if (options.test) return 'inline-source-map';

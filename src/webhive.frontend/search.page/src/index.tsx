@@ -1,7 +1,7 @@
 import { h } from /* webpackIgnore: true */ '//unpkg.com/h-document-element?module';
 export { SearchPageElement } from './search-page-element';
 
-addEventListener('navcomponent.connected.callback', event => {
+addEventListener('navcomponent.connected.callback', (event: any) => {
     event.target.addItem('/search', 'Search', 1);
 });
 
