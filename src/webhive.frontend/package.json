@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "node node_modules/webpack-dev-server/bin/webpack-dev-server",
+    "test": "echo no tests",
     "build:prod": "node node_modules/webpack/bin/webpack --env.mode=production",
     "tscheck": "echo tscheck... && tsc --noEmit",
     "tscheck:w": "npm run tscheck -- --watch"

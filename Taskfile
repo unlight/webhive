@@ -2,9 +2,23 @@
 PATH="$PWD/node_modules/.bin":$PATH
 
 build() {
+    set -x
     rm -rf dist
     tsc
     cp -r src/webhive.web/public_html dist/webhive.web
+    frontend_test_build
+}
+
+frontend_test_build() {
+    set -x
+    cd src/webhive.frontend
+    rm -rf dist
+    npm install
+    npm run test
+    npm run build:prod
+    cd ../..
+    mkdir -p dist/webhive.frontend
+    cp -r src/webhive.frontend/dist dist/webhive.frontend
 }
 
 eslint_run() {
