@@ -35,6 +35,7 @@ export async function main(settings = mainDefaults) {
         app.use(favicon(`${__dirname}/public_html/favicon.ico`));
         app.use(serve(`${__dirname}/public_html`));
         app.use(router.routes());
+        app.use(mount('/frontend', serve(`${__dirname}/../webhive.frontend/dist`)));
         app.use(mount('/api', await api()));
         if (options.listen) {
             const port = config.get('port');
