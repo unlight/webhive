@@ -1,0 +1,43 @@
+{
+  "name": "webhive.frontend",
+  "private": true,
+  "scripts": {
+    "dev": "node node_modules/webpack-dev-server/bin/webpack-dev-server",
+    "build:prod": "node node_modules/webpack/bin/webpack --env.mode=production",
+    "tscheck": "echo tscheck... && tsc --noEmit",
+    "tscheck:w": "npm run tscheck -- --watch"
+  },
+  "dependencies": {
+    "custom-elements-ts": "0.0.16",
+    "dimport": "1.0.0",
+    "h-document-element": "2.0.0",
+    "preact": "10.0.0-rc.1",
+    "space-router": "0.7.0",
+    "tslib": "1.10.0"
+  },
+  "devDependencies": {
+    "@purtuga/esm-webpack-plugin": "1.1.1",
+    "@types/html-webpack-plugin": "3.2.1",
+    "@types/page": "1.8.0",
+    "@types/webpack": "4.39.1",
+    "@types/webpack-dev-server": "3.1.7",
+    "@types/webpack-env": "1.14.0",
+    "copy-webpack-plugin": "5.0.4",
+    "css-loader": "3.2.0",
+    "extract-loader": "3.1.0",
+    "file-loader": "4.2.0",
+    "html-loader": "0.5.5",
+    "html-webpack-plugin": "3.2.0",
+    "optimize-css-assets-webpack-plugin": "5.0.3",
+    "script-ext-html-webpack-plugin": "2.1.4",
+    "source-map-loader": "0.2.4",
+    "static-import-webpack-plugin": "1.1.1",
+    "style-loader": "1.0.0",
+    "terser-webpack-plugin": "1.4.1",
+    "ts-loader": "6.0.4",
+    "typescript": "3.6.2",
+    "webpack": "4.39.3",
+    "webpack-cli": "3.3.7",
+    "webpack-dev-server": "3.8.0"
+  }
+}
