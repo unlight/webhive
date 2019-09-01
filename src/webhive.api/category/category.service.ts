@@ -7,7 +7,7 @@ import { inject } from 'njct';
 export class CategoryService {
 
     constructor(
-        private readonly categoryRepository = inject(CategoryRepository),
+        private readonly categoryRepository = inject.service(CategoryRepository),
     ) { }
 
     async findOrCreate(name: string) {

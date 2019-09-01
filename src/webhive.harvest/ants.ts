@@ -82,5 +82,4 @@ export const ants: Ant[] = [
     // { name: 'timeout', target: 'http://rss1.smashingmagazine.com/feed/', defaultCategory: 'Web' },
     // { name: 'dead', target: 'http://www.templateworld.com/free_templates.html', defaultCategory: 'Web' },
     // { name: 'dead', target: 'http://www.techdays.ru/feeds/rss', defaultCategory: 'Video' },
-    // { name: 'dead', target: 'http://www.tryangular2.com/feed.xml', defaultCategory: 'Web' },
 ];

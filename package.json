@@ -87,6 +87,7 @@
     "eslint": "^6.3.0",
     "eslint-import-resolver-node": "^0.3.2",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-only-warn": "1.0.1",
     "eslint-plugin-unicorn": "^10.0.0",
     "expect": "1.X",
     "html-entities": "^1.2.1",

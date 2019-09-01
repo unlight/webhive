@@ -12,7 +12,7 @@
     "node_modules/tslint-sonarts/lib/rules"
   ],
   "rules": {
-    "no-use-before-declare": true,
+    "no-use-before-declare": false,
     "no-function-expression": false,
     "member-access": false,
     "ordered-imports": false,
@@ -51,6 +51,13 @@
     "no-single-line-block-comment": false,
     "prefer-type-cast": false,
     "no-constant-condition": false,
+    "no-unsafe-any": false,
+    "no-backbone-get-set-outside-model": false,
+    "no-function-constructor-with-string-args": false,
+    "no-reserved-keywords": false,
+    "no-increment-decrement": false,
+    "no-unnecessary-bind": false,
+    "triple-equals": [true, "allow-undefined-check"],
     ".": false
   }
 }

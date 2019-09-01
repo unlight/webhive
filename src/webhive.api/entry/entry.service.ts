@@ -16,8 +16,8 @@ export type EntryBrowseRequest = {
 export class EntryService {
 
     constructor(
-        private readonly entryRepository = inject(EntryRepository),
-        private readonly categoryRepository = inject(CategoryRepository),
+        private readonly entryRepository = inject.service(EntryRepository),
+        private readonly categoryRepository = inject.service(CategoryRepository),
     ) { }
 
     async create(data: CreateEntryDTO) {
