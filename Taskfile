@@ -13,7 +13,7 @@ frontend_test_build() {
     set -x
     cd src/webhive.frontend
     rm -rf dist
-    npm install
+    npm install --production=false --no-package-lock
     npm run test
     npm run build:prod
     cd ../..
