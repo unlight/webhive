@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/tslint/config, import/max-dependencies */
 import * as expect from 'expect';
-import { getApp, CustomServerResponse, ThenArg } from '../main';
+import { main, CustomServerResponse, ThenArg } from '../main';
 import { CreateEntryDTO } from './entry.dto';
 import { injector } from 'njct';
 import { MongoClient, Db } from 'mongodb';
@@ -11,7 +11,7 @@ const sham = require('koa-sham');
 
 describe('entry api', () => {
 
-    let app: ThenArg<ReturnType<typeof getApp>>;
+    let app: ThenArg<ReturnType<typeof main>>;
     let mongoServer: MongoMemoryServer;
     let client: MongoClient;
     let database: Db;
@@ -52,7 +52,7 @@ describe('entry api', () => {
     });
 
     before(async () => {
-        app = await getApp();
+        app = await main();
     });
 
     it('create entry must be protected endpoint', async () => {

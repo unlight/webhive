@@ -16,12 +16,17 @@
     "sourceMap": true,
     "declaration": false,
     "declarationMap": false,
+    "skipLibCheck": true,
     "lib": [
       "esnext"
     ]
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
+    "src/webhive.api/**/*.ts",
+    "src/webhive.web/**/*.ts",
+    "src/webhive.harvest/**/*.ts",
+    "src/webhive.api/**/*.tsx",
+    "src/webhive.web/**/*.tsx",
+    "src/webhive.harvest/**/*.tsx"
   ]
 }

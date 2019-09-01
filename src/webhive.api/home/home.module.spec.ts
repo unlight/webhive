@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/tslint/config */
 import * as expect from 'expect';
-import { getApp, ThenArg, CustomServerResponse } from '../main';
+import { main, ThenArg, CustomServerResponse } from '../main';
 import { ServerResponse } from 'http';
 import { MongoClient, Db } from 'mongodb';
 import { injector } from 'njct';
@@ -11,7 +11,7 @@ const sham = require('koa-sham');
 
 describe('home api', () => {
 
-    let app: ThenArg<ReturnType<typeof getApp>>;
+    let app: ThenArg<ReturnType<typeof main>>;
     let mongoServer: MongoMemoryServer;
     let client: MongoClient;
     let database: Db;
@@ -27,7 +27,7 @@ describe('home api', () => {
     });
 
     before(async () => {
-        app = await getApp();
+        app = await main();
     });
 
     it('GET /', async () => {

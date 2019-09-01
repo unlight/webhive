@@ -5,7 +5,7 @@ import * as Router from 'koa-tree-router';
 import * as favicon from 'koa-favicon';
 import * as serve from 'koa-static';
 import * as mount from 'koa-mount';
-import { getApp as getApi } from '../webhive.api/main';
+import { main as api } from '../webhive.api/main';
 
 if (config.get('environment') === 'development' || config.get('environment') === 'test') {
     require('longjohn');
@@ -26,28 +26,27 @@ export type CustomServerResponse = ServerResponse & {
     ctx: Koa.ParameterizedContext<{ [k: string]: any }, CustomContext>; // tslint:disable-line:no-any
 };
 
-async function main() {
-    await import('./entry/entry.module').then(m => m.initialize(appContext));
-    app.use(favicon(`${__dirname}/public_html/favicon.ico`));
-    app.use(serve(`${__dirname}/public_html`));
-    app.use(router.routes());
-    app.use(mount('/api', await getApi()));
-    return app;
-}
+const mainDefaults = { listen: false };
 
-export async function getApp() {
+export async function main(settings = mainDefaults) {
     if (appInstance === undefined) {
-        appInstance = await main();
+        const options = { ...mainDefaults, ...settings };
+        await import('./entry/entry.module').then(m => m.initialize(appContext));
+        app.use(favicon(`${__dirname}/public_html/favicon.ico`));
+        app.use(serve(`${__dirname}/public_html`));
+        app.use(router.routes());
+        app.use(mount('/api', await api()));
+        if (options.listen) {
+            const port = config.get('port');
+            app.listen(port, () => {
+                console.log(`Web server running on port ${port}`); // eslint-disable-line no-console
+            });
+        }
+        appInstance = app;
     }
     return appInstance;
 }
 
 if (!module.parent) {
-    main().then(app => {
-        app.listen(config.get('port'), () => {
-            console.log(`Web server running on port ${config.get('port')}`); // eslint-disable-line no-console
-        });
-    }, err => {
-        console.error(err); // eslint-disable-line no-console
-    });
+    main({ listen: true });
 }

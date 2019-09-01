@@ -14,7 +14,7 @@ export function initialize({ router }: AppContext) {
 }
 
 export async function browseEntry(context: Koa.Context, next: Function) {
-    const entryService = inject(EntryService);
+    const entryService = inject.service(EntryService);
     const { q } = context.request.query;
     context.body = await entryService.browse({ limit: 100, skip: 0, q });
 }
@@ -29,7 +29,7 @@ export async function checkPermission(context: Koa.Context, next: Function) {
 
 export async function createEntry(context: Koa.Context, next: Function) {
     const createEntryDTO: CreateEntryDTO = context.state.createEntryDTO;
-    const entryService = inject(EntryService);
+    const entryService = inject.service(EntryService);
     if (await entryService.getByLink(createEntryDTO.link)) {
         context.status = 409;
         context.body = {

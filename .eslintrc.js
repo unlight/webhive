@@ -20,6 +20,7 @@ module.exports = {
         'unicorn',
         'import',
         '@typescript-eslint/tslint',
+        'only-warn',
     ],
     'rules': {
         'no-undef': 0,

@@ -63,7 +63,7 @@ function entryTitle(item: FeedParser.Item) {
     const description = striptags(item.description, [], '\n');
     let [result] = String(description).trim().split('\n');
     if (result.length > 120) {
-        result = result.slice(0, 120) + '...';
+        result = `${result.slice(0, 120)}…`;
     }
     return result;
 }
