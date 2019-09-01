@@ -1,10 +1,11 @@
 import * as createRouter from 'space-router';
 import * as on from 'space-router/src/on';
 import dimport from 'dimport';
-import { App } from './app/app.component';
-import { NotFound } from './app/notfound/notfound.component';
-import { isNavigatePushCustomEvent, isNavigateSetCustomEvent } from './app/events';
 import './style.css';
+import { App } from './app/app';
+import { isNavigatePushCustomEvent, isNavigateSetCustomEvent } from './app/events/events';
+import { AboutPage } from './app/+about/about.page';
+import { NotFoundPage } from './app/+notfound/notfound.page';
 
 async function main() {
     const config = await dimport('./app.component.config.js');
@@ -13,7 +14,8 @@ async function main() {
     let router;
     const routes = [
         ['', App, [
-            ['*', NotFound],
+            ['/about', AboutPage],
+            ['*', NotFoundPage],
         ]],
     ];
     await Promise.all(loadingComponents);
