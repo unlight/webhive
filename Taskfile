@@ -20,8 +20,8 @@ frontend_test_build() {
     cd ../..
     mkdir -p dist/webhive.frontend
     cp -r src/webhive.frontend/dist dist/webhive.frontend
-    rm -rv src/webhive.frontend/dist
-    rm -rv src/webhive.frontend/node_modules
+    rm -rf src/webhive.frontend/dist
+    rm -rf src/webhive.frontend/node_modules
 }
 
 eslint_run() {
