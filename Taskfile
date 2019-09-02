@@ -7,6 +7,7 @@ build() {
     tsc
     cp -r src/webhive.web/public_html dist/webhive.web
     frontend_test_build
+    [ -n "$CI" ] && remove_sources
 }
 
 frontend_test_build() {
@@ -19,6 +20,10 @@ frontend_test_build() {
     cd ../..
     mkdir -p dist/webhive.frontend
     cp -r src/webhive.frontend/dist dist/webhive.frontend
+}
+
+remove_sources() {
+    rm -rfv src
 }
 
 eslint_run() {
