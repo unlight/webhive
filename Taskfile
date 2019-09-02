@@ -7,6 +7,7 @@ build() {
     tsc
     cp -r src/webhive.web/public_html dist/webhive.web
     frontend_test_build
+    [ -n "$HEROKU_RELEASE_VERSION" ] && rm -rf src
 }
 
 frontend_test_build() {
@@ -19,9 +20,8 @@ frontend_test_build() {
     cd ../..
     mkdir -p dist/webhive.frontend
     cp -r src/webhive.frontend/dist dist/webhive.frontend
-    rm -rvf src/webhive.frontend/dist
-    rm -rvf src/webhive.frontend/node_modules
-    env
+    rm -rv src/webhive.frontend/dist
+    rm -rv src/webhive.frontend/node_modules
 }
 
 eslint_run() {
