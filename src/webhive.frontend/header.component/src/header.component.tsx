@@ -10,16 +10,13 @@ export class HeaderComponent extends HTMLElement {
      * have been fully parsed
      */
     connectedCallback() {
-        this.innerHTML = `
-            <h1><a class="logo" href="/">&#128376;</a> Web Hive</h1>
-        `;
+        this.append(<h1><a class="logo" href="/" innerHTML={'&#128376;'}></a> Web Hive</h1>);
     }
 
     /**
      * Invoked each time the custom element is disconnected from the document's DOM.
      */
     disconnectedCallback() {
-
     }
 
     /**
@@ -27,7 +24,6 @@ export class HeaderComponent extends HTMLElement {
      * Which attributes to notice change for is specified in a static get observedAttributes method
      */
     attributeChangedCallback(name, oldValue, newValue) {
-
     }
 
 }

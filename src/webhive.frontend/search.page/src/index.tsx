@@ -1,3 +1,4 @@
+// @ts-ignore
 import { h } from /* webpackIgnore: true */ '//unpkg.com/h-document-element?module';
 export { SearchPageElement } from './search-page-element';
 
@@ -5,7 +6,7 @@ addEventListener('navcomponent.connected.callback', (event: any) => {
     event.target.addItem('/search', 'Search', 1);
 });
 
-addEventListener('application.start', event => {
+addEventListener('application.start', (event: any) => {
     const router = event.detail.router;
     const [rootRoutes] = event.detail.routes;
     const [appRoutes] = rootRoutes.slice(-1);

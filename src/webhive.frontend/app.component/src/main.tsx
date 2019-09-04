@@ -1,3 +1,4 @@
+// @ts-ignore
 import { h } from /* webpackIgnore: true */ '//unpkg.com/h-document-element?module';
 import * as createRouter from 'space-router';
 import * as on from 'space-router/src/on';
@@ -59,7 +60,7 @@ async function main() {
     }
 
     function update(oldTree, newTree) {
-        nanomorph(oldTree, newTree)
+        nanomorph(oldTree, newTree, { childrenOnly: true });
     }
 
     async function importComponent(component) {
