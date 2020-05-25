@@ -184,7 +184,7 @@ export const ants: Ant[] = [
     },
     { name: 'zerotoprod', target: 'https://zerotoprod.com/index.xml', defaultCategory: 'DevOps' },
     { name: 'everylayout', target: 'https://every-layout.dev/feed.xml', defaultCategory: 'CSS' },
-    { name: 'dashbouquet', target: 'https://dashbouquet.com/rss', defaultCategory: 'Web' },
+    // { name: 'no rss dashbouquet', target: 'https://dashbouquet.com/rss', defaultCategory: 'Web' },
     {
         name: 'javascriptplayground',
         target: 'http://feeds.feedburner.com/TheJavascriptPlayground',

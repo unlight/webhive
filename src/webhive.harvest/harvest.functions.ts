@@ -19,7 +19,7 @@ export async function harvestResource({
         if (!url) {
             throw new TypeError('url or stream is required');
         }
-        stream = got.stream(url);
+        stream = got.stream(url, { rejectUnauthorized: false });
     }
     const result: FeedParser.Item[] = [];
     const feeds = new FeedParser({ normalize: true, addmeta: false, feedurl: url });
