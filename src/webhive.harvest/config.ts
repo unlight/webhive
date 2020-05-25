@@ -28,7 +28,7 @@ const schema = {
     },
     waitInterval: {
         doc: 'Wait until next run',
-        format: 'duration',
+        format: 'nat',
         default: 55 * 60_000,
         env: 'WAIT_INTERVAL',
         arg: 'wait_interval',
