@@ -132,7 +132,7 @@ export const ants: Ant[] = [
     { name: 'johnpapa', target: 'https://johnpapa.net/rss/', defaultCategory: 'Dev' },
     { name: 'hacksmozilla', target: 'http://hacks.mozilla.org/feed/', defaultCategory: 'Web' },
     { name: 'tutsplus', target: 'https://code.tutsplus.com/posts.atom', defaultCategory: 'Code' },
-    { name: 'nmotw', target: 'https://nmotw.in/atom.xml', defaultCategory: 'npm' },
+    // { name: 'nmotw', target: 'https://nmotw.in/atom.xml', defaultCategory: 'npm' },
     {
         name: 'npmawesome',
         target: 'http://feeds.feedburner.com/npmawesome',
