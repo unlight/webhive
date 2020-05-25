@@ -67,6 +67,7 @@ export const ants: Ant[] = [
     { name: 'everylayout', target: 'https://every-layout.dev/feed.xml', defaultCategory: 'CSS' },
     { name: 'dashbouquet', target: 'https://dashbouquet.com/rss', defaultCategory: 'Web' },
     { name: 'javascriptplayground', target: 'http://feeds.feedburner.com/TheJavascriptPlayground', defaultCategory: 'Javascript' },
+    { name: 'moderncss', target: 'https://moderncss.dev/feed/', defaultCategory: 'CSS' },
     // { name: 'toddmotto', target: 'https://toddmotto.com/feed.xml', defaultCategory: 'Web' },
     // { name: 'not_rss', target: 'http://padabum.com/', defaultCategory: 'Web' },
     // { name: 'not_rss', target: 'http://nodetuts.com/', defaultCategory: 'Web' },
