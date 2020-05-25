@@ -45,7 +45,7 @@ async function program() {
                         }
                         break;
                     default:
-                        throw err;
+                        console.error(err);
                 }
             }
             console.groupEnd();
