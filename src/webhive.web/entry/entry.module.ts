@@ -1,4 +1,4 @@
-import * as got from 'got';
+import got from 'got';
 import { AppContext } from '../main';
 import { inject } from 'njct';
 import { IRouterContext } from 'koa-tree-router';
@@ -15,8 +15,10 @@ export function initialize({ router }: AppContext) {
 
 export async function home(context: IRouterContext, next: Function) {
     const client = inject('client', () => got);
-    const { body } = await client.get(`${config.get('apiUrl')}/entry`, { json: true });
-    context.body = await entryIndex({ entries: body });
+    const response = await client.get<Entry[]>(`${config.get('apiUrl')}/entry`, {
+        responseType: 'json',
+    });
+    context.body = await entryIndex({ entries: response.body });
 }
 
 export async function search(context: IRouterContext, next: Function) {
@@ -24,7 +26,10 @@ export async function search(context: IRouterContext, next: Function) {
     const client = inject('client', () => got);
     let entries: Entry[] = [];
     if (q) {
-        ({ body: entries } = await client.get(`${config.get('apiUrl')}/entry`, { json: true, query: { q } }));
+        ({ body: entries } = await client.get(`${config.get('apiUrl')}/entry`, {
+            responseType: 'json',
+            searchParams: { q },
+        }));
     }
     context.body = await entrySearch({ entries, q });
 }

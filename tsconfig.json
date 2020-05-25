@@ -9,6 +9,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "outDir": "dist",
+    "esModuleInterop": true,
     "pretty": true,
     "jsx": "react",
     "jsxFactory": "h",

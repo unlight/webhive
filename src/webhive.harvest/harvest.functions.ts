@@ -1,10 +1,10 @@
 import { Stream, Readable } from 'stream';
 import { Ant } from './ants';
 import { entryLink } from './entry-link';
-import * as url from 'url';
-import * as got from 'got';
-import * as FeedParser from 'feedparser';
-import * as striptags from 'striptags';
+import url from 'url';
+import got from 'got';
+import FeedParser from 'feedparser';
+import striptags from 'striptags';
 
 export type HarvestResourceArguments = {
     url?: string;

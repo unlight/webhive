@@ -1,25 +1,30 @@
 // @ts-ignore
 import { h } from /* webpackIgnore: true */ '//unpkg.com/h-document-element?module';
-import * as createRouter from 'space-router';
-import * as on from 'space-router/src/on';
+import createRouter from 'space-router';
+import on from 'space-router/src/on';
 import dimport from 'dimport';
 import './style.css';
 import { App } from './app/app';
 import { isNavigatePushCustomEvent, isNavigateSetCustomEvent } from './app/events/events';
 import { AboutPage } from './app/+about/about.page';
 import { NotFoundPage } from './app/+notfound/notfound.page';
-import * as nanomorph from 'nanomorph';
+import nanomorph from 'nanomorph';
 
 async function main() {
     const config = await dimport('./app.component.config.js');
-    const loadingComponents = Object.values(config.components as any[])
-        .map(c => importComponent(c));
+    const loadingComponents = Object.values(config.components as any[]).map((c) =>
+        importComponent(c),
+    );
     let router;
     const routes = [
-        ['', App, [
-            ['/about', AboutPage],
-            ['*', NotFoundPage],
-        ]],
+        [
+            '',
+            App,
+            [
+                ['/about', AboutPage],
+                ['*', NotFoundPage],
+            ],
+        ],
     ];
     await Promise.all(loadingComponents);
     if (document.readyState === 'loading') {
@@ -52,7 +57,9 @@ async function main() {
         const app = components.reduceRight((children, Component) => {
             return Component({ params: route.params, query: route.query, children });
         }, null);
-        dispatchEvent(new CustomEvent('route.transition.end', { detail: { route, components, app } }));
+        dispatchEvent(
+            new CustomEvent('route.transition.end', { detail: { route, components, app } }),
+        );
         if (!document.body.firstElementChild) {
             document.body.append(<main />);
         }
@@ -77,10 +84,9 @@ async function main() {
         module.hot.accept();
         module.hot.dispose(() => {
             router.stop();
-            subsriptions.forEach(unsubscribe => unsubscribe());
+            subsriptions.forEach((unsubscribe) => unsubscribe());
         });
     }
-
 }
 
 main();

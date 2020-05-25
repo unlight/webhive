@@ -1,6 +1,6 @@
 /* eslint-disable no-console, @typescript-eslint/tslint/config */
 /* tslint:disable:no-floating-promises no-any */
-import * as got from 'got';
+import got from 'got';
 import { config } from './config';
 import { MongoClient } from 'mongodb';
 import { createEntry } from './harvest.functions';
@@ -19,10 +19,14 @@ const testInvalidEntries: any[] = [];
 // to run prod migration run script with arg api_url
 
 async function main() {
-    const client = await new MongoClient(process.env.MONGODB_URI1 as string, { useNewUrlParser: true }).connect();
+    const client = await new MongoClient(process.env.MONGODB_URI1 as string, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    }).connect();
     const collection = client.db(process.env.MONGODB_NAME1 as string).collection('entry');
     const cursor = collection.find();
-    while (true) { // eslint-disable-line no-constant-condition
+    while (true) {
+        // eslint-disable-line no-constant-condition
         const item = await cursor.next();
         if (!item) {
             break;
@@ -39,10 +43,11 @@ async function main() {
         entry.link = entry.link.trim();
         entry.title = entry.title.trim();
         entry.title = cleanUpHtml(entry.title);
-        if (!entry.title
-            || entry.title === 'null'
-            || entry.title === 'undefined'
-            || entry.link === '{{ site.url}}{{ post.id }}'
+        if (
+            !entry.title ||
+            entry.title === 'null' ||
+            entry.title === 'undefined' ||
+            entry.link === '{{ site.url}}{{ post.id }}'
         ) {
             // Broken entries, e.g. empty title (it means it contaxt raw_text only and not useful for us)
             continue;
@@ -55,7 +60,10 @@ async function main() {
             testInvalidEntries.push({ entryEntity, errors } as any);
         }
         try {
-            await got.post(`${apiUrl}/entry`, { json: true, body: entry, headers: { 'api-token': config.get('apiToken') } });
+            await got.post(`${apiUrl}/entry`, {
+                json: entry,
+                headers: { 'api-token': config.get('apiToken') },
+            });
             console.log('entry', entry.title);
         } catch (err) {
             console.log('err', err.body, err.statusCode);
@@ -97,7 +105,7 @@ function cleanUpHtml(value) {
         value = value.slice(0, -3);
     }
 
-    value = value.replace(/&amp;(#\d+;)/gi, function() {
+    value = value.replace(/&amp;(#\d+;)/gi, function () {
         return '&' + arguments[1];
     });
 

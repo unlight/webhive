@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/tslint/config */
 import { CreateEntryDTO } from './entry.dto';
-import * as expect from 'expect';
+import expect from 'expect';
 import { validate, ValidatorOptions } from 'class-validator';
 import { plainToClass } from 'class-transformer';
 
 describe('validate entry', () => {
-
     const validateOptions: ValidatorOptions = { validationError: { target: false } };
 
     it('create entry valid', async () => {
@@ -16,16 +15,17 @@ describe('validate entry', () => {
         });
         const errors = await validate(entry, validateOptions);
         expect(errors).toEqual([]);
-
     });
 
     it('create entry invalid empty', async () => {
-        const entry = plainToClass(CreateEntryDTO, { title: '', link: '//annoying.com/akhoond/hypocone?a=loony&b=pladarosis#shunammite' });
+        const entry = plainToClass(CreateEntryDTO, {
+            title: '',
+            link: '//annoying.com/akhoond/hypocone?a=loony&b=pladarosis#shunammite',
+        });
         const errors = await validate(entry, validateOptions);
         expect(errors.length).toBeGreaterThan(0);
-        expect(errors.find(x => x.property === 'link')).toBeTruthy();
-        expect(errors.find(x => x.property === 'title')).toBeTruthy();
-        expect(errors.find(x => x.property === 'date')).toBeTruthy();
+        expect(errors.find((x) => x.property === 'link')).toBeTruthy();
+        expect(errors.find((x) => x.property === 'title')).toBeTruthy();
+        expect(errors.find((x) => x.property === 'date')).toBeTruthy();
     });
-
 });

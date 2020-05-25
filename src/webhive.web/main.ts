@@ -1,10 +1,10 @@
 import { config } from './config';
 import { ServerResponse } from 'http';
-import * as Koa from 'koa';
-import * as Router from 'koa-tree-router';
-import * as favicon from 'koa-favicon';
-import * as serve from 'koa-static';
-import * as mount from 'koa-mount';
+import Koa from 'koa';
+import Router from 'koa-tree-router';
+import favicon from 'koa-favicon';
+import serve from 'koa-static';
+import mount from 'koa-mount';
 import { main as api } from '../webhive.api/main';
 
 if (config.get('environment') === 'development' || config.get('environment') === 'test') {

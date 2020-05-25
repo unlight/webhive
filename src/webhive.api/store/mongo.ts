@@ -12,7 +12,10 @@ let mongoClient: MongoClient;
 
 export function mongoClientInstance() {
     if (mongoClient === undefined) {
-        mongoClient = new MongoClient(config.get('mongoUri'), { useNewUrlParser: true });
+        mongoClient = new MongoClient(config.get('mongoUri'), {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
     }
     return mongoClient;
 }

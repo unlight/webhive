@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* tslint:disable no-floating-promises */
-import * as FeedParser from 'feedparser';
-import * as got from 'got';
+import FeedParser from 'feedparser';
+import got from 'got';
 import { ants } from './ants';
 import { harvestResource, createEntry } from './harvest.functions';
 import { config } from './config';
@@ -15,28 +15,34 @@ async function program() {
     if (argv.ant === '$last') {
         swarm = swarm.slice(-1);
     } else if (argv.ant) {
-        swarm = swarm.filter(x => x.name === argv.ant);
+        swarm = swarm.filter((x) => x.name === argv.ant);
     }
     for (const ant of swarm) {
         console.group('Starting', ant.name);
         const feedItems = await harvestResource({ url: ant.target });
         for (const feedItem of feedItems) {
             const entry = createEntry(feedItem, ant);
-            if (argv.save === false) {
+            if (argv.save === false || argv.dryRun) {
                 console.log(inspect(entry, undefined, Infinity));
                 continue;
             }
             console.group('Saving', feedItem.title);
             try {
-                await got.post(`${config.get('apiUrl')}/entry`, { json: true, body: entry, headers: { 'api-token': config.get('apiToken') } });
+                await got.post(`${config.get('apiUrl')}/entry`, {
+                    json: entry,
+                    headers: { 'api-token': config.get('apiToken') },
+                });
                 console.log(entry.link);
-            } catch (e) {
-                const err = e as got.Response<{ message: string; code?: string }>;
+            } catch (err) {
                 const code = err.body && err.body.code;
-                switch (code) { // tslint:disable-line:no-small-switch
-                    case 'EntryExists': {
-                        console.log(err.body.message);
-                    } break;
+                switch (
+                    code // tslint:disable-line:no-small-switch
+                ) {
+                    case 'EntryExists':
+                        {
+                            console.log(err.body.message);
+                        }
+                        break;
                     default:
                         throw err;
                 }

@@ -6,7 +6,7 @@ import { IRouterContext } from 'koa-tree-router';
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
 import { config } from '../config';
-import * as Koa from 'koa';
+import Koa from 'koa';
 
 export function initialize({ router }: AppContext) {
     router.on('POST', '/entry', checkPermission, transformEntry, createEntry);

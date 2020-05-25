@@ -1,7 +1,7 @@
-import * as h from 'vhtml';
-import * as dayjs from 'dayjs';
+import h from 'vhtml';
+import dayjs from 'dayjs';
 
-const dayTitle = (date: Date) => dayjs(date).format('ddd, D MMM, YYYY')
+const dayTitle = (date: Date) => dayjs(date).format('ddd, D MMM, YYYY');
 /**
  * Shows day title between entries.
  * Thu, 7th Mar, 2019
@@ -12,9 +12,11 @@ export function DayTitle({ previousDate, currentDate }) {
         return <h4>{dayTitle(current)}</h4>;
     }
     const previous: Date = new Date(previousDate);
-    if (current.getDay() !== previous.getDay()
-        || current.getMonth() !== previous.getMonth()
-        || current.getFullYear() !== previous.getFullYear()) {
+    if (
+        current.getDay() !== previous.getDay() ||
+        current.getMonth() !== previous.getMonth() ||
+        current.getFullYear() !== previous.getFullYear()
+    ) {
         return <h4>{dayTitle(current)}</h4>;
     }
 }

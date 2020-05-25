@@ -1,8 +1,8 @@
 import '@abraham/reflection'; // tslint:disable-line:no-import-side-effect
 import { config } from './config';
-import * as Koa from 'koa';
-import * as Router from 'koa-tree-router';
-import * as koaBodyparser from 'koa-bodyparser';
+import Koa from 'koa';
+import Router from 'koa-tree-router';
+import koaBodyparser from 'koa-bodyparser';
 import { ServerResponse } from 'http';
 import { inject } from 'njct';
 import { mongoClientInstance } from './store/mongo';
@@ -35,8 +35,8 @@ export async function main(settings = {}) {
         app.use(koaJsonError());
         const client = inject('client', mongoClientInstance);
         await client.connect();
-        await import('./home/home.module').then(m => m.initialize(appContext));
-        await import('./entry/entry.module').then(m => m.initialize(appContext));
+        await import('./home/home.module').then((m) => m.initialize(appContext));
+        await import('./entry/entry.module').then((m) => m.initialize(appContext));
         app.use(koaBodyparser({ strict: false }));
         app.use(router.routes());
         let server: ReturnType<typeof app.listen>;
