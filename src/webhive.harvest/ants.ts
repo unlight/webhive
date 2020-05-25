@@ -50,7 +50,6 @@ export const ants: Ant[] = [
         target: 'http://feeds.feedburner.com/nczonline',
         defaultCategory: 'JavaScript',
     },
-    { name: 'h3manth', target: 'http://h3manth.com/new/atom.xml', defaultCategory: 'Web' },
     {
         name: 'webreflection',
         target: 'http://webreflection.blogspot.com/feeds/posts/default?alt=rss',
@@ -191,6 +190,7 @@ export const ants: Ant[] = [
         defaultCategory: 'Javascript',
     },
     { name: 'moderncss', target: 'https://moderncss.dev/feed/', defaultCategory: 'CSS' },
+    { name: 'h3manth', target: 'http://h3manth.com/new/atom.xml', defaultCategory: 'Web' },
     // { name: 'toddmotto', target: 'https://toddmotto.com/feed.xml', defaultCategory: 'Web' },
     // { name: 'not_rss', target: 'http://padabum.com/', defaultCategory: 'Web' },
     // { name: 'not_rss', target: 'http://nodetuts.com/', defaultCategory: 'Web' },
