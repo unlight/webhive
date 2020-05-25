@@ -30,17 +30,18 @@ async function program() {
             try {
                 await got.post(`${config.get('apiUrl')}/entry`, {
                     json: entry,
+                    responseType: 'json',
                     headers: { 'api-token': config.get('apiToken') },
                 });
                 console.log(entry.link);
             } catch (err) {
-                const code = err.body && err.body.code;
+                const code = err.response.body && err.response.body.code;
                 switch (
                     code // tslint:disable-line:no-small-switch
                 ) {
                     case 'EntryExists':
                         {
-                            console.log(err.body.message);
+                            console.log(err.response.body.message);
                         }
                         break;
                     default:

@@ -9,9 +9,12 @@ import striptags from 'striptags';
 export type HarvestResourceArguments = {
     url?: string;
     stream?: NodeJS.ReadableStream;
-}
+};
 
-export async function harvestResource({ url, stream }: HarvestResourceArguments): Promise<FeedParser.Item[]> {
+export async function harvestResource({
+    url,
+    stream,
+}: HarvestResourceArguments): Promise<FeedParser.Item[]> {
     if (!stream) {
         if (!url) {
             throw new TypeError('url or stream is required');
@@ -21,9 +24,10 @@ export async function harvestResource({ url, stream }: HarvestResourceArguments)
     const result: FeedParser.Item[] = [];
     const feeds = new FeedParser({ normalize: true, addmeta: false, feedurl: url });
     stream.pipe(feeds);
-    feeds.on('readable', function() {
+    feeds.on('readable', function () {
         let item: FeedParser.Item;
-        while ((item = feeds.read())) { // tslint:disable-line:no-conditional-assignment
+        while ((item = feeds.read())) {
+            // tslint:disable-line:no-conditional-assignment
             result.push(item);
         }
     });
