@@ -6,12 +6,8 @@ export function EntryComponent({ entry }: { entry: Entry }) {
         <div class="entry">
             <span class="entry__category">{entry.category.name}</span>
             <span>
-                <a href={entry.link}>{entry.title}</a> {}
-                <a
-                    class="entry__google"
-                    href={`http://google.com/search?q=${encodeURIComponent(entry.title)}`}
-                >
-                    [G]
+                <a href={entry.link} target="_blank">
+                    {entry.title}
                 </a>
             </span>
         </div>
