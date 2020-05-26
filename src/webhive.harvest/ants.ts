@@ -128,6 +128,11 @@ export const ants: Ant[] = [
         target: 'http://feeds.feedburner.com/JamesPadolsey',
         defaultCategory: 'Web',
     },
+    {
+        name: 'wanago',
+        target: 'https://wanago.io/feed/',
+        defaultCategory: 'Javascript',
+    },
     { name: 'johnpapa', target: 'https://johnpapa.net/rss/', defaultCategory: 'Dev' },
     { name: 'hacksmozilla', target: 'http://hacks.mozilla.org/feed/', defaultCategory: 'Web' },
     { name: 'tutsplus', target: 'https://code.tutsplus.com/posts.atom', defaultCategory: 'Code' },
