@@ -195,6 +195,7 @@ export const ants: Ant[] = [
         defaultCategory: 'Javascript',
     },
     { name: 'moderncss', target: 'https://moderncss.dev/feed/', defaultCategory: 'CSS' },
+    { name: 'indepth', target: 'https://indepth.dev/rss', defaultCategory: 'WebDev' },
     { name: 'h3manth', target: 'http://h3manth.com/new/atom.xml', defaultCategory: 'Web' },
     // { name: 'toddmotto', target: 'https://toddmotto.com/feed.xml', defaultCategory: 'Web' },
     // { name: 'not_rss', target: 'http://padabum.com/', defaultCategory: 'Web' },
