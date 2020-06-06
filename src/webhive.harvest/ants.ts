@@ -159,6 +159,11 @@ export const ants: Ant[] = [
     { name: 'rhyous', target: 'http://www.rhyous.com/feed/', defaultCategory: 'C#' },
     { name: 'radiojs', target: 'https://radiojs.ru/feed/podcast/', defaultCategory: 'JavaScript' },
     {
+        name: 'softwareengineeringdaily',
+        target: 'https://softwareengineeringdaily.com/feed/',
+        defaultCategory: 'Software Engineering',
+    },
+    {
         name: 'sixrevisions',
         target: 'http://feeds.feedburner.com/sixrevisions?format=xml',
         defaultCategory: 'Web',
