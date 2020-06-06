@@ -148,11 +148,6 @@ export const ants: Ant[] = [
         defaultCategory: 'Templates',
     },
     { name: 'xiper', target: 'http://www.xiper.net/rss.html', defaultCategory: 'Web' },
-    {
-        name: 'opendesigns',
-        target: 'http://feeds.feedburner.com/opendesigns',
-        defaultCategory: 'Templates',
-    },
     { name: 'scotch', target: 'https://scotch.io/feed', defaultCategory: 'Web Dev' },
     { name: 'sitepoint', target: 'http://www.sitepoint.com/feed/', defaultCategory: 'Web' },
     { name: 'freetechbooks', target: 'http://www.freetechbooks.com/rss', defaultCategory: 'Books' },
@@ -202,6 +197,11 @@ export const ants: Ant[] = [
     { name: 'moderncss', target: 'https://moderncss.dev/feed/', defaultCategory: 'CSS' },
     { name: 'indepth', target: 'https://indepth.dev/rss', defaultCategory: 'WebDev' },
     { name: 'h3manth', target: 'http://h3manth.com/new/atom.xml', defaultCategory: 'Web' },
+    {
+        name: 'opendesigns',
+        target: 'http://feeds.feedburner.com/opendesigns',
+        defaultCategory: 'Templates',
+    },
     // { name: 'toddmotto', target: 'https://toddmotto.com/feed.xml', defaultCategory: 'Web' },
     // { name: 'not_rss', target: 'http://padabum.com/', defaultCategory: 'Web' },
     // { name: 'not_rss', target: 'http://nodetuts.com/', defaultCategory: 'Web' },
