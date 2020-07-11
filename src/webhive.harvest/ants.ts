@@ -80,7 +80,6 @@ export const ants: Ant[] = [
         target: 'http://feeds.feedburner.com/addyosmani?format=xml',
         defaultCategory: 'Web',
     },
-    { name: 'ajaxian', target: 'http://feeds.feedburner.com/ajaxian', defaultCategory: 'Web' },
     {
         name: 'chrisheilmann',
         target: 'http://feeds.feedburner.com/chrisheilmann',
@@ -202,6 +201,7 @@ export const ants: Ant[] = [
         target: 'http://feeds.feedburner.com/opendesigns',
         defaultCategory: 'Templates',
     },
+    // { name: 'ajaxian', target: 'http://feeds.feedburner.com/ajaxian', defaultCategory: 'Web' },
     // { name: 'toddmotto', target: 'https://toddmotto.com/feed.xml', defaultCategory: 'Web' },
     // { name: 'not_rss', target: 'http://padabum.com/', defaultCategory: 'Web' },
     // { name: 'not_rss', target: 'http://nodetuts.com/', defaultCategory: 'Web' },
