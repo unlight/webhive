@@ -135,7 +135,6 @@ export const ants: Ant[] = [
     { name: 'johnpapa', target: 'https://johnpapa.net/rss/', defaultCategory: 'Dev' },
     { name: 'hacksmozilla', target: 'http://hacks.mozilla.org/feed/', defaultCategory: 'Web' },
     { name: 'tutsplus', target: 'https://code.tutsplus.com/posts.atom', defaultCategory: 'Code' },
-    // { name: 'nmotw', target: 'https://nmotw.in/atom.xml', defaultCategory: 'npm' },
     {
         name: 'npmawesome',
         target: 'http://feeds.feedburner.com/npmawesome',
@@ -187,7 +186,6 @@ export const ants: Ant[] = [
     },
     { name: 'zerotoprod', target: 'https://zerotoprod.com/index.xml', defaultCategory: 'DevOps' },
     { name: 'everylayout', target: 'https://every-layout.dev/feed.xml', defaultCategory: 'CSS' },
-    // { name: 'no rss dashbouquet', target: 'https://dashbouquet.com/rss', defaultCategory: 'Web' },
     {
         name: 'javascriptplayground',
         target: 'http://feeds.feedburner.com/TheJavascriptPlayground',
@@ -196,11 +194,13 @@ export const ants: Ant[] = [
     { name: 'moderncss', target: 'https://moderncss.dev/feed/', defaultCategory: 'CSS' },
     { name: 'indepth', target: 'https://indepth.dev/rss', defaultCategory: 'WebDev' },
     { name: 'h3manth', target: 'http://h3manth.com/new/atom.xml', defaultCategory: 'Web' },
-    {
-        name: 'opendesigns',
-        target: 'http://feeds.feedburner.com/opendesigns',
-        defaultCategory: 'Templates',
-    },
+    // {
+    //     name: 'opendesigns',
+    //     target: 'http://feeds.feedburner.com/opendesigns',
+    //     defaultCategory: 'Templates',
+    // },
+    // { name: 'no rss dashbouquet', target: 'https://dashbouquet.com/rss', defaultCategory: 'Web' },
+    // { name: 'nmotw', target: 'https://nmotw.in/atom.xml', defaultCategory: 'npm' },
     // { name: 'ajaxian', target: 'http://feeds.feedburner.com/ajaxian', defaultCategory: 'Web' },
     // { name: 'toddmotto', target: 'https://toddmotto.com/feed.xml', defaultCategory: 'Web' },
     // { name: 'not_rss', target: 'http://padabum.com/', defaultCategory: 'Web' },
