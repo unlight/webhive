@@ -41,7 +41,7 @@
   "dependencies": {
     "@abraham/reflection": "^0.7.0",
     "await-to-js": "^2.1.1",
-    "class-transformer": "^0.2.3",
+    "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
     "convict": "^6.0.0",
     "dayjs": "^1.8.27",
