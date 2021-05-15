@@ -194,6 +194,11 @@ export const ants: Ant[] = [
     { name: 'moderncss', target: 'https://moderncss.dev/feed/', defaultCategory: 'CSS' },
     { name: 'indepth', target: 'https://indepth.dev/rss', defaultCategory: 'WebDev' },
     { name: 'h3manth', target: 'http://h3manth.com/new/atom.xml', defaultCategory: 'Web' },
+    {
+        name: 'codeopinion',
+        target: 'https://codeopinion.com/feed/',
+        defaultCategory: 'Software Architecture',
+    },
     // {
     //     name: 'opendesigns',
     //     target: 'http://feeds.feedburner.com/opendesigns',
