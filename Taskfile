@@ -6,7 +6,7 @@ build() {
     rm -rf dist
     tsc
     cp -r src/webhive.web/public_html dist/webhive.web
-    frontend_test_build
+    # frontend_test_build
     [ -n "$HEROKU_RELEASE_VERSION" ] && rm -rf src
 }
 

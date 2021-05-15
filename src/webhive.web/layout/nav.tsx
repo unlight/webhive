@@ -12,10 +12,6 @@ export function Nav() {
                     <a href="/search">Search</a>
                 </li>{' '}
                 {}
-                <li>
-                    <a href="/frontend/">MicroFrontend</a>
-                </li>{' '}
-                {}
             </ul>
         </nav>
     );
