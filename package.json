@@ -6,10 +6,6 @@
   "main": "index.js",
   "typings": "index.d.ts",
   "author": "2019",
-  "engines": {
-    "node": ">=12",
-    "npm": ">=3"
-  },
   "scripts": {
     "dev": "run-p dev:web",
     "harvest:d": "node --inspect-brk -r ts-node/register/transpile-only src/webhive.harvest/program.ts --ant=webapplog --no-save",
