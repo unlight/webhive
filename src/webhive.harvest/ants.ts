@@ -122,11 +122,11 @@ export const ants: Ant[] = [
         defaultCategory: 'Web',
     },
     { name: 'itebooks', target: 'http://feeds.feedburner.com/IT-eBooks', defaultCategory: 'Books' },
-    {
-        name: 'jamespadolsey',
-        target: 'http://feeds.feedburner.com/JamesPadolsey',
-        defaultCategory: 'Web',
-    },
+    // {
+    //     name: 'jamespadolsey',
+    //     target: 'http://feeds.feedburner.com/JamesPadolsey',
+    //     defaultCategory: 'Web',
+    // },
     {
         name: 'wanago',
         target: 'https://wanago.io/feed/',
