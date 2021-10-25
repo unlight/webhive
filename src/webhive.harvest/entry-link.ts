@@ -31,6 +31,9 @@ export function entryLink(object: string | Item) {
         }
         result = testurl;
     }
+    if (!(result.startsWith('http:') || result.startsWith('https:'))) {
+        result = 'http://' + result;
+    }
     components = new URL(result);
     components.searchParams.delete('gi');
     components.searchParams.delete('source');
