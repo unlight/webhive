@@ -39,7 +39,7 @@
     "await-to-js": "^2.1.1",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
-    "convict": "^6.0.0",
+    "convict": "^6.2.2",
     "dayjs": "^1.8.27",
     "feedparser": "^2.2.10",
     "got": "^11.1.4",
