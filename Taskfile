@@ -7,7 +7,7 @@ build() {
     tsc
     cp -r src/webhive.web/public_html dist/webhive.web
     # frontend_test_build
-    [ -n "$HEROKU_RELEASE_VERSION" ] && rm -rf src
+    # [ -n "$HEROKU_RELEASE_VERSION" ] && rm -rf src
 }
 
 frontend_test_build() {
