@@ -199,11 +199,6 @@ export const ants: Ant[] = [
   },
   { name: 'rhyous', target: 'http://www.rhyous.com/feed/', defaultCategory: 'C#' },
   {
-    name: 'radiojs',
-    target: 'https://radiojs.ru/feed/podcast/',
-    defaultCategory: 'JavaScript',
-  },
-  {
     name: 'softwareengineeringdaily',
     target: 'https://softwareengineeringdaily.com/feed/',
     defaultCategory: 'Software Engineering',
@@ -267,6 +262,11 @@ export const ants: Ant[] = [
     target: 'https://codeopinion.com/feed/',
     defaultCategory: 'Software Architecture',
   },
+  // {
+  //   name: 'radiojs',
+  //   target: 'https://radiojs.ru/feed/podcast/',
+  //   defaultCategory: 'JavaScript',
+  // },
   // {
   //     name: 'jamespadolsey',
   //     target: 'http://feeds.feedburner.com/JamesPadolsey',
