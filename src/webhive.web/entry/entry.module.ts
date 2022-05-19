@@ -3,7 +3,6 @@ import { AppContext } from '../main';
 import { inject } from 'njct';
 import { IRouterContext } from 'koa-tree-router';
 import { config } from '../config';
-import { readFileSync } from 'fs';
 import { entryIndex } from './entry.index';
 import { entrySearch } from './entry.search';
 import { Entry } from './entry';
@@ -22,7 +21,7 @@ export async function home(context: IRouterContext, next: Function) {
 }
 
 export async function search(context: IRouterContext, next: Function) {
-    const q = context.query.q;
+    const q = context.query.q as string;
     const client = inject('client', () => got);
     let entries: Entry[] = [];
     if (q) {

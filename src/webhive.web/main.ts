@@ -23,7 +23,7 @@ type CustomContext = {
 export type AppContext = typeof appContext;
 export type ThenArg<T> = T extends Promise<infer U> ? U : T;
 export type CustomServerResponse = ServerResponse & {
-    ctx: Koa.ParameterizedContext<{ [k: string]: any }, CustomContext>; // tslint:disable-line:no-any
+    ctx: Koa.ParameterizedContext<{ [k: string]: any }, CustomContext>;
 };
 
 const mainDefaults = { listen: false };
@@ -31,7 +31,7 @@ const mainDefaults = { listen: false };
 export async function main(settings = mainDefaults) {
     if (appInstance === undefined) {
         const options = { ...mainDefaults, ...settings };
-        await import('./entry/entry.module').then(m => m.initialize(appContext));
+        await import('./entry/entry.module').then((m) => m.initialize(appContext));
         app.use(favicon(`${__dirname}/public_html/favicon.ico`));
         app.use(serve(`${__dirname}/public_html`));
         app.use(router.routes());

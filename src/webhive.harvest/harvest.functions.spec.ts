@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/tslint/config */
 import expect from 'expect';
 import { harvestResource, createEntry, entryDate } from './harvest.functions';
 import { createReadStream } from 'fs';

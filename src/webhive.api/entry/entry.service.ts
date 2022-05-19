@@ -8,17 +8,16 @@ export type EntryBrowseRequest = {
     skip: number;
     limit: number;
     q: string;
-}
+};
 
 /**
  * Entry service, any logic should be here.
  */
 export class EntryService {
-
     constructor(
         private readonly entryRepository = inject.service(EntryRepository),
         private readonly categoryRepository = inject.service(CategoryRepository),
-    ) { }
+    ) {}
 
     async create(data: CreateEntryDTO) {
         const entry: EntryModel = {
@@ -40,7 +39,7 @@ export class EntryService {
     }
 
     async browse(entryBrowseRequest: Partial<EntryBrowseRequest> = {}) {
-        let { skip = 0, limit = 100, q } = entryBrowseRequest; // tslint:disable-line:prefer-const
+        let { skip = 0, limit = 100, q } = entryBrowseRequest;
         if (limit > 100 || limit <= 0) {
             limit = 100;
         }

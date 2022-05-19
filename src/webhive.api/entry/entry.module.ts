@@ -16,7 +16,7 @@ export function initialize({ router }: AppContext) {
 export async function browseEntry(context: Koa.Context, next: Function) {
     const entryService = inject.service(EntryService);
     const { q } = context.request.query;
-    context.body = await entryService.browse({ limit: 100, skip: 0, q });
+    context.body = await entryService.browse({ limit: 100, skip: 0, q: q as string });
 }
 
 export async function checkPermission(context: Koa.Context, next: Function) {

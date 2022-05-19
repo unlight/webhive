@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/tslint/config */
 import expect from 'expect';
 import { main, ThenArg, CustomServerResponse } from '../main';
 import { ServerResponse } from 'http';

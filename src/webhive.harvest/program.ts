@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-/* tslint:disable no-floating-promises */
 import FeedParser from 'feedparser';
 import got from 'got';
 import { ants } from './ants';
@@ -23,7 +22,7 @@ async function program() {
         for (const feedItem of feedItems) {
             const entry = createEntry(feedItem, ant);
             if (argv.save === false || argv.dryRun) {
-                console.log(inspect(entry, undefined, Infinity));
+                console.log(inspect(entry, undefined, Number.POSITIVE_INFINITY));
                 continue;
             }
             console.group('Saving', feedItem.title);
@@ -34,11 +33,9 @@ async function program() {
                     headers: { 'api-token': config.get('apiToken') },
                 });
                 console.log(entry.link);
-            } catch (err) {
+            } catch (err: any) {
                 const code = err.response.body && err.response.body.code;
-                switch (
-                    code // tslint:disable-line:no-small-switch
-                ) {
+                switch (code) {
                     case 'EntryExists':
                         {
                             console.log(err.response.body.message);

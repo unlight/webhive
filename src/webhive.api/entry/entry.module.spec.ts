@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/tslint/config, import/max-dependencies */
+/* eslint-disable import/max-dependencies */
 import expect from 'expect';
 import { main, CustomServerResponse, ThenArg } from '../main';
 import { CreateEntryDTO } from './entry.dto';
@@ -35,24 +35,22 @@ describe('entry api', () => {
         injector.provide('client', () => client);
         injector.provide('database', () => database);
         // Insert test data
+
         await database.collection('entry2').insertMany(
             [
                 {
-                    _id: '01',
                     title: 'title01',
                     link: 'https://foo/01',
                     date: '2001-02-03T07:20:01-05:00',
                     category_id: '03',
                 },
                 {
-                    _id: '02',
                     title: 'title02',
                     link: 'https://foo/02',
                     date: '2002-02-03T07:20:01-05:00',
                     category_id: '04',
                 },
                 {
-                    _id: '03',
                     title: 'title03',
                     link: 'https://foo/03',
                     date: '2003-02-03T07:20:01-05:00',
@@ -61,13 +59,9 @@ describe('entry api', () => {
             ],
             { forceServerObjectId: true },
         );
-        await database.collection('category').insertMany(
-            [
-                { _id: '03', name: 'cat03' },
-                { _id: '04', name: 'cat04' },
-            ],
-            { forceServerObjectId: true },
-        );
+        await database
+            .collection('category')
+            .insertMany([{ name: 'cat03' }, { name: 'cat04' }], { forceServerObjectId: true });
     });
 
     after(async () => {
@@ -118,8 +112,7 @@ describe('entry api', () => {
                 method: 'POST',
                 body: <CreateEntryDTO>{
                     title: 'nonliving',
-                    link:
-                        'https://ambary.com/porphyrogenite/chlorophyllan?a=civilizedness&b=mesologic#partiality',
+                    link: 'https://ambary.com/porphyrogenite/chlorophyllan?a=civilizedness&b=mesologic#partiality',
                     date: '2024-11-28T22:31:32-09:00',
                     category: 'Monkeyfy',
                 },

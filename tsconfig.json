@@ -1,6 +1,9 @@
 {
+  "ts-node": {
+    "transpileOnly": true
+  },
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es2018",
     "module": "commonjs",
     "moduleResolution": "node",
     "importHelpers": true,
@@ -18,9 +21,7 @@
     "declaration": false,
     "declarationMap": false,
     "skipLibCheck": true,
-    "lib": [
-      "esnext"
-    ]
+    "lib": ["esnext"]
   },
   "include": [
     "src/webhive.api/**/*.ts",

@@ -19,7 +19,13 @@ export async function harvestResource({
         if (!url) {
             throw new TypeError('url or stream is required');
         }
-        stream = got.stream(url, { rejectUnauthorized: false });
+        stream = got.stream(url, {
+            headers: {
+                'User-Agent':
+                    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36',
+            },
+            https: { rejectUnauthorized: false },
+        });
     }
     const result: FeedParser.Item[] = [];
     const feeds = new FeedParser({ normalize: true, addmeta: false, feedurl: url });
@@ -27,7 +33,6 @@ export async function harvestResource({
     feeds.on('readable', function () {
         let item: FeedParser.Item;
         while ((item = feeds.read())) {
-            // tslint:disable-line:no-conditional-assignment
             result.push(item);
         }
     });

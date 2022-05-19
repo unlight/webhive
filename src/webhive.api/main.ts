@@ -1,4 +1,4 @@
-import '@abraham/reflection'; // tslint:disable-line:no-import-side-effect
+import '@abraham/reflection';
 import { config } from './config';
 import Koa from 'koa';
 import Router from 'koa-tree-router';

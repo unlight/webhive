@@ -99,7 +99,8 @@ export const ants: Ant[] = [
         target: 'http://blog.isquaredsoftware.com/index.xml',
         defaultCategory: 'Web',
     },
-    { name: 'dzone', target: 'http://feeds.dzone.com/webdev', defaultCategory: 'Web' },
+    // { name: 'dzone', target: 'http://feeds.dzone.com/webdev', defaultCategory: 'Web' },
+    { name: 'eventdriven', target: 'https://event-driven.io/rss.xml', defaultCategory: 'Web' },
     { name: 'howtonode', target: 'http://howtonode.org/feed.xml', defaultCategory: 'NodeJS' },
     {
         name: 'html5rocks',
@@ -122,11 +123,7 @@ export const ants: Ant[] = [
         defaultCategory: 'Web',
     },
     { name: 'itebooks', target: 'http://feeds.feedburner.com/IT-eBooks', defaultCategory: 'Books' },
-    // {
-    //     name: 'jamespadolsey',
-    //     target: 'http://feeds.feedburner.com/JamesPadolsey',
-    //     defaultCategory: 'Web',
-    // },
+
     {
         name: 'wanago',
         target: 'https://wanago.io/feed/',
@@ -198,6 +195,11 @@ export const ants: Ant[] = [
         target: 'https://codeopinion.com/feed/',
         defaultCategory: 'Software Architecture',
     },
+    // {
+    //     name: 'jamespadolsey',
+    //     target: 'http://feeds.feedburner.com/JamesPadolsey',
+    //     defaultCategory: 'Web',
+    // },
     // { name: 'xiper', target: 'http://www.xiper.net/rss.html', defaultCategory: 'Web' },
     // {
     //     name: 'opendesigns',

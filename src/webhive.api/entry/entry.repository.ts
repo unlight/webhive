@@ -3,7 +3,7 @@ import { EntryModel } from './entry.model';
 import { mongoDatabaseInstance } from '../store/mongo';
 
 const entryGetOptionsDefaults = {
-    sort: undefined as unknown as (object | object[]),
+    sort: undefined as unknown as object | object[],
     skip: 0,
     limit: 100,
     filter: undefined as unknown as { [k: string]: unknown },
@@ -15,10 +15,7 @@ type EntryGetOptions = typeof entryGetOptionsDefaults;
  * Entry repository, gets data from store.
  */
 export class EntryRepository {
-
-    constructor(
-        private readonly database = inject('database', mongoDatabaseInstance),
-    ) { }
+    constructor(private readonly database = inject('database', mongoDatabaseInstance)) {}
 
     async insert(entry: EntryModel) {
         const collection = this.database.collection('entry2');

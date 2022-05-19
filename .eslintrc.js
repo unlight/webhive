@@ -14,7 +14,7 @@ module.exports = {
         project: 'tsconfig.json',
         warnOnUnsupportedTypeScriptVersion: false,
     },
-    plugins: ['unicorn', 'import', '@typescript-eslint/tslint', 'only-warn'],
+    plugins: ['unicorn', 'import', 'only-warn'],
     rules: {
         'no-undef': 0,
         'no-unused-vars': 0,
@@ -29,11 +29,5 @@ module.exports = {
         'import/max-dependencies': [1, { max: 10 }],
         quotes: [1, 'single', { allowTemplateLiterals: true }],
         semi: [1, 'always'],
-        '@typescript-eslint/tslint/config': [
-            1,
-            {
-                lintFile: './tslint.json',
-            },
-        ],
     },
 };
