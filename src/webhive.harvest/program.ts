@@ -7,6 +7,7 @@ import { config } from './config';
 import { inspect } from 'util';
 import ms = require('ms');
 import 'longjohn';
+import delay from 'delay';
 const argv = require('yargs').argv;
 
 async function program() {
@@ -20,6 +21,7 @@ async function program() {
     console.group('Starting', ant.name);
     const feedItems = await harvestResource({ url: ant.target });
     for (const feedItem of feedItems) {
+      await delay(1000);
       const entry = createEntry(feedItem, ant);
       if (argv.save === false || argv.dryRun) {
         console.log(inspect(entry, undefined, Number.POSITIVE_INFINITY));

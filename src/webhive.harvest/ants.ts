@@ -186,7 +186,6 @@ export const ants: Ant[] = [
     target: 'http://www.os-templates.com/feed.xml',
     defaultCategory: 'Templates',
   },
-  { name: 'scotch', target: 'https://scotch.io/feed', defaultCategory: 'Web Dev' },
   {
     name: 'sitepoint',
     target: 'http://www.sitepoint.com/feed/',
@@ -262,6 +261,7 @@ export const ants: Ant[] = [
     target: 'https://codeopinion.com/feed/',
     defaultCategory: 'Software Architecture',
   },
+  // { name: 'scotch', target: 'https://scotch.io/feed', defaultCategory: 'Web Dev' },
   // {
   //   name: 'radiojs',
   //   target: 'https://radiojs.ru/feed/podcast/',
