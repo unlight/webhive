@@ -196,16 +196,10 @@ export const ants: Ant[] = [
     target: 'http://www.freetechbooks.com/rss',
     defaultCategory: 'Books',
   },
-  { name: 'rhyous', target: 'http://www.rhyous.com/feed/', defaultCategory: 'C#' },
   {
     name: 'softwareengineeringdaily',
     target: 'https://softwareengineeringdaily.com/feed/',
     defaultCategory: 'Software Engineering',
-  },
-  {
-    name: 'sixrevisions',
-    target: 'http://feeds.feedburner.com/sixrevisions?format=xml',
-    defaultCategory: 'Web',
   },
   {
     name: 'unscriptable',
@@ -261,6 +255,7 @@ export const ants: Ant[] = [
     target: 'https://codeopinion.com/feed/',
     defaultCategory: 'Software Architecture',
   },
+  // { name: 'rhyous', target: 'http://www.rhyous.com/feed/', defaultCategory: 'C#' },
   // { name: 'scotch', target: 'https://scotch.io/feed', defaultCategory: 'Web Dev' },
   // {
   //   name: 'radiojs',
