@@ -11,16 +11,16 @@ export const ants: Ant[] = [
     defaultCategory: 'JavaScript',
   },
   { name: 'codeburst', target: 'https://codeburst.io/feed', defaultCategory: 'Code' },
-  {
-    name: 'rutracker1565',
-    target: 'http://feed.rutracker.org/atom/f/1565.atom',
-    defaultCategory: 'Video',
-  },
-  {
-    name: 'rutracker1425',
-    target: 'http://feed.rutracker.org/atom/f/1425.atom',
-    defaultCategory: 'Books',
-  },
+  // {
+  //   name: 'rutracker1565',
+  //   target: 'http://feed.rutracker.org/atom/f/1565.atom',
+  //   defaultCategory: 'Video',
+  // },
+  // {
+  //   name: 'rutracker1425',
+  //   target: 'http://feed.rutracker.org/atom/f/1425.atom',
+  //   defaultCategory: 'Books',
+  // },
   {
     name: '2ality',
     target: 'http://feeds.feedburner.com/2ality',
