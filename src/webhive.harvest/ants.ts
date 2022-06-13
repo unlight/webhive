@@ -255,6 +255,11 @@ export const ants: Ant[] = [
     target: 'https://codeopinion.com/feed/',
     defaultCategory: 'Software Architecture',
   },
+  {
+    name: 'gilstayar',
+    target: 'https://gils-blog.tayar.org/feed/feed.xml',
+    defaultCategory: 'NodeJS',
+  },
   // { name: 'rhyous', target: 'http://www.rhyous.com/feed/', defaultCategory: 'C#' },
   // { name: 'scotch', target: 'https://scotch.io/feed', defaultCategory: 'Web Dev' },
   // {
