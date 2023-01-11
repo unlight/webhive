@@ -37,7 +37,7 @@
     "@abraham/reflection": "^0.10.0",
     "await-to-js": "^2.1.1",
     "class-transformer": "^0.5.1",
-    "class-validator": "^0.13.2",
+    "class-validator": "^0.14.0",
     "convict": "^6.2.3",
     "dayjs": "^1.11.2",
     "delay": "^5.0.0",
