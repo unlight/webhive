@@ -1,6 +1,13 @@
 #!/bin/bash
 PATH="$PWD/node_modules/.bin":$PATH
 
+build_deploy() {
+    set -x
+    npm ci
+    npm run build
+    npm ci --prod
+}
+
 build() {
     set -x
     rm -rf dist
