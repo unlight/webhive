@@ -189,11 +189,6 @@ export const ants: Ant[] = [
     defaultCategory: 'News',
   },
   {
-    name: 'xakep',
-    target: 'https://xakep.ru/category/coding/feed/',
-    defaultCategory: 'Dev',
-  },
-  {
     name: 'stackshare',
     target: 'https://stackshare.io/featured-posts.atom',
     defaultCategory: 'News',
@@ -230,6 +225,11 @@ export const ants: Ant[] = [
     target: 'https://gils-blog.tayar.org/feed/feed.xml',
     defaultCategory: 'NodeJS',
   },
+  // {
+  //   name: 'xakep',
+  //   target: 'https://xakep.ru/category/coding/feed/',
+  //   defaultCategory: 'Dev',
+  // },
   // { name: 'rhyous', target: 'http://www.rhyous.com/feed/', defaultCategory: 'C#' },
   // { name: 'scotch', target: 'https://scotch.io/feed', defaultCategory: 'Web Dev' },
   // {
