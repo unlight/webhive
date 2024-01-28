@@ -124,11 +124,6 @@ export const ants: Ant[] = [
     defaultCategory: 'Templates',
   },
   {
-    name: 'blognodejs',
-    target: 'https://nodejs.org/en/feed/blog.xml',
-    defaultCategory: 'NodeJS',
-  },
-  {
     name: 'impressivewebs',
     target: 'http://feeds2.feedburner.com/ImpressiveWebs',
     defaultCategory: 'Web',
