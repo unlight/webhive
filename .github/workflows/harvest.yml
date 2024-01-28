@@ -16,5 +16,8 @@ jobs:
       - name: 'Install depependencies'
         run: npm install
       - name: 'Harvest'
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          API_TOKEN: ${{ secrets.API_TOKEN }}
         run: |
           npm run harvest -- --once
