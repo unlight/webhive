@@ -209,7 +209,6 @@ export const ants: Ant[] = [
     defaultCategory: 'Javascript',
   },
   { name: 'moderncss', target: 'https://moderncss.dev/feed/', defaultCategory: 'CSS' },
-  { name: 'indepth', target: 'https://indepth.dev/rss', defaultCategory: 'WebDev' },
   {
     name: 'h3manth',
     target: 'http://h3manth.com/new/atom.xml',
@@ -225,6 +224,7 @@ export const ants: Ant[] = [
     target: 'https://gils-blog.tayar.org/feed/feed.xml',
     defaultCategory: 'NodeJS',
   },
+  // { name: 'indepth', target: 'https://indepth.dev/rss', defaultCategory: 'WebDev' },
   // {
   //   name: 'xakep',
   //   target: 'https://xakep.ru/category/coding/feed/',
