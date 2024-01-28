@@ -13,12 +13,12 @@ export const ants: Ant[] = [
   { name: 'codeburst', target: 'https://codeburst.io/feed', defaultCategory: 'Code' },
   {
     name: 'rutracker1565',
-    target: 'https://feed.rutracker.org/atom/f/1565.atom',
+    target: 'https://feed.rutracker.cc/atom/f/1565.atom',
     defaultCategory: 'Video',
   },
   {
     name: 'rutracker1425',
-    target: 'https://feed.rutracker.org/atom/f/1425.atom',
+    target: 'https://feed.rutracker.cc/atom/f/1425.atom',
     defaultCategory: 'Books',
   },
   {
@@ -30,21 +30,6 @@ export const ants: Ant[] = [
     name: 'echojs',
     target: 'http://www.echojs.com/rss',
     defaultCategory: 'JavaScript',
-  },
-  {
-    name: 'codetalks',
-    target: 'https://codetalks.tv/javascript/feed',
-    defaultCategory: 'JavaScript',
-  },
-  {
-    name: 'codetalks',
-    target: 'https://codetalks.tv/nodejs/feed',
-    defaultCategory: 'NodeJS',
-  },
-  {
-    name: 'codetalks',
-    target: 'https://codetalks.tv/frontend/feed',
-    defaultCategory: 'Frontend',
   },
   {
     name: 'chikuyonok',
@@ -111,11 +96,6 @@ export const ants: Ant[] = [
     target: 'https://davidwalsh.name/feed',
     defaultCategory: 'Web',
   },
-  {
-    name: 'deborahk',
-    target: 'http://blogs.msmvps.com/deborahk/feed/',
-    defaultCategory: 'Web',
-  },
   { name: 'domenic', target: 'http://domenic.me/atom.xml', defaultCategory: 'Web' },
   {
     name: 'davidnolen',
@@ -127,13 +107,12 @@ export const ants: Ant[] = [
     target: 'http://blog.isquaredsoftware.com/index.xml',
     defaultCategory: 'Web',
   },
-  // { name: 'dzone', target: 'http://feeds.dzone.com/webdev', defaultCategory: 'Web' },
+  { name: 'dzone', target: 'http://feeds.dzone.com/webdev', defaultCategory: 'Web' },
   {
     name: 'eventdriven',
     target: 'https://event-driven.io/rss.xml',
     defaultCategory: 'Web',
   },
-  // { name: 'howtonode', target: 'http://howtonode.org/feed.xml', defaultCategory: 'NodeJS' },
   {
     name: 'html5rocks',
     target: 'http://feeds.feedburner.com/html5rocks?format=xml',
@@ -181,11 +160,7 @@ export const ants: Ant[] = [
     target: 'http://feeds.feedburner.com/npmawesome',
     defaultCategory: 'npm',
   },
-  {
-    name: 'ostemplates',
-    target: 'http://www.os-templates.com/feed.xml',
-    defaultCategory: 'Templates',
-  },
+
   {
     name: 'sitepoint',
     target: 'http://www.sitepoint.com/feed/',

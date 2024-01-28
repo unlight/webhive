@@ -1,0 +1,19 @@
+name: 'Harvest'
+on:
+  schedule:
+    - cron: '0 */7 * * *'
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v3
+      - name: 'Setup Node ${{ matrix.node }}'
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: 'Install depependencies'
+        run: npm install
+      - name: 'Harvest'
+        run: |
+          npm run harvest -- --once

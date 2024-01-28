@@ -21,7 +21,7 @@ async function program() {
     console.group('Starting', ant.name);
     const feedItems = await harvestResource({ url: ant.target });
     for (const feedItem of feedItems) {
-      await delay(800);
+      await delay(200);
       const entry = createEntry(feedItem, ant);
       if (argv.save === false || argv.dryRun) {
         console.log(inspect(entry, undefined, Number.POSITIVE_INFINITY));
