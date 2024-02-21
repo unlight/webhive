@@ -150,12 +150,11 @@ export const ants: Ant[] = [
     target: 'https://code.tutsplus.com/posts.atom',
     defaultCategory: 'Code',
   },
-  {
-    name: 'npmawesome',
-    target: 'http://feeds.feedburner.com/npmawesome',
-    defaultCategory: 'npm',
-  },
-
+  // {
+  //   name: 'npmawesome',
+  //   target: 'http://feeds.feedburner.com/npmawesome',
+  //   defaultCategory: 'npm',
+  // },
   {
     name: 'sitepoint',
     target: 'http://www.sitepoint.com/feed/',
