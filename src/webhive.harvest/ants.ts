@@ -118,11 +118,11 @@ export const ants: Ant[] = [
     target: 'http://feeds.feedburner.com/html5rocks?format=xml',
     defaultCategory: 'HTML5',
   },
-  {
-    name: 'html5xcss3',
-    target: 'http://feeds.feedburner.com/html5xcss3',
-    defaultCategory: 'Templates',
-  },
+  // {
+  //   name: 'html5xcss3',
+  //   target: 'http://feeds.feedburner.com/html5xcss3',
+  //   defaultCategory: 'Templates',
+  // },
   {
     name: 'impressivewebs',
     target: 'http://feeds2.feedburner.com/ImpressiveWebs',
