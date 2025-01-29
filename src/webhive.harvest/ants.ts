@@ -10,7 +10,11 @@ export const ants: Ant[] = [
     target: 'https://javascriptkicks.com/feeds/rss',
     defaultCategory: 'JavaScript',
   },
-  { name: 'codeburst', target: 'https://codeburst.io/feed', defaultCategory: 'Code' },
+  {
+    name: 'codeburst',
+    target: 'https://codeburst.io/feed',
+    defaultCategory: 'Code',
+  },
   {
     name: 'rutracker1565',
     target: 'https://feed.rutracker.cc/atom/f/1565.atom',
@@ -96,7 +100,11 @@ export const ants: Ant[] = [
     target: 'https://davidwalsh.name/feed',
     defaultCategory: 'Web',
   },
-  { name: 'domenic', target: 'http://domenic.me/atom.xml', defaultCategory: 'Web' },
+  {
+    name: 'domenic',
+    target: 'http://domenic.me/atom.xml',
+    defaultCategory: 'Web',
+  },
   {
     name: 'davidnolen',
     target: 'http://swannodette.github.io/atom.xml',
@@ -107,7 +115,11 @@ export const ants: Ant[] = [
     target: 'http://blog.isquaredsoftware.com/index.xml',
     defaultCategory: 'Web',
   },
-  { name: 'dzone', target: 'http://feeds.dzone.com/webdev', defaultCategory: 'Web' },
+  {
+    name: 'dzone',
+    target: 'http://feeds.dzone.com/webdev',
+    defaultCategory: 'Web',
+  },
   {
     name: 'eventdriven',
     target: 'https://event-driven.io/rss.xml',
@@ -139,7 +151,11 @@ export const ants: Ant[] = [
     target: 'https://wanago.io/feed/',
     defaultCategory: 'Javascript',
   },
-  { name: 'johnpapa', target: 'https://johnpapa.net/rss/', defaultCategory: 'Dev' },
+  {
+    name: 'johnpapa',
+    target: 'https://johnpapa.net/rss/',
+    defaultCategory: 'Dev',
+  },
   {
     name: 'hacksmozilla',
     target: 'http://hacks.mozilla.org/feed/',
@@ -175,8 +191,16 @@ export const ants: Ant[] = [
     target: 'http://unscriptable.com/feed/',
     defaultCategory: 'JavaScript',
   },
-  { name: 'w3', target: 'http://www.w3.org/blog/news/feed', defaultCategory: 'Web' },
-  { name: 'webapplog', target: 'http://webapplog.com/feed/', defaultCategory: 'Web' },
+  {
+    name: 'w3',
+    target: 'http://www.w3.org/blog/news/feed',
+    defaultCategory: 'Web',
+  },
+  {
+    name: 'webapplog',
+    target: 'http://webapplog.com/feed/',
+    defaultCategory: 'Web',
+  },
   {
     name: 'weblogs',
     target: 'http://weblogs.asp.net/feed/recent-posts.xml',
@@ -207,7 +231,11 @@ export const ants: Ant[] = [
     target: 'http://feeds.feedburner.com/TheJavascriptPlayground',
     defaultCategory: 'Javascript',
   },
-  { name: 'moderncss', target: 'https://moderncss.dev/feed/', defaultCategory: 'CSS' },
+  {
+    name: 'moderncss',
+    target: 'https://moderncss.dev/feed/',
+    defaultCategory: 'CSS',
+  },
   {
     name: 'h3manth',
     target: 'http://h3manth.com/new/atom.xml',
