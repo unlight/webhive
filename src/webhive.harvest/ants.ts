@@ -70,11 +70,11 @@ export const ants: Ant[] = [
     target: 'http://javascriptweekly.com/rss/244mk13g',
     defaultCategory: 'JavaScript',
   },
-  {
-    name: 'webplatformnews',
-    target: 'https://webplatform.news/feed.xml',
-    defaultCategory: 'Web',
-  },
+  // {
+  //   name: 'webplatformnews',
+  //   target: 'https://webplatform.news/feed.xml',
+  //   defaultCategory: 'Web',
+  // },
   {
     name: 'netcurry',
     target: 'http://feeds.feedburner.com/netCurryRecentArticles',
@@ -166,11 +166,11 @@ export const ants: Ant[] = [
     target: 'https://code.tutsplus.com/posts.atom',
     defaultCategory: 'Code',
   },
-  // {
-  //   name: 'npmawesome',
-  //   target: 'http://feeds.feedburner.com/npmawesome',
-  //   defaultCategory: 'npm',
-  // },
+  {
+    name: 'npmawesome',
+    target: 'http://feeds.feedburner.com/npmawesome',
+    defaultCategory: 'npm',
+  },
   {
     name: 'sitepoint',
     target: 'http://www.sitepoint.com/feed/',
