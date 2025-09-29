@@ -201,11 +201,11 @@ export const ants: Ant[] = [
     target: 'http://webapplog.com/feed/',
     defaultCategory: 'Web',
   },
-  {
-    name: 'weblogs',
-    target: 'http://weblogs.asp.net/feed/recent-posts.xml',
-    defaultCategory: 'ASP.NET',
-  },
+  // {
+  //   name: 'weblogs',
+  //   target: 'http://weblogs.asp.net/feed/recent-posts.xml',
+  //   defaultCategory: 'ASP.NET',
+  // },
   {
     name: 'whencaniuse',
     target: 'http://feeds.feedburner.com/WhenCanIUse',
