@@ -171,11 +171,11 @@ export const ants: Ant[] = [
     target: 'http://feeds.feedburner.com/npmawesome',
     defaultCategory: 'npm',
   },
-  {
-    name: 'sitepoint',
-    target: 'http://www.sitepoint.com/feed/',
-    defaultCategory: 'Web',
-  },
+  // {
+  //   name: 'sitepoint',
+  //   target: 'http://www.sitepoint.com/feed/',
+  //   defaultCategory: 'Web',
+  // },
   {
     name: 'freetechbooks',
     target: 'http://www.freetechbooks.com/rss',
