@@ -70,11 +70,11 @@ export const ants: Ant[] = [
     target: 'http://javascriptweekly.com/rss/244mk13g',
     defaultCategory: 'JavaScript',
   },
-  // {
-  //   name: 'webplatformnews',
-  //   target: 'https://webplatform.news/feed.xml',
-  //   defaultCategory: 'Web',
-  // },
+  {
+    name: 'webplatformnews',
+    target: 'https://webplatform.news/feed.xml',
+    defaultCategory: 'Web',
+  },
   {
     name: 'netcurry',
     target: 'http://feeds.feedburner.com/netCurryRecentArticles',
@@ -236,11 +236,11 @@ export const ants: Ant[] = [
     target: 'https://moderncss.dev/feed/',
     defaultCategory: 'CSS',
   },
-  {
-    name: 'h3manth',
-    target: 'http://h3manth.com/new/atom.xml',
-    defaultCategory: 'Web',
-  },
+  // {
+  //   name: 'h3manth',
+  //   target: 'http://h3manth.com/new/atom.xml',
+  //   defaultCategory: 'Web',
+  // },
   {
     name: 'codeopinion',
     target: 'https://codeopinion.com/feed/',
@@ -252,12 +252,16 @@ export const ants: Ant[] = [
     defaultCategory: 'NodeJS',
   },
   // { name: 'indepth', target: 'https://indepth.dev/rss', defaultCategory: 'WebDev' },
-  // {
-  //   name: 'xakep',
-  //   target: 'https://xakep.ru/category/coding/feed/',
-  //   defaultCategory: 'Dev',
-  // },
-  // { name: 'rhyous', target: 'http://www.rhyous.com/feed/', defaultCategory: 'C#' },
+  {
+    name: 'xakep',
+    target: 'https://xakep.ru/category/coding/feed/',
+    defaultCategory: 'Dev',
+  },
+  {
+    name: 'rhyous',
+    target: 'http://www.rhyous.com/feed/',
+    defaultCategory: 'C#',
+  },
   // { name: 'scotch', target: 'https://scotch.io/feed', defaultCategory: 'Web Dev' },
   // {
   //   name: 'radiojs',
