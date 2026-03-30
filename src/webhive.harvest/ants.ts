@@ -161,11 +161,11 @@ export const ants: Ant[] = [
     target: 'http://hacks.mozilla.org/feed/',
     defaultCategory: 'Web',
   },
-  {
-    name: 'tutsplus',
-    target: 'https://code.tutsplus.com/posts.atom',
-    defaultCategory: 'Code',
-  },
+  // {
+  //   name: 'tutsplus',
+  //   target: 'https://code.tutsplus.com/posts.atom',
+  //   defaultCategory: 'Code',
+  // },
   {
     name: 'npmawesome',
     target: 'http://feeds.feedburner.com/npmawesome',
