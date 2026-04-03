@@ -43,7 +43,7 @@
     "delay": "^5.0.0",
     "feedparser": "^2.2.10",
     "got": "^11.1.4",
-    "koa": "^2.13.4",
+    "koa": "^3.0.1",
     "koa-bodyparser": "^4.3.0",
     "koa-favicon": "^2.1.0",
     "koa-json-error": "^3.1.2",
