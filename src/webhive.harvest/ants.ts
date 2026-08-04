@@ -5,11 +5,11 @@ export type Ant = {
 };
 
 export const ants: Ant[] = [
-  {
-    name: 'javascriptkicks',
-    target: 'https://javascriptkicks.com/feeds/rss',
-    defaultCategory: 'JavaScript',
-  },
+  // {
+  //   name: 'javascriptkicks',
+  //   target: 'https://javascriptkicks.com/feeds/rss',
+  //   defaultCategory: 'JavaScript',
+  // },
   {
     name: 'codeburst',
     target: 'https://codeburst.io/feed',
@@ -115,11 +115,11 @@ export const ants: Ant[] = [
     target: 'http://blog.isquaredsoftware.com/index.xml',
     defaultCategory: 'Web',
   },
-  {
-    name: 'dzone',
-    target: 'http://feeds.dzone.com/webdev',
-    defaultCategory: 'Web',
-  },
+  // {
+  //   name: 'dzone',
+  //   target: 'http://feeds.dzone.com/webdev',
+  //   defaultCategory: 'Web',
+  // },
   {
     name: 'eventdriven',
     target: 'https://event-driven.io/rss.xml',
@@ -161,11 +161,11 @@ export const ants: Ant[] = [
     target: 'http://hacks.mozilla.org/feed/',
     defaultCategory: 'Web',
   },
-  // {
-  //   name: 'tutsplus',
-  //   target: 'https://code.tutsplus.com/posts.atom',
-  //   defaultCategory: 'Code',
-  // },
+  {
+    name: 'tutsplus',
+    target: 'https://code.tutsplus.com/posts.atom',
+    defaultCategory: 'Code',
+  },
   {
     name: 'npmawesome',
     target: 'http://feeds.feedburner.com/npmawesome',
@@ -211,11 +211,11 @@ export const ants: Ant[] = [
     target: 'http://feeds.feedburner.com/WhenCanIUse',
     defaultCategory: 'News',
   },
-  {
-    name: 'stackshare',
-    target: 'https://stackshare.io/featured-posts.atom',
-    defaultCategory: 'News',
-  },
+  // {
+  //   name: 'stackshare',
+  //   target: 'https://stackshare.io/featured-posts.atom',
+  //   defaultCategory: 'News',
+  // },
   {
     name: 'zerotoprod',
     target: 'https://zerotoprod.com/index.xml',
