@@ -176,11 +176,11 @@ export const ants: Ant[] = [
   //   target: 'http://www.sitepoint.com/feed/',
   //   defaultCategory: 'Web',
   // },
-  {
-    name: 'freetechbooks',
-    target: 'http://www.freetechbooks.com/rss',
-    defaultCategory: 'Books',
-  },
+  // {
+  //   name: 'freetechbooks',
+  //   target: 'http://www.freetechbooks.com/rss',
+  //   defaultCategory: 'Books',
+  // },
   {
     name: 'softwareengineeringdaily',
     target: 'https://softwareengineeringdaily.com/feed/',
